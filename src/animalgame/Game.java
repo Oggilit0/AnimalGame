@@ -94,20 +94,29 @@ public class Game {
 
     }
     public void createAnimal(Animal animalType) {
-        if (animalType.getClass().equals(Cat.class)) {
-           // Cat cat = new Cat();
-        } else if (animalType.getClass().equals(Cow.class)) {
-            //Cow cow =  new Cow();
-        } else if (animalType.getClass().equals(Dog.class)) {
+       // if (animalType.getClass().equals(Cat.class)) {
+            switch(animalType.getClass().getName()){
+                case "animalgame.Cat":
+                    //Cat cat = new Cat(ProgramUtils.userInput(),);
+                case "animalgame.Cow":
+                    //Cow cow = new Cow();
+                case "animalgame.Dog":
+                    //Dog dog = new Dog();
+                case "animalgame.Horse":
+                    //Horse horse = new Horse();
+                case "animalgame.Snake":
+                    //Snake snake = new snake();
+                default:
+                    //alternativ att få specifikt kön beroende på val från Store
+                    //Animal.Gender gender
+                    //kön
+                    //djurtyp
+                    //slumpa antal i player tryMating
+                    //slumpa kön
+
+            }
         }
-    }
-    //alternativ att få specifikt kön beroende på val från Store
-    // switch med case i vilket djur där djur skapas?
-    //Animal.Gender gender
-    //kön
-    //djurtyp
-    //slumpa antal i player tryMating
-    //slumpa kön
+
 
     public void createPlayer(String newPlayer){
         Player player = new Player(newPlayer);
