@@ -13,7 +13,7 @@ public class Game {
     private Menu gameMenu;
 
     public Game(){
-
+        Store store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
