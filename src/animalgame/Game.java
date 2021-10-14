@@ -11,9 +11,10 @@ public class Game {
     private int playerAmount;
     private Player currentPlayer;
     private Menu gameMenu;
+    private Store store;
 
     public Game(){
-
+        this.store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
@@ -51,6 +52,7 @@ public class Game {
             for(int i = 0; i < playerAmount; i++){
                 System.out.print("Write player " + (i+1) +": ");
                 createPlayer(ProgramUtils.userInput());
+
             }
         }else {
             System.out.println("Min 2 Max 4");
@@ -69,7 +71,7 @@ public class Game {
             this.round = r;
             if(round != maxRound){
                 System.out.println("Round " + (r + 1));
-                newRoundPlayer();
+                newRoundGetPlayer();
             }else{
                 endGame();
 
@@ -78,19 +80,22 @@ public class Game {
         }
     }
     public void endGame(){
-        //This is something really special!
+            System.out.println(ProgramUtils.RED+"GAME OVER");
     }
-    public void newRoundPlayer(){
+    public void newRoundGetPlayer(){
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
-            System.out.println(currentPlayer.getName());
+            System.out.println(currentPlayer.getName()+ "'s Turn:");
+            if(this.currentPlayer.getMoney() == 0){
+                endGame();
+            }
             if(i != playerAmount -1){
                 this.currentPlayer = allPlayers.get(1+i);
             }
         }
     }
     public void ageAnimal(){
-        //This is a comment
+
 
     }
 
@@ -154,4 +159,7 @@ public class Game {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public Store getStore(){return store;}
 }
+
