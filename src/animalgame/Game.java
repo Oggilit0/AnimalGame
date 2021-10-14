@@ -86,6 +86,9 @@ public class Game {
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
             System.out.println(currentPlayer.getName());
+            if(this.currentPlayer.getMoney() == 0){
+                endGame();
+            }
             if(i != playerAmount -1){
                 this.currentPlayer = allPlayers.get(1+i);
             }
