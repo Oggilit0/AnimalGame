@@ -43,11 +43,12 @@ public class Menu {
 
         switch(ProgramUtils.menuBuilder("Shop","Buy animals","Buy Food","Sell animals")){
             case 1:
-                this.currentGame.getStore().animalToBuy();
+                animalChoice();
                 break;
+               // this.currentGame.getStore().animalToBuy();
             case 2:
-                this.currentGame.getStore().foodToBuy();
                 break;
+                //this.currentGame.getStore().foodToBuy();
             case 3:
                 this.currentGame.getStore().animalToSell();
                 break;
@@ -56,11 +57,12 @@ public class Menu {
     }
     public void animalChoice(){
 
-        switch(ProgramUtils.menuBuilder("Cat","Dog","Cow","Horse","Snake")){
+        switch(ProgramUtils.menuBuilder("AnimalChoice","cat","Dog","Cow","Horse","Snake")){
             case 1:
-                System.out.println("Choose the animals gender!");
-                ProgramUtils.userInput();
+                String cat = "Cat";
+
         }
+        this.currentGame.getStore().animalToBuy();
     }
 
     public void feedAnimalsMenu(){
