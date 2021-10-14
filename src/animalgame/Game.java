@@ -80,9 +80,7 @@ public class Game {
         }
     }
     public void endGame(){
-        if(this.currentPlayer.getMoney() == 0 || (this.round > maxRound)){
             System.out.println(ProgramUtils.RED+"GAME OVER");
-        }
     }
     public void newRoundGetPlayer(){
         this.currentPlayer = allPlayers.get(0);
@@ -94,7 +92,7 @@ public class Game {
         }
     }
     public void ageAnimal(){
-        //This is a comment
+
 
     }
     public void createAnimal(Animal animalType) {
