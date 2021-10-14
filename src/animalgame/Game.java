@@ -19,29 +19,7 @@ public class Game {
         this.gameMenu = new Menu(this);
         Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
         Animal testKatt = new Cat("TestKatt",500,5, Animal.Gender.MALE);
-        //this is a test 2
 
-
-        //Oskar testing
-        Player adam = new Player("adam");
-        adam.setPlayerAnimal(testKo);
-        adam.setPlayerAnimal(testKatt);
-        adam.setPlayerAnimal(testKo);
-        adam.setPlayerAnimal(testKatt);
-        currentPlayer = adam;
-        System.out.println(currentPlayer);
-        Menu newMenu = new Menu(this);
-        newMenu.roundMenu();
-
-        //End oskar testing
-
-        // Debug
-       // this.allPlayers.get(0).tryMating(testKo,testKatt);
-      //this.allPlayers.get(0).setPlayerAnimal(testKo);
-       // createAnimal(testKatt);
-      //  createAnimal(testKo);
-
-        // Debug
         gameStart();
 
     }
@@ -86,6 +64,7 @@ public class Game {
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
             System.out.println(currentPlayer.getName()+ "'s Turn:");
+            gameMenu.roundMenu();
             if(this.currentPlayer.getMoney() == 0){
                 endGame();
             }
