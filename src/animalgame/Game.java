@@ -98,27 +98,55 @@ public class Game {
 
 
     }
-    public void createAnimal(Animal animalType) {
-       // if (animalType.getClass().equals(Cat.class)) {
+
+
+    /**
+     *
+     * @param animalType
+     * @param gender
+     */
+    public void createAnimal(Animal animalType, Animal.Gender gender) {
             switch(animalType.getClass().getName()){
                 case "animalgame.Cat":
-                    //Cat cat = new Cat(ProgramUtils.userInput(),);
+                    if(animalType.getGender() == Animal.Gender.FEMALE){
+                        Cat cat = new Cat(ProgramUtils.userInput(), 500, 9, Animal.Gender.FEMALE);
+                        this.currentPlayer.setPlayerAnimal(cat);
+                    }else{
+                        Cat cat = new Cat(ProgramUtils.userInput(),500,9, Animal.Gender.MALE);
+                        this.currentPlayer.setPlayerAnimal(cat);
+                    }
+                    break;
                 case "animalgame.Cow":
-                    //Cow cow = new Cow();
+                    if(gender == Animal.Gender.FEMALE){
+                        Cow cow = new Cow(ProgramUtils.userInput(), 500, 10, Animal.Gender.FEMALE);
+                        this.currentPlayer.setPlayerAnimal(cow);
+                    }else{
+                        Cow cow = new Cow(ProgramUtils.userInput(), 500, 10, Animal.Gender.MALE);
+                        this.currentPlayer.setPlayerAnimal(cow);
+                        }
+                        break;
                 case "animalgame.Dog":
-                    //Dog dog = new Dog();
+                    if(gender == Animal.Gender.FEMALE){
+                        Dog dog = new Dog(ProgramUtils.userInput(),500, 15, Animal.Gender.FEMALE);
+                        this.currentPlayer.setPlayerAnimal(dog);
+                    }else{
+                        Dog dog = new Dog(ProgramUtils.userInput(), 500,15, Animal.Gender.MALE);
+                        this.currentPlayer.setPlayerAnimal(dog);
+                    }
                 case "animalgame.Horse":
-                    //Horse horse = new Horse();
-                case "animalgame.Snake":
-                    //Snake snake = new snake();
-                default:
-                    //alternativ att få specifikt kön beroende på val från Store
-                    //Animal.Gender gender
-                    //kön
-                    //djurtyp
-                    //slumpa antal i player tryMating
-                    //slumpa kön
+                    if(gender == Animal.Gender.FEMALE){
 
+                    }else{
+
+                    }
+                case "animalgame.Snake":
+                    if(gender == Animal.Gender.FEMALE){
+
+                    }else{
+
+                    }
+                default:
+                    // if (animalType.getClass().equals(Cat.class))
             }
         }
 
