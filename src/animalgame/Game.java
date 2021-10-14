@@ -31,12 +31,13 @@ public class Game {
             for(int i = 0; i < playerAmount; i++){
                 System.out.print("Write player " + (i+1) +": ");
                 createPlayer(ProgramUtils.userInput());
-
             }
+
         }else {
             System.out.println("Min 2 Max 4");
             System.exit(0);
         }
+
         System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
         this.maxRound = Integer.parseInt(ProgramUtils.userInput());
         if (!(maxRound >= 5 && maxRound <= 30)) {
@@ -59,13 +60,15 @@ public class Game {
 
         }
     }
+
     public void endGame(){
-            System.out.println(ProgramUtils.RED+"GAME OVER");
+        System.out.println(ProgramUtils.RED+"GAME OVER");
     }
+
     public void newRoundGetPlayer(){
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
-            System.out.println(currentPlayer.getName()+ "'s Turn:");
+            System.out.println(ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn:"+ProgramUtils.RESET+"\n");
             gameMenu.roundMenu();
             if(this.currentPlayer.getMoney() == 0){
                 endGame();
