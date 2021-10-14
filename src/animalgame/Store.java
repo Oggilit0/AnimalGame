@@ -13,6 +13,7 @@ public class Store {
 
     public void animalToBuy(){
 
+
     }
     public void foodToBuy(){
 
