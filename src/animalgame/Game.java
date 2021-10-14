@@ -15,7 +15,7 @@ public class Game {
     private int age;
 
     public Game(){
-        this.store = new Store(currentPlayer);
+        this.store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
