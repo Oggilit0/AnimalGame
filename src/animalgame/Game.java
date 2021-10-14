@@ -43,6 +43,7 @@ public class Game {
         if (!(maxRound >= 5 && maxRound <= 30)) {
             System.out.println("Min 5 rounds and Max 30 rounds");
         }
+        System.out.println("\n".repeat(30));
         newRound();
     }
 
@@ -50,9 +51,10 @@ public class Game {
         for(int r = 0; r <= this.maxRound; r++) {
             this.round = r;
             if(round != maxRound){
-                System.out.println("Round " + (r + 1));
+                System.out.println(ProgramUtils.RED+"Round " + (r + 1)+ProgramUtils.RESET);
                 newRoundGetPlayer();
                 ageAnimal();
+                System.out.println("\n".repeat(30));
             }else{
                 endGame();
 
@@ -145,10 +147,12 @@ public class Game {
         this.allPlayers.add(player);
     }
 
-    public Player getCurrentPlayer() {
+    public Player getCurrentPlayer(){
         return currentPlayer;
     }
 
-    public Store getStore(){return store;}
+    public Store getStore(){
+        return store;
+    }
 }
 
