@@ -85,7 +85,7 @@ public class Game {
     public void newRoundGetPlayer(){
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
-            System.out.println(currentPlayer.getName());
+            System.out.println(currentPlayer.getName()+ "'s Turn:");
             if(this.currentPlayer.getMoney() == 0){
                 endGame();
             }
