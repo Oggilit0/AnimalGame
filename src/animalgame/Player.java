@@ -10,7 +10,7 @@ public class Player {
     private int money;
     private ArrayList<Animal> playerAnimal;
     private ArrayList<Food> foods;
-
+  
     public Player(String name) {
         this.name = name;
         this.money = 5000;
