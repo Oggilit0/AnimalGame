@@ -12,9 +12,10 @@ public class Game {
     private Player currentPlayer;
     private Menu gameMenu;
     private Store store;
+    private int age;
 
     public Game(){
-        this.store = new Store();
+        this.store = new Store(currentPlayer);
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
@@ -50,6 +51,7 @@ public class Game {
             if(round != maxRound){
                 System.out.println("Round " + (r + 1));
                 newRoundGetPlayer();
+                ageAnimal();
             }else{
                 endGame();
 
@@ -74,7 +76,13 @@ public class Game {
         }
     }
     public void ageAnimal(){
-
+        for(Animal animal : currentPlayer.getPlayerAnimal()){
+            if(!(animal.setCurrentAge() == animal.getMaxAge())){
+                animal.setCurrentAge()++;
+            }else{
+                animal.death();
+            }
+        }
 
     }
 
