@@ -24,7 +24,7 @@ public class Menu {
 
         switch(ProgramUtils.menuBuilder("Choose one","Shop","Feed animals","Mate animals")){
             case 1:
-                shopMenu();
+               // shopMenu();
                 break;
             case 2:
                 feedAnimalsMenu();
@@ -39,21 +39,21 @@ public class Menu {
         }
     }
 
-    public void shopMenu(){
-
-        switch(ProgramUtils.menuBuilder("Shop","Buy animals","Buy Food","Sell animals")){
-            case 1:
-                this.currentGame.getStore().animalToBuy();
-                break;
-            case 2:
-                this.currentGame.getStore().foodToBuy();
-                break;
-            case 3:
-                this.currentGame.getStore().animalToSell();
-                break;
-            default:
-        }
-    }
+//    public void shopMenu(){
+//
+//        switch(ProgramUtils.menuBuilder("Shop","Buy animals","Buy Food","Sell animals")){
+//            case 1:
+//                this.currentGame.getStore().animalToBuy();
+//                break;
+//            case 2:
+//                this.currentGame.getStore().foodToBuy();
+//                break;
+//            case 3:
+//                this.currentGame.getStore().animalToSell();
+//                break;
+//            default:
+//        }
+//    }
 
     public void feedAnimalsMenu(){
 
