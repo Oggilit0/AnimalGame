@@ -2,6 +2,9 @@ package animalgame;
 
 import java.util.ArrayList;
 
+/**
+ * @author
+ */
 public class Player {
     private String name;
     private int money;
@@ -23,6 +26,9 @@ public class Player {
     }
 
     /**
+     * Takes two animals and checks if they are the same class and different gender.
+     * If comparison is successful a random number will be given to how many new animals
+     * the player will get.
      * @param animal1
      * @param animal2
      */
@@ -34,20 +40,25 @@ public class Player {
                     int makeBabies = (int) (Math.random() * 3) + 1; //random how many babies
                     for (int i = 0; i < makeBabies; i++) {
                         int getGender = (int) (Math.random() * 2); //random gender of baby
-                        //createAnimal(animal1);
-                        //slump kön
-                    }
-                    return true;
+                        if (getGender == 0) {
+                            //createAnimal(animal1, FEMALE); *female*
+                        } else {
+                            //createAnimal(animal1, MALE); *male*
+                        }
+                    }return true;
+
                 } else {
                     // no babies, mating not successful
-                }
-                return false;
-            } else {
+                }return false;
+
+            }else{
                 // animal same gender : can't get babies.
-            }
-            return false;
+            }return false;
+
         }return false;
     }
+
+
     public String getName() {
         return name;
     }
