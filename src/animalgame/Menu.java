@@ -54,6 +54,14 @@ public class Menu {
             default:
         }
     }
+    public void animalChoice(){
+
+        switch(ProgramUtils.menuBuilder("Cat","Dog","Cow","Horse","Snake")){
+            case 1:
+                System.out.println("Choose the animals gender!");
+                ProgramUtils.userInput();
+        }
+    }
 
     public void feedAnimalsMenu(){
 
