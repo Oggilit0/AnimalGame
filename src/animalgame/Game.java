@@ -11,9 +11,10 @@ public class Game {
     private int playerAmount;
     private Player currentPlayer;
     private Menu gameMenu;
+    private Store store;
 
     public Game(){
-        Store store = new Store();
+        this.store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
@@ -129,4 +130,7 @@ public class Game {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public Store getStore(){return store;}
 }
+
