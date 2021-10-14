@@ -51,6 +51,7 @@ public class Game {
             for(int i = 0; i < playerAmount; i++){
                 System.out.print("Write player " + (i+1) +": ");
                 createPlayer(ProgramUtils.userInput());
+
             }
         }else {
             System.out.println("Min 2 Max 4");
@@ -69,7 +70,7 @@ public class Game {
             this.round = r;
             if(round != maxRound){
                 System.out.println("Round " + (r + 1));
-                newRoundPlayer();
+                newRoundGetPlayer();
             }else{
                 endGame();
 
@@ -78,9 +79,11 @@ public class Game {
         }
     }
     public void endGame(){
-        //This is something really special!
+        if(this.currentPlayer.getMoney() == 0 || (this.round > maxRound)){
+            System.out.println(ProgramUtils.RED+"GAME OVER");
+        }
     }
-    public void newRoundPlayer(){
+    public void newRoundGetPlayer(){
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
             System.out.println(currentPlayer.getName());
