@@ -77,13 +77,12 @@ public class Game {
     }
     public void ageAnimal(){
         for(Animal animal : currentPlayer.getPlayerAnimal()){
-            if(!(animal.setCurrentAge() == animal.getMaxAge())){
-                animal.setCurrentAge()++;
+            if(!(animal.getCurrentAge() == animal.getMaxAge())){
+                animal.setCurrentAge(1);
             }else{
                 animal.death();
             }
         }
-
     }
 
 
