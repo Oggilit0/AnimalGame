@@ -15,7 +15,7 @@ public class Game {
     private int age;
 
     public Game(){
-        this.store = new Store(currentPlayer);
+        this.store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
@@ -26,22 +26,24 @@ public class Game {
     }
     public void gameStart(){
         System.out.print("Write in how many players (Min 2 Max 4): ");
-        this.playerAmount = Integer.parseInt(ProgramUtils.userInput());
+        this.playerAmount = ProgramUtils.tryCatch(ProgramUtils.userInput());
         if (playerAmount >= 2 && playerAmount <= 4) {
             for(int i = 0; i < playerAmount; i++){
                 System.out.print("Write player " + (i+1) +": ");
                 createPlayer(ProgramUtils.userInput());
-
             }
+
         }else {
             System.out.println("Min 2 Max 4");
             System.exit(0);
         }
+
         System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
-        this.maxRound = Integer.parseInt(ProgramUtils.userInput());
+        this.maxRound = ProgramUtils.tryCatch(ProgramUtils.userInput());
         if (!(maxRound >= 5 && maxRound <= 30)) {
             System.out.println("Min 5 rounds and Max 30 rounds");
         }
+        System.out.println("\n".repeat(30));
         newRound();
     }
 
@@ -49,9 +51,10 @@ public class Game {
         for(int r = 0; r <= this.maxRound; r++) {
             this.round = r;
             if(round != maxRound){
-                System.out.println("Round " + (r + 1));
+                System.out.println(ProgramUtils.RED+"Round " + (r + 1)+ProgramUtils.RESET);
                 newRoundGetPlayer();
                 ageAnimal();
+                System.out.println("\n".repeat(30));
             }else{
                 endGame();
 
@@ -59,13 +62,15 @@ public class Game {
 
         }
     }
+
     public void endGame(){
-            System.out.println(ProgramUtils.RED+"GAME OVER");
+        System.out.println(ProgramUtils.RED+"GAME OVER");
     }
+
     public void newRoundGetPlayer(){
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
-            System.out.println(currentPlayer.getName()+ "'s Turn:");
+            System.out.println(ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn:"+ProgramUtils.RESET+"\n");
             gameMenu.roundMenu();
             if(this.currentPlayer.getMoney() == 0){
                 endGame();
@@ -77,13 +82,12 @@ public class Game {
     }
     public void ageAnimal(){
         for(Animal animal : currentPlayer.getPlayerAnimal()){
-            if(!(animal.setCurrentAge() == animal.getMaxAge())){
-                animal.setCurrentAge()++;
+            if(!(animal.getCurrentAge() == animal.getMaxAge())){
+                animal.setCurrentAge(1);
             }else{
                 animal.death();
             }
         }
-
     }
 
 
@@ -143,10 +147,12 @@ public class Game {
         this.allPlayers.add(player);
     }
 
-    public Player getCurrentPlayer() {
+    public Player getCurrentPlayer(){
         return currentPlayer;
     }
 
-    public Store getStore(){return store;}
+    public Store getStore(){
+        return store;
+    }
 }
 
