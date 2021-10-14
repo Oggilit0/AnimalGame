@@ -99,7 +99,7 @@ public class Game {
 
     }
 
-    
+
     /**
      *
      * @param animalType
