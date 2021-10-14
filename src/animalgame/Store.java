@@ -17,6 +17,9 @@ public class Store {
     }
     public void foodToBuy(){
 
+       Food meat = new Meat(Meat, 1);
+       Food fish = new Fish(Fish, 1);
+       Food  grass = new Grass(Grass, 1);
 
        Food meat = new Meat("Meat", 1);
        Food fish = new Fish("Fish", 1);

@@ -141,10 +141,9 @@ public class Game {
             }
         }
 
-
     public void createPlayer(String newPlayer){
         Player player = new Player(newPlayer);
-        this.allPlayers.add(player);
+        this.allPlayers.add(createPlayer(name);
     }
 
     public Player getCurrentPlayer(){
