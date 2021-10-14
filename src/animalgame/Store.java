@@ -1,13 +1,24 @@
 package animalgame;
 
 public class Store {
-    public Store(){
+
+
+
+    private final Player player;
+
+    public Store(Player player){
+        this.player= player;
 
     }
+
     public void animalToBuy(){
 
     }
-    public void foodToBuy(){
+    public void foodToBuy(Food foodTyp){
+
+       Food meat = new Meat(Meat, 1);
+       Food fish = new Fish(Fish, 1);
+       Food  grass = new Grass(Grass, 1);
 
         // input parameter Food
         // create food object (Meat, Fish, Grass)

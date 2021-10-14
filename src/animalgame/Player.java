@@ -78,4 +78,8 @@ public class Player {
     public int getMoney() {
         return money;
     }
+
+    public void setFoods(Food food){
+        this.foods.add(food);
+    }
 }
