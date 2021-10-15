@@ -86,4 +86,8 @@ public class Player {
     public void setFoods(Food food){
         this.foods.add(food);
     }
+
+    public ArrayList<Food> getFoods(){
+        return this.foods;
+    }
 }
