@@ -21,32 +21,37 @@ public class Game {
         Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
         Animal testKatt = new Cat("TestKatt",500,5, Animal.Gender.MALE);
 
-        gameStart();
+        gameStartPlayer();
 
     }
-    public void gameStart(){
+    public void gameStartPlayer() {
         System.out.print("Write in how many players (Min 2 Max 4): ");
         this.playerAmount = ProgramUtils.tryCatch(ProgramUtils.userInput());
         if (playerAmount >= 2 && playerAmount <= 4) {
-            for(int i = 0; i < playerAmount; i++){
-                System.out.print("Write player " + (i+1) +": ");
+            for (int i = 0; i < playerAmount; i++) {
+                System.out.print("Write player " + (i + 1) + ": ");
                 createPlayer(ProgramUtils.userInput());
+
             }
-        }else {
+        } else {
             System.out.println("Min 2 Max 4");
-            System.exit(0);
+            gameStartPlayer();
         }
+        gameStartRounds();
+    }
+    public void gameStartRounds(){
         System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
         this.maxRound = ProgramUtils.tryCatch(ProgramUtils.userInput());
         if (!(maxRound >= 5 && maxRound <= 30)) {
             System.out.println("Min 5 rounds and Max 30 rounds");
+            gameStartRounds();
         }
         System.out.println("\n".repeat(30));
         newRound();
     }
 
     public void newRound(){
-        this.allPlayers.get(2).setMoney(0);
+        //this.allPlayers.get(2).setMoney(0);
         for(int r = 0; r <= this.maxRound; r++) {
             this.round = r;
             if(round != maxRound){
