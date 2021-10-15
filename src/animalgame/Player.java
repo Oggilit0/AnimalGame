@@ -79,7 +79,15 @@ public class Player {
         return money;
     }
 
+    public void setMoney(int money){
+        this.money = money;
+    }
+
     public void setFoods(Food food){
         this.foods.add(food);
+    }
+
+    public ArrayList<Food> getFoods(){
+        return this.foods;
     }
 }
