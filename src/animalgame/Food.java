@@ -13,4 +13,9 @@ public abstract class Food {
     public String getName(){
         return this.name;
     }
+
+    public void addWeight(int weight){
+    this.weight += weight;
+    }
+}
 }
