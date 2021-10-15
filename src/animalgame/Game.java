@@ -62,6 +62,14 @@ public class Game {
 
         }
     }
+    public void gameOver(){
+        System.out.println("\n".repeat(30));
+        System.out.println(ProgramUtils.RED+"Game OVER "+currentPlayer.getName()+"!"+ProgramUtils.RESET);
+        for (Player player : allPlayers){
+            System.out.println(ProgramUtils.GREEN+"The winner is "+player.getName().toUpperCase()+"!"+ProgramUtils.RESET+"\uD83D\uDC51");
+            System.exit(1);
+        }
+    }
 
     public void endGame(){
         System.out.println(ProgramUtils.RED+"Good Game!"+ProgramUtils.RESET);
@@ -73,8 +81,12 @@ public class Game {
             this.allPlayers.get(1).setMoney(0);
             if(this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)){
                 this.allPlayers.remove(currentPlayer);
-                System.out.println(ProgramUtils.RED+"Game OVER "+currentPlayer.getName()+"!"+ProgramUtils.RESET);
-                continue;
+                if(this.allPlayers.size() != 1){
+                    continue;
+                }else{
+                    gameOver();
+                }
+
             }
 
             System.out.println(ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn:"+ProgramUtils.RESET+"\n");
