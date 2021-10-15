@@ -143,7 +143,7 @@ public class Game {
 
     public void createPlayer(String newPlayer){
         Player player = new Player(newPlayer);
-        this.allPlayers.add(createPlayer(name);
+        this.allPlayers.add(player);
     }
 
     public Player getCurrentPlayer(){
