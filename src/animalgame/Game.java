@@ -32,12 +32,10 @@ public class Game {
                 System.out.print("Write player " + (i+1) +": ");
                 createPlayer(ProgramUtils.userInput());
             }
-
         }else {
             System.out.println("Min 2 Max 4");
             System.exit(0);
         }
-
         System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
         this.maxRound = ProgramUtils.tryCatch(ProgramUtils.userInput());
         if (!(maxRound >= 5 && maxRound <= 30)) {
@@ -48,13 +46,14 @@ public class Game {
     }
 
     public void newRound(){
+        this.allPlayers.get(2).setMoney(0);
         for(int r = 0; r <= this.maxRound; r++) {
             this.round = r;
             if(round != maxRound){
                 System.out.println(ProgramUtils.RED+"Round " + (r + 1)+ProgramUtils.RESET);
                 newRoundGetPlayer();
                 ageAnimal();
-                System.out.println("\n".repeat(30));
+                System.out.println("\n".repeat(10));
             }else{
                 endGame();
 
@@ -63,10 +62,8 @@ public class Game {
         }
     }
     public void gameOver(){
-        System.out.println("\n".repeat(30));
-        System.out.println(ProgramUtils.RED+"Game OVER "+currentPlayer.getName()+"!"+ProgramUtils.RESET);
         for (Player player : allPlayers){
-            System.out.println(ProgramUtils.GREEN+"The winner is "+player.getName().toUpperCase()+"!"+ProgramUtils.RESET+"\uD83D\uDC51");
+            System.out.println(ProgramUtils.GREEN+"The winner is "+player.getName()+"!"+ProgramUtils.RESET+"\uD83D\uDC51");
             System.exit(1);
         }
     }
@@ -78,18 +75,24 @@ public class Game {
     public void newRoundGetPlayer(){
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
-            this.allPlayers.get(1).setMoney(0);
             if(this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)){
                 this.allPlayers.remove(currentPlayer);
+                System.out.println("\n".repeat(10));
+                try {
+                    System.out.println(ProgramUtils.RED+"GAME OVER "+currentPlayer.getName()+"!"+ProgramUtils.RESET);
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 if(this.allPlayers.size() != 1){
-                    continue;
+                    break;
                 }else{
                     gameOver();
                 }
 
             }
 
-            System.out.println(ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn:"+ProgramUtils.RESET+"\n");
+            System.out.println("\n"+ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn"+ProgramUtils.RESET+"\n");
             gameMenu.roundMenu();
 
             if(i != playerAmount -1){
