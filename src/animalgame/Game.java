@@ -64,17 +64,22 @@ public class Game {
     }
 
     public void endGame(){
-        System.out.println(ProgramUtils.RED+"GAME OVER");
+        System.out.println(ProgramUtils.RED+"Good Game!"+ProgramUtils.RESET);
     }
 
     public void newRoundGetPlayer(){
         this.currentPlayer = allPlayers.get(0);
         for(int i = 0; i < playerAmount; i++){
+            this.allPlayers.get(1).setMoney(0);
+            if(this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)){
+                this.allPlayers.remove(currentPlayer);
+                System.out.println(ProgramUtils.RED+"Game OVER "+currentPlayer.getName()+"!"+ProgramUtils.RESET);
+                continue;
+            }
+
             System.out.println(ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn:"+ProgramUtils.RESET+"\n");
             gameMenu.roundMenu();
-            if(this.currentPlayer.getMoney() == 0){
-                endGame();
-            }
+
             if(i != playerAmount -1){
                 this.currentPlayer = allPlayers.get(1+i);
             }
