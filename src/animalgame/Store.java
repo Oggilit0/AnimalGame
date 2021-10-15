@@ -18,10 +18,10 @@ public class Store {
 
     }
 
-    public void shopFood(String food){
+    public void shopFood(String food, int foodPrice){
         System.out.println("How many do you want to buy?");
         int amountToBuy = ProgramUtils.tryCatch(ProgramUtils.userInput());
-        int sum = 50 * amountToBuy;
+        int sum = foodPrice * amountToBuy;
 
         if(this.customer.getMoney() >= sum){
             boolean containFoodType = false;
@@ -52,34 +52,23 @@ public class Store {
     }
 
     public void foodToBuy(){
-        // Vi måste kolla spelarens pengar
-        // Vi måste fråga hur mycket han vill köpa
-        // vi skall lägga till allt han köpt
-
 
        switch( ProgramUtils.menuBuilder("Avaible food","meat", "fish","grass")){
 
             case 1:
-                shopFood("Meat");
+                shopFood("Meat",50);
                 break;
 
             case 2:
-                shopFood("Fish");
+                shopFood("Fish",100);
                 break;
 
             case 3:
-                shopFood("Grass");
+                shopFood("Grass",20);
                 break;
 
 
         }
-
-        // input parameter Food
-        // create food object (Meat, Fish, Grass)
-        // put food object in player inventory
-
-        // check Game class method createAnimal for inspiration :)
-
     }
     public void animalToSell(){}
 }
