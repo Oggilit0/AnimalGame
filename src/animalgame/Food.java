@@ -18,4 +18,4 @@ public abstract class Food {
     this.weight += weight;
     }
 }
-}
+
