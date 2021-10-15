@@ -47,8 +47,11 @@ public class Menu {
                 break;
                // this.currentGame.getStore().animalToBuy();
             case 2:
+                this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
+                this.currentGame.getStore().foodToBuy();
+
                 break;
-                //this.currentGame.getStore().foodToBuy();
+
             case 3:
                 this.currentGame.getStore().animalToSell();
                 break;
