@@ -9,4 +9,8 @@ public abstract class Food {
         this.weight = weight;
 
     }
+
+    public String getName(){
+        return this.name;
+    }
 }
