@@ -12,7 +12,6 @@ public class Game {
     private Player currentPlayer;
     private Menu gameMenu;
     private Store store;
-    private int age;
 
     public Game(){
         this.store = new Store();
@@ -51,7 +50,7 @@ public class Game {
     }
 
     public void newRound(){
-        //this.allPlayers.get(2).setMoney(0);
+        //this.allPlayers.get(2).setMoney(0); a test to check that the player gets kicked when broke
         for(int r = 0; r <= this.maxRound; r++) {
             this.round = r;
             if(round != maxRound){
@@ -61,14 +60,12 @@ public class Game {
                 System.out.println("\n".repeat(10));
             }else{
                 endGame();
-
             }
-
         }
     }
     public void gameOver(){
-        for (Player player : allPlayers){
-            System.out.println(ProgramUtils.GREEN+"The winner is "+player.getName()+"!"+ProgramUtils.RESET+"\uD83D\uDC51");
+        for (Player winner : allPlayers){
+            System.out.println(ProgramUtils.GREEN+"The winner is "+winner.getName()+"!"+ProgramUtils.RESET+"\uD83D\uDC51");
             System.exit(1);
         }
     }
@@ -94,9 +91,7 @@ public class Game {
                 }else{
                     gameOver();
                 }
-
             }
-
             System.out.println("\n"+ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn"+ProgramUtils.RESET+"\n");
             gameMenu.roundMenu();
 
@@ -109,6 +104,7 @@ public class Game {
         for(Animal animal : currentPlayer.getPlayerAnimal()){
             if(!(animal.getCurrentAge() == animal.getMaxAge())){
                 animal.setCurrentAge(1);
+                System.out.println("Every animal you have aged with 1 year!");
             }else{
                 animal.death();
             }
