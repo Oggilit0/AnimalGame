@@ -22,7 +22,7 @@ public class Game {
 
         gameStartPlayer();
         //this is A COMMENT
-
+        //hello
     }
     public void gameStartPlayer() {
         System.out.print("Write in how many players (Min 2 Max 4): ");
@@ -72,6 +72,7 @@ public class Game {
     }
 
     public void endGame(){
+
         System.out.println(ProgramUtils.RED+"Good Game!"+ProgramUtils.RESET);
     }
 
@@ -98,6 +99,7 @@ public class Game {
                 }
             }
             System.out.println("\n"+ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn"+ProgramUtils.RESET+"\n");
+            System.out.println(currentPlayer.getMoney()+ProgramUtils.YELLOW+" Gold\n"+ProgramUtils.RESET);
             gameMenu.roundMenu();
 
             if(i != playerAmount -1){
