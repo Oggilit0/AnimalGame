@@ -14,13 +14,14 @@ public abstract class Animal {
         MALE,FEMALE;
     }
 
-    public Animal(String name, int animalPrice, int maxAge, Gender gender){
+    public Animal(String name, int animalPrice, int maxAge, Gender gender, Player owner){
         this.name = name;
         this.health = 100;
         this.currentAge = 0;
         this.animalPrice = animalPrice;
         this.maxAge = maxAge;
         this.gender = gender;
+        this.owner = owner;
 
     }
 
