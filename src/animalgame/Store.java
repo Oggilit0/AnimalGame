@@ -18,7 +18,7 @@ public class Store {
 
     }
 
-    public void shopFood(String food, int foodPrice){
+    public void foodToBuy(String food, int foodPrice){
         System.out.println("How many do you want to buy?");
         int amountToBuy = ProgramUtils.tryCatch(ProgramUtils.userInput());
         int sum = foodPrice * amountToBuy;
@@ -51,24 +51,6 @@ public class Store {
         //Debug
     }
 
-    public void foodToBuy(){
 
-       switch( ProgramUtils.menuBuilder("Avaible food","meat", "fish","grass")){
-
-            case 1:
-                shopFood("Meat",50);
-                break;
-
-            case 2:
-                shopFood("Fish",100);
-                break;
-
-            case 3:
-                shopFood("Grass",20);
-                break;
-
-
-        }
-    }
     public void animalToSell(){}
 }
