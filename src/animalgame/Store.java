@@ -1,7 +1,13 @@
 package animalgame;
 
-public class Store {
+import animalgame.food.Fish;
+import animalgame.food.abstractmodels.Food;
+import animalgame.food.Grass;
+import animalgame.food.Meat;
+import animalgame.utilities.ProgramUtils;
 
+public class Store {
+    // private AnimalFactory factory;
     private Player customer;
 
    public void setCustomer(Player customer){
@@ -16,6 +22,7 @@ public class Store {
     public void animalToBuy(){
 
 
+        // customer.deliverAnimals( animalsList )
     }
 
     public void foodToBuy(String food, int foodPrice){
@@ -52,5 +59,12 @@ public class Store {
     }
 
 
-    public void animalToSell(){}
-}
+    public void animalToSell(Animal animal){
+       int animalPrice = animal.getAnimalPrice()* (animal.getHealth()/100);
+       this.customer.
+       this.customer.getPlayerAnimal().remove(animal)
+    }
+} // häst , ta djuret och ta bort från spellistan
+//djur remove från player list
+//spelarens pengar ska plussas på djurets värde
+//
