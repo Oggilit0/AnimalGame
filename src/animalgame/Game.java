@@ -21,6 +21,7 @@ public class Game {
         Animal testKatt = new Cat("TestKatt",500,5, Animal.Gender.MALE);
 
         gameStartPlayer();
+        //this is A COMMENT
 
     }
     public void gameStartPlayer() {
@@ -159,6 +160,8 @@ public class Game {
                     }
                 default:
                     // if (animalType.getClass().equals(Cat.class))
+                    //100% hälsa
+                    //köpa djur: döpa och välja kön
             }
         }
 
