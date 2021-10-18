@@ -1,4 +1,4 @@
-package animalgame;
+package animalgame.utilities;
 
 import java.util.List;
 import java.util.Scanner;
