@@ -3,6 +3,7 @@ package animalgame.food.abstractmodels;
 public abstract class Food {
     private String name;
     private int weight;
+    private int foodPrice;
 
     public Food(String name, int weight) {
         this.name = name;
@@ -22,6 +23,12 @@ public abstract class Food {
 
     public int getWeight() {
         return weight;
+    }
+    public void setFoodPrice(int foodPrice){
+        this.foodPrice = foodPrice;
+    }
+    public int getFoodPrice(){
+        return this.foodPrice;
     }
 }
 
