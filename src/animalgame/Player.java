@@ -1,5 +1,8 @@
 package animalgame;
 
+import animalgame.animals.abstractmodels.Animal;
+import animalgame.food.abstractmodels.Food;
+
 import java.util.ArrayList;
 
 /**

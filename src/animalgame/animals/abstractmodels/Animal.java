@@ -1,4 +1,7 @@
-package animalgame;
+package animalgame.animals.abstractmodels;
+
+import animalgame.Player;
+import animalgame.enums.Gender;
 
 public abstract class Animal {
     private String name;
@@ -9,10 +12,6 @@ public abstract class Animal {
     private Player owner;
     private final Gender gender;
     private Boolean aliveStatus = true;
-
-    enum Gender{
-        MALE,FEMALE;
-    }
 
     public Animal(String name, int animalPrice, int maxAge, Gender gender, Player owner){
         this.name = name;
