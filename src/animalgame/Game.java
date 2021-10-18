@@ -21,6 +21,7 @@ public class Game {
         Animal testKatt = new Cat("TestKatt",500,5, Animal.Gender.MALE);
 
         gameStartPlayer();
+        //this is A COMMENT
 
     }
     public void gameStartPlayer() {
