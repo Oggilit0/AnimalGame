@@ -22,7 +22,7 @@ public class Game {
 
         gameStartPlayer();
         //this is A COMMENT
-
+        //hello
     }
     public void gameStartPlayer() {
         System.out.print("Write in how many players (Min 2 Max 4): ");
