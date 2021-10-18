@@ -48,7 +48,7 @@ public class Menu {
                // this.currentGame.getStore().animalToBuy();
             case 2:
                 this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
-                this.currentGame.getStore().foodToBuy();
+                shopFoodMenu();
 
                 break;
 
@@ -58,6 +58,26 @@ public class Menu {
             default:
         }
     }
+    public void shopFoodMenu(){
+
+        switch( ProgramUtils.menuBuilder("Avaible food","meat", "fish","grass")){
+
+            case 1:
+                this.currentGame.getStore().foodToBuy("Meat",50);
+                break;
+
+            case 2:
+                this.currentGame.getStore().foodToBuy("Fish",100);
+                break;
+
+            case 3:
+                this.currentGame.getStore().foodToBuy("Grass",20);
+                break;
+
+
+        }
+    }
+
     public void animalChoice(){
 
         switch(ProgramUtils.menuBuilder("AnimalChoice","cat","Dog","Cow","Horse","Snake")){
