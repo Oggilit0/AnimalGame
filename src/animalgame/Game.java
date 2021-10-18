@@ -160,6 +160,8 @@ public class Game {
                     }
                 default:
                     // if (animalType.getClass().equals(Cat.class))
+                    //100% hälsa
+                    //köpa djur: döpa och välja kön
             }
         }
 
