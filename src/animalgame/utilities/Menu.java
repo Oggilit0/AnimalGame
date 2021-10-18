@@ -1,6 +1,8 @@
-package animalgame;
+package animalgame.utilities;
 
-import java.util.Collections;
+import animalgame.Game;
+import animalgame.animals.abstractmodels.Animal;
+import animalgame.utilities.ProgramUtils;
 
 public class Menu {
     private Game currentGame;
