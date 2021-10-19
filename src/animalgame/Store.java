@@ -51,6 +51,7 @@ public class Store {
             }
 
         }
+        this.customer.addMoney(sum);
         //Debug
         for(Food fooder : this.customer.getFoods()){
 
