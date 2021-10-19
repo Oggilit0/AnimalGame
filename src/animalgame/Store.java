@@ -1,5 +1,6 @@
 package animalgame;
 
+import animalgame.animals.abstractmodels.Animal;
 import animalgame.food.Fish;
 import animalgame.food.abstractmodels.Food;
 import animalgame.food.Grass;
@@ -30,7 +31,7 @@ public class Store {
         int amountToBuy = ProgramUtils.tryCatch(ProgramUtils.userInput());
         int sum = foodPrice * amountToBuy;
 
-        if(this.customer.getMoney() >= sum){
+        if(this.customer.getMoney() >= sum || this.customer.getMoney() < 0){
             boolean containFoodType = false;
             for(Food foodType : this.customer.getFoods()){
                 if (foodType.getName().equals(food)){
@@ -49,7 +50,10 @@ public class Store {
                 this.customer.setFoods(grass);
             }
 
+        }else{
+            System.out.println("Can't afford $" + sum + " with your $"+this.customer.getMoney());
         }
+        this.customer.removeMoney(sum);
         //Debug
         for(Food fooder : this.customer.getFoods()){
 
@@ -59,5 +63,12 @@ public class Store {
     }
 
 
-    public void animalToSell(){}
-}
+    public void animalToSell(Animal animal){
+       int animalPrice = animal.getAnimalPrice()* (animal.getHealth()/100);
+
+       this.customer.getPlayerAnimal().remove(animal);
+    }
+} // häst , ta djuret och ta bort från spellistan
+//djur remove från player list
+//spelarens pengar ska plussas på djurets värde
+//
