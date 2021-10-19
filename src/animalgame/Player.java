@@ -50,7 +50,7 @@ public class Player {
         return money;
     }
 
-    public void removeMoney(int money){
+    public void addMoney(int money){
         this.money += money;
     }
 
