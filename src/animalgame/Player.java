@@ -50,6 +50,10 @@ public class Player {
         return money;
     }
 
+    public void addMoney(int money){
+        this.money += money;
+    }
+
     public void setMoney(int money){
         this.money = money;
     }
@@ -61,4 +65,5 @@ public class Player {
     public ArrayList<Food> getFoods(){
         return this.foods;
     }
+
 }
