@@ -31,7 +31,7 @@ public class Store {
         int amountToBuy = ProgramUtils.tryCatch(ProgramUtils.userInput());
         int sum = foodPrice * amountToBuy;
 
-        if(this.customer.getMoney() >= sum){
+        if(this.customer.getMoney() >= sum || this.customer.getMoney() < 0){
             boolean containFoodType = false;
             for(Food foodType : this.customer.getFoods()){
                 if (foodType.getName().equals(food)){
@@ -50,6 +50,8 @@ public class Store {
                 this.customer.setFoods(grass);
             }
 
+        }else{
+            System.out.println("Can't afford $" + sum + " with your $"+this.customer.getMoney());
         }
         this.customer.removeMoney(sum);
         //Debug
