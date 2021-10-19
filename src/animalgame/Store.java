@@ -1,5 +1,6 @@
 package animalgame;
 
+import animalgame.animals.abstractmodels.Animal;
 import animalgame.food.Fish;
 import animalgame.food.abstractmodels.Food;
 import animalgame.food.Grass;
@@ -59,5 +60,12 @@ public class Store {
     }
 
 
-    public void animalToSell(){}
-}
+    public void animalToSell(Animal animal){
+       int animalPrice = animal.getAnimalPrice()* (animal.getHealth()/100);
+       
+       this.customer.getPlayerAnimal().remove(animal)
+    }
+} // häst , ta djuret och ta bort från spellistan
+//djur remove från player list
+//spelarens pengar ska plussas på djurets värde
+//
