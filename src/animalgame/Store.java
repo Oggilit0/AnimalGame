@@ -62,8 +62,8 @@ public class Store {
 
     public void animalToSell(Animal animal){
        int animalPrice = animal.getAnimalPrice()* (animal.getHealth()/100);
-       
-       this.customer.getPlayerAnimal().remove(animal)
+
+       this.customer.getPlayerAnimal().remove(animal);
     }
 } // häst , ta djuret och ta bort från spellistan
 //djur remove från player list
