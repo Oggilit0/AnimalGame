@@ -51,7 +51,7 @@ public class Player {
     }
 
     public void removeMoney(int money){
-        this.money += money;
+        this.money -= money;
     }
 
     public void setMoney(int money){
