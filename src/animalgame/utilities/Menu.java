@@ -55,7 +55,7 @@ public class Menu {
                 break;
 
             case 3:
-                //this.currentGame.getStore().animalToSell();
+               // this.currentGame.getStore().animalToSell();
                 break;
             default:
         }
