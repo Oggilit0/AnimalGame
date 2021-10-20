@@ -1,5 +1,9 @@
 package animalgame.utilities;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,21 +14,42 @@ public class ProgramUtils {
     public static final String YELLOW = "\u001B[33m";
     public static final String RED = "\u001B[31m";
 
-
     /**
-     * Read a file from input path
-     * @param path name of the file
+     * Load object from file and return that object
+     * @return object from file
      */
-    public static void readFile(String path){
+    public static Object readFile(){
+        ObjectInputStream o = null;
+        Object object = null;
+        try{
+            FileInputStream f = new FileInputStream("src/animalgame/savegame");
+            o = new ObjectInputStream(f);
+            object = o.readObject();
+            o.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return object;
     }
 
-
     /**
-     * Write to file from input path
-     * @param path name of the file
+     * Save input object to file
+     * @param object input object to save
      */
-    public static void writeToFile(String path){
+    public static void writeToFile(Object object){
+        ObjectOutputStream o = null;
+        FileOutputStream f = null;
 
+        try{
+            f = new FileOutputStream("src/animalgame/savegame");
+            o = new ObjectOutputStream(f);
+            o.writeObject(object);
+            o.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
