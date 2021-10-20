@@ -1,8 +1,11 @@
 package animalgame.utilities;
 
 import animalgame.Game;
+import animalgame.Player;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.utilities.ProgramUtils;
+
+import java.util.ArrayList;
 
 public class Menu {
     private Game currentGame;
@@ -97,9 +100,11 @@ public class Menu {
     }
 
     public void mateAnimalsMenu(){
-
-        System.out.println("choose which animal to mate etc");
-    }
-
-
+        for(Animal animal : currentGame.getCurrentPlayer().getPlayerAnimal()) {
+            if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
+                System.out.println("you need 2 or more animals!");
+            }else{
+                }
+            }
+        }
 }
