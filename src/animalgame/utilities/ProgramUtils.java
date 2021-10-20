@@ -1,5 +1,9 @@
 package animalgame.utilities;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,10 +16,22 @@ public class ProgramUtils {
 
 
     /**
-     * Read a file from input path
-     * @param path name of the file
+     * Load object from file and return that object
+     * @return object from file
      */
-    public static void readFile(String path){
+    public static Object readFile(){
+        ObjectInputStream o = null;
+        Object object = null;
+        try{
+            FileInputStream f = new FileInputStream("src/animalgame/savegame");
+            o = new ObjectInputStream(f);
+            object = o.readObject();
+            o.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return object;
     }
 
 
