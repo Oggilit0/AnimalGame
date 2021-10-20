@@ -3,6 +3,7 @@ package animalgame.utilities;
 import animalgame.Game;
 import animalgame.Player;
 import animalgame.animals.abstractmodels.Animal;
+import animalgame.enums.Gender;
 import animalgame.utilities.ProgramUtils;
 
 import java.util.ArrayList;
@@ -84,10 +85,22 @@ public class Menu {
     }
 
     public void animalChoice(){
-
+        for (Gender gender : Gender.values())
         switch(ProgramUtils.menuBuilder("AnimalChoice","cat","Dog","Cow","Horse","Snake")){
             case 1:
-                String cat = "Cat";
+                switch (ProgramUtils.menuBuilder("GenderChoice", "MALE","FEMALE")){
+                    case 1:
+                        System.out.println("Your animal is now MALE!");
+                        break;
+                    case 2:
+                        System.out.println("your animal is now FEMALE!");
+                        break;
+                    default:
+
+
+                }
+
+
 
         }
         this.currentGame.getStore().animalToBuy();
