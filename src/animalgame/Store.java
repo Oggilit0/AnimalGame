@@ -5,6 +5,7 @@ import animalgame.food.Fish;
 import animalgame.food.abstractmodels.Food;
 import animalgame.food.Grass;
 import animalgame.food.Meat;
+import animalgame.utilities.Factory;
 import animalgame.utilities.ProgramUtils;
 
 public class Store {
