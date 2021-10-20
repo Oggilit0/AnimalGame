@@ -28,7 +28,7 @@ public abstract class Animal {
      * Kills the animal and removes it from owners list of animals
      */
     public void death(){
-        this.owner.removePlayerAnimal(this);
+        //this.owner.removePlayerAnimal(this);
         this.aliveStatus = false;
     }
 
@@ -73,9 +73,9 @@ public abstract class Animal {
         return this.animalPrice;
     }
 
-    public void setOwner(Player owner){
-        this.owner = owner;
-    }
+//    public void setOwner(Player owner){
+//        this.owner = owner;
+//    }
 
 
 }

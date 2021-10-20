@@ -22,9 +22,9 @@ public class Game {
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         //Animal testKo = new Cow("TestKo",1000,10,Gender.FEMALE, currentPlayer);
-        Animal testKatt = new Cat("Katten", 500, 5, Gender.MALE, currentPlayer);
-        Animal testKatten = new Cat("Katt", 500, 5, Gender.FEMALE, currentPlayer);
-        tryMating(testKatt, testKatten);
+//        Animal testKatt = new Cat("Katten", 500, 5, Gender.MALE, currentPlayer);
+//        Animal testKatten = new Cat("Katt", 500, 5, Gender.FEMALE, currentPlayer);
+//        tryMating(testKatt, testKatten);
         //createAnimal("Cat", Gender.MALE);
         gameStartPlayer();
         //this is A COMMENT
