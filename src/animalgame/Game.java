@@ -21,9 +21,11 @@ public class Game {
         this.store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
-        //Animal testKo = new Cow("TestKo",1000,10, Animal.Gender.FEMALE);
-       // Animal testKatt = new Cat("TestKatt",500,5, Animal.Gender.MALE);
-
+        //Animal testKo = new Cow("TestKo",1000,10,Gender.FEMALE, currentPlayer);
+        Animal testKatt = new Cat("Katten",500,5, Gender.MALE, currentPlayer);
+        Animal testKatten = new Cat("Katt",500, 5, Gender.FEMALE, currentPlayer);
+        tryMating(testKatt,testKatten);
+        //createAnimal("Cat", Gender.MALE);
         gameStartPlayer();
         //this is A COMMENT
         //hello
@@ -129,24 +131,22 @@ public class Game {
      * @param gender
      */
     public void createAnimal(String animalType, Gender gender) {
-           // "animalgame.animals.Cat"
-            //animalType.getClass().getName().substring(11);
+           // "animalgame.animals.Cat";
+        //animalType.getClass().getName().substring(11);
+        System.out.println("Congratulations to your new animal you got a: " + gender + ". Name your new animal : ");
             switch(animalType){
                 case "Cat":
                     if(gender == Gender.FEMALE){
-                        Cat cat = new Cat("Martina", 500, 9, Gender.FEMALE, currentPlayer);
-                        System.out.println("Hej katten!");
+                        Cat cat = new Cat(ProgramUtils.userInput(), 500, 9, Gender.FEMALE, currentPlayer);
                         this.currentPlayer.setPlayerAnimal(cat);
                     }else{
-                        Cat cat = new Cat("Martin",500,9, Gender.MALE, currentPlayer);
-                        System.out.println("Hej katt!");
+                        Cat cat = new Cat(ProgramUtils.userInput(),500,9, Gender.MALE, currentPlayer);
                         this.currentPlayer.setPlayerAnimal(cat);
                     }
                     break;
                 case "Cow":
                     if(gender == Gender.FEMALE){
                         Cow cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.FEMALE, currentPlayer);
-                        System.out.println("Hej ko!");
                         this.currentPlayer.setPlayerAnimal(cow);
                     }else{
                         Cow cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.MALE, currentPlayer);
@@ -161,6 +161,7 @@ public class Game {
                         Dog dog = new Dog(ProgramUtils.userInput(), 500,15, Gender.MALE, currentPlayer);
                         this.currentPlayer.setPlayerAnimal(dog);
                     }
+                    break;
                 case "Horse":
                     if(gender == Gender.FEMALE){
                         Horse horse = new Horse(ProgramUtils.userInput(),500,20, Gender.FEMALE, currentPlayer);
@@ -170,6 +171,7 @@ public class Game {
                         Horse horse = new Horse(ProgramUtils.userInput(),500,20, Gender.MALE, currentPlayer);
                         this.currentPlayer.setPlayerAnimal(horse);
                     }
+                    break;
                 case "Snake":
                     if(gender == Gender.FEMALE){
                         Snake snake = new Snake(ProgramUtils.userInput(),500, 7, Gender.FEMALE, currentPlayer);
@@ -178,10 +180,9 @@ public class Game {
                         Snake snake = new Snake(ProgramUtils.userInput(),500, 7, Gender.FEMALE, currentPlayer);
                         this.currentPlayer.setPlayerAnimal(snake);
                     }
+                    break;
                 default:
-                    // if (animalType.getClass().equals(Cat.class))
-                    //100% hälsa
-                    //köpa djur: döpa och välja kön
+                    //vad ska hända här?
             }
         }
 
@@ -199,12 +200,12 @@ public class Game {
                 if (startMating == 0) {
                     int makeBabies = (int) (Math.random() * 3) + 1; //random how many babies
                     for (int i = 0; i < makeBabies; i++) {
-                        int getGender = (int) (Math.random() * 2); //random gender of baby
-                        if (getGender == 0) {
-                            createAnimal(animal1.getClass().getName(), Gender.FEMALE);
-                        } else {
-                            createAnimal(animal1.getClass().getName(), Gender.MALE);
-                        }
+                            int getGender = (int) (Math.random() * 2); //random gender of baby
+                            if (getGender == 0) {
+                                    createAnimal(animal1.getClass().getName(), Gender.FEMALE);
+                            } else {
+                                    createAnimal(animal1.getClass().getName(), Gender.MALE);
+                                }
                     }return true;
 
                 } else {
