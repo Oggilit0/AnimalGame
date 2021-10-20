@@ -9,18 +9,18 @@ public abstract class Animal {
     private final int maxAge;
     private int currentAge;
     private int animalPrice;
-    private Player owner;
+    //private Player owner;
     private final Gender gender;
     private Boolean aliveStatus = true;
 
-    public Animal(String name, int animalPrice, int maxAge, Gender gender, Player owner){
+    public Animal(String name, int animalPrice, int maxAge, Gender gender){
         this.name = name;
         this.health = 100;
         this.currentAge = 0;
         this.animalPrice = animalPrice;
         this.maxAge = maxAge;
         this.gender = gender;
-        this.owner = owner;
+        //this.owner = owner;
 
     }
 
