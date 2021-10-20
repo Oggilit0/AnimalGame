@@ -1,4 +1,7 @@
-package animalgame;
+package animalgame.animals.abstractmodels;
+
+import animalgame.Player;
+import animalgame.enums.Gender;
 
 public abstract class Animal {
     private String name;
@@ -10,17 +13,14 @@ public abstract class Animal {
     private final Gender gender;
     private Boolean aliveStatus = true;
 
-    enum Gender{
-        MALE,FEMALE;
-    }
-
-    public Animal(String name, int animalPrice, int maxAge, Gender gender){
+    public Animal(String name, int animalPrice, int maxAge, Gender gender, Player owner){
         this.name = name;
         this.health = 100;
         this.currentAge = 0;
         this.animalPrice = animalPrice;
         this.maxAge = maxAge;
         this.gender = gender;
+        this.owner = owner;
 
     }
 
@@ -58,9 +58,12 @@ public abstract class Animal {
         return this.currentAge;
     }
 
-    public int getCurrentAge(){
-        return this.currentAge;
+    public void setCurrentAge(int currentAge) {
+        this.currentAge += currentAge;
     }
+
+    public int getCurrentAge(){
+        return this. currentAge;}
 
     public int getHealth(){
         return this.health;

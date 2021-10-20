@@ -1,4 +1,4 @@
-package animalgame;
+package animalgame.utilities;
 
 import java.util.List;
 import java.util.Scanner;
@@ -42,7 +42,7 @@ public class ProgramUtils {
             menuCounter += 1;
         }
         System.out.print("\nUser input: ");
-        return Integer.parseInt(userInput());
+        return tryCatch(userInput());
     }
 
     /**
@@ -54,16 +54,21 @@ public class ProgramUtils {
 
         Scanner console = new Scanner(System.in);
         String userInput;
+        userInput = console.nextLine();
+        return userInput;
+    }
 
-        //try{
-            userInput = console.nextLine();
-            return userInput;
+    public static int tryCatch(String numberInput){
+        int newInput;
+            try{
+                newInput = Integer.parseInt(numberInput);
+            }catch(Exception e){
+                //e.printStackTrace();
+                System.out.println("Write a number you goof!");
+                newInput = tryCatch(userInput());
+            }
 
-        //}catch(Exception e){
-        //    e.printStackTrace();
-        //    return null;
-        //}
-
+        return newInput;
     }
 
 }

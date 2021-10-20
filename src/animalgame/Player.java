@@ -1,13 +1,19 @@
 package animalgame;
 
+import animalgame.animals.abstractmodels.Animal;
+import animalgame.food.abstractmodels.Food;
+
 import java.util.ArrayList;
 
+/**
+ * @author
+ */
 public class Player {
     private String name;
     private int money;
     private ArrayList<Animal> playerAnimal;
     private ArrayList<Food> foods;
-
+  
     public Player(String name) {
         this.name = name;
         this.money = 5000;
@@ -22,32 +28,8 @@ public class Player {
         //add health to animal
     }
 
-    /**
-     * @param animal1
-     * @param animal2
-     */
-    public boolean tryMating(Animal animal1, Animal animal2) {
-        if (animal1.getClass().equals(animal2.getClass())) {
-            if (animal1.getGender() != animal2.getGender()) {
-                int startMating = (int) (Math.random() * 2); //random if mating is successful
-                if (startMating == 0) {
-                    int makeBabies = (int) (Math.random() * 3) + 1; //random how many babies
-                    for (int i = 0; i < makeBabies; i++) {
-                        int getGender = (int) (Math.random() * 2); //random gender of baby
-                        //createAnimal(animal1);
-                        //slump kön
-                    }
-                    return true;
-                } else {
-                    // no babies, mating not successful
-                }
-                return false;
-            } else {
-                // animal same gender : can't get babies.
-            }
-            return false;
-        }return false;
-    }
+
+
     public String getName() {
         return name;
     }
@@ -67,4 +49,21 @@ public class Player {
     public int getMoney() {
         return money;
     }
+
+    public void removeMoney(int money){
+        this.money -= money;
+    }
+
+    public void setMoney(int money){
+        this.money = money;
+    }
+
+    public void setFoods(Food food){
+        this.foods.add(food);
+    }
+
+    public ArrayList<Food> getFoods(){
+        return this.foods;
+    }
+
 }
