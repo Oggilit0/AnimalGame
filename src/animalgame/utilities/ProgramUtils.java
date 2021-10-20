@@ -22,12 +22,15 @@ public class ProgramUtils {
         ObjectInputStream o = null;
         Object object = null;
         try{
-            FileInputStream f = new FileInputStream("src/animalgame/savegame");
+            FileInputStream f = new FileInputStream("src/animalgame/savegame.txt");
             o = new ObjectInputStream(f);
             object = o.readObject();
+            System.out.println("Sucess!");
             o.close();
 
+
         }catch(Exception e){
+            System.out.println("WRONG!");
             e.printStackTrace();
         }
         return object;
@@ -42,7 +45,7 @@ public class ProgramUtils {
         FileOutputStream f = null;
 
         try{
-            f = new FileOutputStream("src/animalgame/savegame");
+            f = new FileOutputStream("src/animalgame/savegame.txt",false);
             o = new ObjectOutputStream(f);
             o.writeObject(object);
             o.close();
