@@ -17,19 +17,20 @@ public class Game {
     private Menu gameMenu;
     private Store store;
 
-    public Game(){
+    public Game() {
         this.store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         //Animal testKo = new Cow("TestKo",1000,10,Gender.FEMALE, currentPlayer);
-        Animal testKatt = new Cat("Katten",500,5, Gender.MALE, currentPlayer);
-        Animal testKatten = new Cat("Katt",500, 5, Gender.FEMALE, currentPlayer);
-        tryMating(testKatt,testKatten);
+        Animal testKatt = new Cat("Katten", 500, 5, Gender.MALE, currentPlayer);
+        Animal testKatten = new Cat("Katt", 500, 5, Gender.FEMALE, currentPlayer);
+        tryMating(testKatt, testKatten);
         //createAnimal("Cat", Gender.MALE);
         gameStartPlayer();
         //this is A COMMENT
         //hello
     }
+
     public void gameStartPlayer() {
         System.out.print("Write in how many players (Min 2 Max 4): ");
         this.playerAmount = ProgramUtils.tryCatch(ProgramUtils.userInput());
@@ -45,7 +46,8 @@ public class Game {
         }
         gameStartRounds();
     }
-    public void gameStartRounds(){
+
+    public void gameStartRounds() {
         System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
         this.maxRound = ProgramUtils.tryCatch(ProgramUtils.userInput());
         if (!(maxRound >= 5 && maxRound <= 30)) {
@@ -56,69 +58,71 @@ public class Game {
         newRound();
     }
 
-    public void newRound(){
+    public void newRound() {
         //this.allPlayers.get(2).setMoney(0); a test to check that the player gets kicked when broke
-        for(int r = 0; r <= this.maxRound; r++) {
+        for (int r = 0; r <= this.maxRound; r++) {
             this.round = r;
-            if(round != maxRound){
-                System.out.println(ProgramUtils.RED+"Round " + (r + 1)+ProgramUtils.RESET);
+            if (round != maxRound) {
+                System.out.println(ProgramUtils.RED + "Round " + (r + 1) + ProgramUtils.RESET);
                 newRoundGetPlayer();
                 ageAnimal();
                 System.out.println("\n".repeat(10));
-            }else{
+            } else {
                 endGame();
             }
         }
     }
-    public void gameOver(){
-        for (Player winner : allPlayers){
-            System.out.println(ProgramUtils.GREEN+"The winner is "+winner.getName()+"!"+ProgramUtils.RESET+"\uD83D\uDC51");
+
+    public void gameOver() {
+        for (Player winner : allPlayers) {
+            System.out.println(ProgramUtils.GREEN + "The winner is " + winner.getName() + "!" + ProgramUtils.RESET + "\uD83D\uDC51");
             System.exit(1);
         }
     }
 
-    public void endGame(){
+    public void endGame() {
 
-        System.out.println(ProgramUtils.RED+"Good Game!"+ProgramUtils.RESET);
+        System.out.println(ProgramUtils.RED + "Good Game!" + ProgramUtils.RESET);
     }
 
-    public void newRoundGetPlayer(){
+    public void newRoundGetPlayer() {
         this.currentPlayer = allPlayers.get(0);
-        for(int i = 0; i < playerAmount; i++){
+        for (int i = 0; i < playerAmount; i++) {
             //TEST
             //createAnimal("Cat", Animal.Gender.MALE);
             //createAnimal("Cat", Animal.Gender.FEMALE);
             //TEST
-            if(this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)){
+            if (this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)) {
                 this.allPlayers.remove(currentPlayer);
                 System.out.println("\n".repeat(10));
                 try {
-                    System.out.println(ProgramUtils.RED+"GAME OVER "+currentPlayer.getName()+"!"+ProgramUtils.RESET);
+                    System.out.println(ProgramUtils.RED + "GAME OVER " + currentPlayer.getName() + "!" + ProgramUtils.RESET);
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(this.allPlayers.size() != 1){
+                if (this.allPlayers.size() != 1) {
                     break;
-                }else{
+                } else {
                     gameOver();
                 }
             }
-            System.out.println("\n"+ProgramUtils.GREEN+currentPlayer.getName()+ "'s Turn"+ProgramUtils.RESET+"\n");
-            System.out.println(currentPlayer.getMoney()+ProgramUtils.YELLOW+" Gold\n"+ProgramUtils.RESET);
+            System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
+            System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold\n" + ProgramUtils.RESET);
             gameMenu.roundMenu();
 
-            if(i != playerAmount -1){
-                this.currentPlayer = allPlayers.get(1+i);
+            if (i != playerAmount - 1) {
+                this.currentPlayer = allPlayers.get(1 + i);
             }
         }
     }
-    public void ageAnimal(){
-        for(Animal animal : currentPlayer.getPlayerAnimal()){
-            if(!(animal.getCurrentAge() == animal.getMaxAge())){
+
+    public void ageAnimal() {
+        for (Animal animal : currentPlayer.getPlayerAnimal()) {
+            if (!(animal.getCurrentAge() == animal.getMaxAge())) {
                 animal.setCurrentAge(1);
                 System.out.println("Every animal you have aged with 1 year!");
-            }else{
+            } else {
                 animal.death();
             }
         }
@@ -126,65 +130,69 @@ public class Game {
 
 
     /**
-     *
      * @param animalType
      * @param gender
      */
-    public void createAnimal(String animalType, Gender gender) {
-           // "animalgame.animals.Cat";
-        //animalType.getClass().getName().substring(11);
+    public Animal createAnimal(String animalType, Gender gender) {
+        // "animalgame.animals.Cat";
+        //animalType.substring(11);
         System.out.println("Congratulations to your new animal you got a: " + gender + ". Name your new animal : ");
-            switch(animalType){
-                case "Cat":
-                    if(gender == Gender.FEMALE){
-                        Cat cat = new Cat(ProgramUtils.userInput(), 500, 9, Gender.FEMALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(cat);
-                    }else{
-                        Cat cat = new Cat(ProgramUtils.userInput(),500,9, Gender.MALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(cat);
-                    }
-                    break;
-                case "Cow":
-                    if(gender == Gender.FEMALE){
-                        Cow cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.FEMALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(cow);
-                    }else{
-                        Cow cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.MALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(cow);
-                        }
-                        break;
-                case "Dog":
-                    if(gender == Gender.FEMALE){
-                        Dog dog = new Dog(ProgramUtils.userInput(),500, 15, Gender.FEMALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(dog);
-                    }else{
-                        Dog dog = new Dog(ProgramUtils.userInput(), 500,15, Gender.MALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(dog);
-                    }
-                    break;
-                case "Horse":
-                    if(gender == Gender.FEMALE){
-                        Horse horse = new Horse(ProgramUtils.userInput(),500,20, Gender.FEMALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(horse);
+        switch (animalType) {
+            case "Cat":
+                Cat cat;
+                if(gender == Gender.FEMALE) {
+                    cat = new Cat(ProgramUtils.userInput(), 500, 9, Gender.FEMALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(cat);
+                } else {
+                    cat = new Cat(ProgramUtils.userInput(), 500, 9, Gender.MALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(cat);
+                }
+                return cat;
+            case "Cow":
+                Cow cow;
+                if (gender == Gender.FEMALE) {
+                    cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.FEMALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(cow);
+                } else {
+                    cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.MALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(cow);
+                }
+               return cow;
+            case "Dog":
+                Dog dog;
+                if (gender == Gender.FEMALE) {
+                    dog = new Dog(ProgramUtils.userInput(), 500, 15, Gender.FEMALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(dog);
+                } else {
+                    dog = new Dog(ProgramUtils.userInput(), 500, 15, Gender.MALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(dog);
+                }
+                return dog;
+            case "Horse":
+                Horse horse;
+                if (gender == Gender.FEMALE) {
+                    horse = new Horse(ProgramUtils.userInput(), 500, 20, Gender.FEMALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(horse);
 
-                    }else{
-                        Horse horse = new Horse(ProgramUtils.userInput(),500,20, Gender.MALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(horse);
-                    }
-                    break;
-                case "Snake":
-                    if(gender == Gender.FEMALE){
-                        Snake snake = new Snake(ProgramUtils.userInput(),500, 7, Gender.FEMALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(snake);
-                    }else{
-                        Snake snake = new Snake(ProgramUtils.userInput(),500, 7, Gender.FEMALE, currentPlayer);
-                        this.currentPlayer.setPlayerAnimal(snake);
-                    }
-                    break;
-                default:
-                    //vad ska hända här?
-            }
-        }
+                } else {
+                    horse = new Horse(ProgramUtils.userInput(), 500, 20, Gender.MALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(horse);
+                }
+                return horse;
+            case "Snake":
+                Snake snake;
+                if (gender == Gender.FEMALE) {
+                    snake = new Snake(ProgramUtils.userInput(), 500, 7, Gender.FEMALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(snake);
+                } else {
+                    snake = new Snake(ProgramUtils.userInput(), 500, 7, Gender.FEMALE, currentPlayer);
+                    this.currentPlayer.setPlayerAnimal(snake);
+                }
+                return snake;
+            default:
+
+        }return null;
+    }
 
     /**
      * Takes two animals and checks if they are the same class and different gender.
