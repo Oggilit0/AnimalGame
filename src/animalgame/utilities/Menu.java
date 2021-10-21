@@ -27,9 +27,9 @@ public class Menu {
 
 
     public void roundMenu(){
-
         switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals")){
             case 1:
+                this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
                 shopMenu();
                 break;
             case 2:
@@ -53,9 +53,7 @@ public class Menu {
                 break;
                // this.currentGame.getStore().animalToBuy();
             case 2:
-                this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
                 shopFoodMenu();
-
                 break;
 
             case 3:
@@ -85,23 +83,77 @@ public class Menu {
     }
 
     public void animalChoice(){
-        for (Gender gender : Gender.values())
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","cat","Dog","Cow","Horse","Snake")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","cat"+": 1000 Gold","Dog"+": 1000 Gold","Cow"+": 1000 Gold","Horse"+": 1000 Gold","Snake"+": 1000 Gold")){
             case 1:
                 switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
                     case 1:
-                        System.out.println("Your animal is now MALE!");
-                        this.currentGame.getStore().animalToBuy();
+                        if(!currentGame.getStore().animalToBuy("Cat",Gender.MALE,1000)){
+                            animalChoice();
+                    }
                         break;
                     case 2:
-                        System.out.println("your animal is now FEMALE!");
+                        if(!currentGame.getStore().animalToBuy("Cat",Gender.FEMALE,1000)){
+                            animalChoice();
+                        }
                         break;
-                    default:
-
-
+                }
+                break;
+            case 2:
+                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
+                    case 1:
+                        if(!currentGame.getStore().animalToBuy("Dog",Gender.MALE,1000)){
+                            animalChoice();
+                        }
+                        break;
+                    case 2:
+                        if(!currentGame.getStore().animalToBuy("Dog",Gender.FEMALE,1000)){
+                            animalChoice();
+                        }
+                        break;
+                }
+                break;
+            case 3:
+                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
+                    case 1:
+                        if(!currentGame.getStore().animalToBuy("Cow",Gender.MALE,1000)){
+                            animalChoice();
+                        }
+                        break;
+                    case 2:
+                        if(!currentGame.getStore().animalToBuy("Cow",Gender.FEMALE,1000)){
+                            animalChoice();
+                        }
+                        break;
+                }
+                break;
+            case 4:
+                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
+                    case 1:
+                        if(!currentGame.getStore().animalToBuy("Horse",Gender.MALE,1000)){
+                            animalChoice();
+                        }
+                        break;
+                    case 2:
+                        if(!currentGame.getStore().animalToBuy("Horse",Gender.FEMALE,1000)){
+                            animalChoice();
+                        }
+                        break;
+                }
+                break;
+            case 5:
+                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
+                    case 1:
+                        if(!currentGame.getStore().animalToBuy("Snake",Gender.MALE,1000)){
+                            animalChoice();
+                        }
+                        break;
+                    case 2:
+                        if(!currentGame.getStore().animalToBuy("Snake",Gender.FEMALE,1000)){
+                            animalChoice();
+                        }
+                        break;
                 }
         }
-        this.currentGame.getStore().animalToBuy();
     }
 
     public void feedAnimalsMenu(){
