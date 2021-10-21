@@ -3,6 +3,7 @@ package animalgame;
 import animalgame.animals.*;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
+import animalgame.utilities.Factory;
 import animalgame.utilities.Menu;
 import animalgame.utilities.ProgramUtils;
 
@@ -22,10 +23,10 @@ public class Game {
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         //Animal testKo = new Cow("TestKo",1000,10,Gender.FEMALE, currentPlayer);
-//        Animal testKatt = new Cat("Katten", 500, 5, Gender.MALE, currentPlayer);
-//        Animal testKatten = new Cat("Katt", 500, 5, Gender.FEMALE, currentPlayer);
-//        tryMating(testKatt, testKatten);
-        //createAnimal("Cat", Gender.MALE);
+        Animal testKatt = new Horse( "Katten", 500, 5, Gender.MALE);
+       Animal testKatten = new Horse( "Katt", 55,5,  Gender.FEMALE);
+        Factory.tryMating(testKatt, testKatten, currentPlayer);
+        //Factory.createAnimal("Cat", Gender.MALE);
         gameStartPlayer();
         //this is A COMMENT
         //hello
