@@ -1,5 +1,6 @@
 package animalgame.utilities;
 
+import animalgame.Player;
 import animalgame.animals.*;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
@@ -15,11 +16,9 @@ public class Factory {
      * @param animalType
      * @param gender
      */
-    public Animal createAnimal(String animalType, Gender gender) {
-        // "animalgame.animals.Cat";
-        //animalType.substring(11);
-        System.out.println("Congratulations to your new animal you got a: " + gender + ". Name your new animal : ");
-        switch (animalType) {
+    public static  Animal createAnimal(String animalType, Gender gender) {
+        System.out.println("Congratulations to your new animal, it´s a: " + gender.toString().toLowerCase() + "! Name your new animal : ");
+        switch(animalType){
             case "Cat":
                 Cat cat;
                 if(gender == Gender.FEMALE) {
@@ -71,7 +70,7 @@ public class Factory {
      * @param animal1
      * @param animal2
      */
-    public boolean tryMating(Animal animal1, Animal animal2) {
+    public static boolean tryMating(Animal animal1, Animal animal2, Player currentPlayer) {
         if (animal1.getClass().equals(animal2.getClass())) {
             if (animal1.getGender() != animal2.getGender()) {
                 int startMating = (int) (Math.random() * 2); //random if mating is successful
@@ -80,9 +79,11 @@ public class Factory {
                     for (int i = 0; i < makeBabies; i++) {
                         int getGender = (int) (Math.random() * 2); //random gender of baby
                         if (getGender == 0) {
-                            createAnimal(animal1.getClass().getName(), Gender.FEMALE);
+                            createAnimal(animal1.getClass().toString().substring(25), Gender.FEMALE);
+                            //
                         } else {
-                            createAnimal(animal1.getClass().getName(), Gender.MALE);
+                            createAnimal(animal1.getClass().toString().substring(25), Gender.MALE);
+                           // currentPlayer.setPlayerAnimal();
                         }
                     }return true;
 
