@@ -23,9 +23,9 @@ public class Game {
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         //Animal testKo = new Cow("TestKo",1000,10,Gender.FEMALE, currentPlayer);
-        Animal testKatt = new Horse( "Katten", 500, 5, Gender.MALE);
-       Animal testKatten = new Horse( "Katt", 55,5,  Gender.FEMALE);
-        Factory.tryMating(testKatt, testKatten, currentPlayer);
+        //Animal testKatt = new Horse( "Katten", 500, 5, Gender.MALE);
+       //Animal testKatten = new Horse( "Katt", 55,5,  Gender.FEMALE);
+       // Factory.tryMating(testKatt, testKatten, currentPlayer);
         //Factory.createAnimal("Cat", Gender.MALE);
         gameStartPlayer();
         //this is A COMMENT
