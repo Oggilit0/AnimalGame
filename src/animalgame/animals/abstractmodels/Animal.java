@@ -9,18 +9,18 @@ public abstract class Animal {
     private final int maxAge;
     private int currentAge;
     private int animalPrice;
-    private Player owner;
+    //private Player owner;
     private final Gender gender;
     private Boolean aliveStatus = true;
 
-    public Animal(String name, int animalPrice, int maxAge, Gender gender, Player owner){
+    public Animal(String name, int animalPrice, int maxAge, Gender gender){
         this.name = name;
         this.health = 100;
         this.currentAge = 0;
         this.animalPrice = animalPrice;
         this.maxAge = maxAge;
         this.gender = gender;
-        this.owner = owner;
+        //this.owner = owner;
 
     }
 
@@ -28,7 +28,7 @@ public abstract class Animal {
      * Kills the animal and removes it from owners list of animals
      */
     public void death(){
-        this.owner.removePlayerAnimal(this);
+        //this.owner.removePlayerAnimal(this);
         this.aliveStatus = false;
     }
 
@@ -73,9 +73,9 @@ public abstract class Animal {
         return this.animalPrice;
     }
 
-    public void setOwner(Player owner){
-        this.owner = owner;
-    }
+//    public void setOwner(Player owner){
+//        this.owner = owner;
+//    }
 
 
 }

@@ -3,6 +3,7 @@ package animalgame.utilities;
 import animalgame.Game;
 import animalgame.Player;
 import animalgame.animals.abstractmodels.Animal;
+import animalgame.enums.Gender;
 import animalgame.utilities.ProgramUtils;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Menu {
 
     public void roundMenu(){
 
-        switch(ProgramUtils.menuBuilder("Choose one","Shop","Feed animals","Mate animals")){
+        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals")){
             case 1:
                 shopMenu();
                 break;
@@ -46,7 +47,7 @@ public class Menu {
 
     public void shopMenu(){
 
-        switch(ProgramUtils.menuBuilder("Shop","Buy animals","Buy Food","Sell animals")){
+        switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
             case 1:
                 animalChoice();
                 break;
@@ -65,7 +66,7 @@ public class Menu {
     }
     public void shopFoodMenu(){
 
-        switch( ProgramUtils.menuBuilder("Avaible food","meat", "fish","grass")){
+        switch( ProgramUtils.menuBuilder("\nAvailable food","meat", "fish","grass")){
 
             case 1:
                 this.currentGame.getStore().foodToBuy("Meat",50);
@@ -84,11 +85,21 @@ public class Menu {
     }
 
     public void animalChoice(){
-
-        switch(ProgramUtils.menuBuilder("AnimalChoice","cat","Dog","Cow","Horse","Snake")){
+        for (Gender gender : Gender.values())
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","cat","Dog","Cow","Horse","Snake")){
             case 1:
-                String cat = "Cat";
+                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
+                    case 1:
+                        System.out.println("Your animal is now MALE!");
+                        this.currentGame.getStore().animalToBuy();
+                        break;
+                    case 2:
+                        System.out.println("your animal is now FEMALE!");
+                        break;
+                    default:
 
+
+                }
         }
         this.currentGame.getStore().animalToBuy();
     }

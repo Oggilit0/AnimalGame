@@ -3,12 +3,13 @@ package animalgame;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.food.abstractmodels.Food;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author
  */
-public class Player {
+public class Player implements Serializable {
     private String name;
     private int money;
     private ArrayList<Animal> playerAnimal;
