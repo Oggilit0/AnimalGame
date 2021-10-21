@@ -17,7 +17,7 @@ public class Factory {
      * @param gender
      */
     public static  Animal createAnimal(String animalType, Gender gender) {
-        System.out.println("Congratulations to your new animal, it´s a: " + gender.toString().toLowerCase() + "! Name your new animal : ");
+        System.out.println("Congratulations to your new "+ gender.toString().toLowerCase()+ " animal, Name your new animal : ");
         switch(animalType){
             case "Cat":
                 Cat cat;
