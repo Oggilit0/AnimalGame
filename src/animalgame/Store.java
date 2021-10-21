@@ -28,7 +28,7 @@ public class Store {
            return false;
        }else{
             customer.removeMoney(price);
-            Factory.createAnimal(animal,gender);
+            customer.setPlayerAnimal(Factory.createAnimal(animal,gender));
             return true;
        }
     }

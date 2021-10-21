@@ -79,11 +79,10 @@ public class Factory {
                     for (int i = 0; i < makeBabies; i++) {
                         int getGender = (int) (Math.random() * 2); //random gender of baby
                         if (getGender == 0) {
-                            createAnimal(animal1.getClass().toString().substring(25), Gender.FEMALE);
-                            //
+                            currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().toString().substring(25), Gender.FEMALE));
+
                         } else {
-                            createAnimal(animal1.getClass().toString().substring(25), Gender.MALE);
-                           // currentPlayer.setPlayerAnimal();
+                            currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().toString().substring(25), Gender.MALE));
                         }
                     }return true;
 
