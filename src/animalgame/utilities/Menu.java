@@ -203,23 +203,23 @@ public class Menu {
 
     }
 
-    public void mateAnimalsMenu(){
+    public void mateAnimalsMenu() {
         if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
             System.out.println("\nyou need 2 or more animals!");
             System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().size());
             roundMenu();
-        }else{
+        } else {
             playerAnimalsAsMenu();
             int menuChoice = 0;
             do {
                 menuChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
                 System.out.print("Write a number: ");
 
-            }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size());
+            } while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size());
             System.out.println("success");
 
         }
-
+    }
     public void sellAnimalMenu(){
 
 
