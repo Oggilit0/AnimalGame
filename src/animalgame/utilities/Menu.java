@@ -37,7 +37,7 @@ public class Menu {
 
 
     public void roundMenu(){
-        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals")){
+        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game","Debug")){
             case 1:
                 this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
                 shopMenu();
