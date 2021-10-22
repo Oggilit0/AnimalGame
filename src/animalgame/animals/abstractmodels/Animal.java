@@ -62,6 +62,10 @@ public abstract class Animal {
         this.currentAge += currentAge;
     }
 
+    public void setHealth(int health){
+        this.health += health;
+    }
+
     public int getCurrentAge(){
         return this. currentAge;}
 

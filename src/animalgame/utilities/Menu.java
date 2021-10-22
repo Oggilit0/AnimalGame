@@ -5,6 +5,7 @@ import animalgame.Player;
 import animalgame.animals.Cat;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
+import animalgame.food.abstractmodels.Food;
 import animalgame.utilities.ProgramUtils;
 
 import java.util.ArrayList;
@@ -21,6 +22,14 @@ public class Menu {
         int i = 1;
         for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
             System.out.println(i + ".\t" + animal.getClass().getName().substring(19) + " :  namn: " + animal.getName()+ " Gender: "+animal.getGender().toString().toLowerCase());
+            i++;
+        }
+    }
+
+    public void playerFoodAsMenu(){
+        int i = 1;
+        for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
+            System.out.println(i + ".\t Amount of weight: " + food.getWeight() + "KG  :  Type of food: " + food.getName());
             i++;
         }
     }
@@ -173,8 +182,12 @@ public class Menu {
     }
 
     public void feedAnimalsMenu(){
-
-        System.out.println("Choose which animals to feed");
+        System.out.println("Choose which animals to feed: ");
+        playerAnimalsAsMenu();
+        System.out.println("Choose which food to feed your animal with: ");
+        playerFoodAsMenu();
+        System.out.println("How many kg do you want to feed your animal: ");
+        //currentGame.getCurrentPlayer().feedAnimal();
 
     }
 
