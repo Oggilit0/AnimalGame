@@ -154,9 +154,12 @@ public class Game {
                     gameOver();
                 }
             }
-
             System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
-            System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold\n" + ProgramUtils.RESET);
+            System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold" + ProgramUtils.RESET);
+            for (Animal animal : currentPlayer.getPlayerAnimal()) {
+                animal.healthOverTime();
+                System.out.println(animal.getName() + " health is at " + ProgramUtils.RED + animal.getHealth() + ProgramUtils.RESET);
+            }
             gameMenu.roundMenu();
 
             if (i != playerAmount - 1) {
@@ -171,15 +174,7 @@ public class Game {
     }
 
     public void ageAnimal() {
-
         for (Animal animal : currentPlayer.getPlayerAnimal()) {
-            animal.healthOverTime();
-            System.out.println("\n"+animal.getName()+" health is at "+ProgramUtils.RED+ animal.getHealth()+ProgramUtils.RESET);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             if (!(animal.getCurrentAge() == animal.getMaxAge())) {
                 animal.setCurrentAge(1);
                 System.out.println("Every animal you have aged with 1 year!");
