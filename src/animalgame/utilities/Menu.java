@@ -3,8 +3,12 @@ package animalgame.utilities;
 import animalgame.Game;
 import animalgame.Player;
 import animalgame.animals.Cat;
+import animalgame.animals.Cow;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
+import animalgame.food.Fish;
+import animalgame.food.Grass;
+import animalgame.food.Meat;
 import animalgame.food.abstractmodels.Food;
 import animalgame.utilities.ProgramUtils;
 
@@ -44,7 +48,6 @@ public class Menu {
                 break;
             case 2:
                 feedAnimalsMenu();
-                playerAnimalsAsMenu();
                 break;
             case 3:
                 mateAnimalsMenu();
@@ -118,7 +121,7 @@ public class Menu {
     }
 
     public void animalChoice(){
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","cat"+": 1000 Gold","Dog"+": 1000 Gold","Cow"+": 1000 Gold","Horse"+": 1000 Gold","Snake"+": 1000 Gold")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Cat"+": 1000 Gold","Dog"+": 1000 Gold","Cow"+": 1000 Gold","Horse"+": 1000 Gold","Snake"+": 1000 Gold")){
             case 1:
                 switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
                     case 1:
@@ -193,14 +196,24 @@ public class Menu {
         }
     }
 
-    public void feedAnimalsMenu(){
-        System.out.println("Choose which animals to feed: ");
-        playerAnimalsAsMenu();
-        System.out.println("Choose which food to feed your animal with: ");
-        playerFoodAsMenu();
-        System.out.println("How many kg do you want to feed your animal: ");
-        //currentGame.getCurrentPlayer().feedAnimal();
+    public void feedAnimalsMenu() {
+        if (currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0) {
+            System.out.println("You must have one animal to feed!");
 
+        } else if (currentGame.getCurrentPlayer().getFoods().size() == 0) {
+            System.out.println("You must buy food to feed your animal with!");
+
+        } else {
+            System.out.println("Choose which animals to feed: ");
+            playerAnimalsAsMenu();
+            int animalChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            System.out.println("Choose which food to feed your animal with: ");
+            playerFoodAsMenu();
+            int foodChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            //System.out.println("How many kg do you want to feed your animal: ");
+           // int kgChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1));
+        }
     }
 
     public void mateAnimalsMenu(){
