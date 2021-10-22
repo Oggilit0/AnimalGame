@@ -7,6 +7,7 @@ import animalgame.food.Fish;
 import animalgame.food.Grass;
 import animalgame.food.Meat;
 import animalgame.food.abstractmodels.Food;
+import animalgame.utilities.ProgramUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,7 +43,20 @@ public class Player implements Serializable {
         //beroende på KG
         //getPlayerAnimal(animal.getHealth() + );
 
-
+    public boolean gameOverCheck(){
+        if (this.money == 0 && (this.playerAnimal.size() == 0)) {
+            //this.allPlayers.remove(this);
+            System.out.println("\n".repeat(10));
+            try {
+                System.out.println(ProgramUtils.RED + "GAME OVER " + this.name + "!" + ProgramUtils.RESET);
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return false;
+    }
 
     public String getName() {
         return name;
