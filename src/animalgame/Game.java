@@ -171,7 +171,10 @@ public class Game {
     }
 
     public void ageAnimal() {
+
         for (Animal animal : currentPlayer.getPlayerAnimal()) {
+            animal.healthOverTime();
+            System.out.println(animal.getName()+" health is at "+ animal.getHealth());
             if (!(animal.getCurrentAge() == animal.getMaxAge())) {
                 animal.setCurrentAge(1);
                 System.out.println("Every animal you have aged with 1 year!");
