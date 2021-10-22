@@ -23,10 +23,14 @@ public class Player implements Serializable {
     }
 
 
-    public void feedAnimal(Animal animal) {
-        //remove food from foodsList
-        //remove money from player
-        //add health to animal
+    public void feedAnimal(Animal animal, Food food) {
+        //if(animal äter det den blir serverad){
+        int f = (int)(animal.getHealth()*(10.0f/100.0f));
+        animal.setHealth(f);
+        this.foods.remove(food);
+        //beroende på KG
+        //set health
+        //getPlayerAnimal(animal.getHealth() + );
     }
 
 
