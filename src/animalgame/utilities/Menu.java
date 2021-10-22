@@ -5,6 +5,7 @@ import animalgame.Player;
 import animalgame.animals.Cat;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
+import animalgame.food.abstractmodels.Food;
 import animalgame.utilities.ProgramUtils;
 
 import java.util.ArrayList;
@@ -25,6 +26,14 @@ public class Menu {
         }
     }
 
+    public void playerFoodAsMenu(){
+        int i = 1;
+        for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
+            System.out.println(i + ".\t Amount of weight: " + food.getWeight() + "KG  :  Type of food: " + food.getName());
+            i++;
+        }
+    }
+
 
 
     public void roundMenu(){
@@ -40,8 +49,33 @@ public class Menu {
             case 3:
                 mateAnimalsMenu();
                 break;
+            case 4:
+                this.currentGame.saveGame();
+            case 5:
+
+                for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
+                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + ". Name:"+animal.getName());
+                }
+
+                for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
+                    System.out.println("Food: " + food.getClass().getName().substring(16) + ". Amount:"+food.getWeight() + " kg");
+                }
+                roundMenu();
             default:
                 roundMenu();
+        }
+    }
+
+    public void newGameMenu(){
+        switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
+            case 1:
+                this.currentGame.startGame();
+                break;
+            case 2:
+                this.currentGame.loadGame();
+                break;
+            default:
+                newGameMenu();
         }
     }
 
@@ -60,6 +94,7 @@ public class Menu {
                // this.currentGame.getStore().animalToSell();
                 break;
             default:
+                shopMenu();
         }
     }
     public void shopFoodMenu(){
@@ -77,8 +112,8 @@ public class Menu {
             case 3:
                 this.currentGame.getStore().foodToBuy("Grass",20);
                 break;
-
-
+            default:
+                shopFoodMenu();
         }
     }
 
@@ -153,12 +188,18 @@ public class Menu {
                         }
                         break;
                 }
+            default:
+                animalChoice();
         }
     }
 
     public void feedAnimalsMenu(){
-
-        System.out.println("Choose which animals to feed");
+        System.out.println("Choose which animals to feed: ");
+        playerAnimalsAsMenu();
+        System.out.println("Choose which food to feed your animal with: ");
+        playerFoodAsMenu();
+        System.out.println("How many kg do you want to feed your animal: ");
+        //currentGame.getCurrentPlayer().feedAnimal();
 
     }
 
@@ -188,5 +229,4 @@ public class Menu {
             }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size() || menuChoice == otherChoice);
         }
     }
-
 }

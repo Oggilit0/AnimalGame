@@ -3,7 +3,9 @@ package animalgame.animals.abstractmodels;
 import animalgame.Player;
 import animalgame.enums.Gender;
 
-public abstract class Animal {
+import java.io.Serializable;
+
+public abstract class Animal implements Serializable {
     private String name;
     private int health;
     private final int maxAge;
@@ -60,6 +62,10 @@ public abstract class Animal {
 
     public void setCurrentAge(int currentAge) {
         this.currentAge += currentAge;
+    }
+
+    public void setHealth(int health){
+        this.health += health;
     }
 
     public int getCurrentAge(){
