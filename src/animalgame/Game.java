@@ -174,7 +174,12 @@ public class Game {
 
         for (Animal animal : currentPlayer.getPlayerAnimal()) {
             animal.healthOverTime();
-            System.out.println(animal.getName()+" health is at "+ animal.getHealth());
+            System.out.println("\n"+animal.getName()+" health is at "+ProgramUtils.RED+ animal.getHealth()+ProgramUtils.RESET);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if (!(animal.getCurrentAge() == animal.getMaxAge())) {
                 animal.setCurrentAge(1);
                 System.out.println("Every animal you have aged with 1 year!");
