@@ -63,7 +63,7 @@ public class Game {
             }
 
         }while(!checkPlayerInputAmount);
-
+        this.currentPlayer = allPlayers.get(0);
     }
 
     /**
@@ -135,7 +135,6 @@ public class Game {
     }
 
     public void newRoundGetPlayer() {
-        this.currentPlayer = allPlayers.get(0);
         for (int i = 0; i < playerAmount; i++) {
             //TEST
             //createAnimal("Cat", Animal.Gender.MALE);
