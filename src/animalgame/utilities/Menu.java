@@ -124,7 +124,7 @@ public class Menu {
                     case 1:
                         if(!currentGame.getStore().animalToBuy("Cat",Gender.MALE,1000)){
                             animalChoice();
-                    }
+                        }
                         break;
                     case 2:
                         if(!currentGame.getStore().animalToBuy("Cat",Gender.FEMALE,1000)){
