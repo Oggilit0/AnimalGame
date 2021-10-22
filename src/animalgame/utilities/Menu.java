@@ -163,6 +163,7 @@ public class Menu {
     }
 
     public void mateAnimalsMenu(){
+        ArrayList<Animal> newAnimalList = new ArrayList<>();
         if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
             System.out.println("\nyou need 2 or more animals!");
             System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().size());
@@ -170,13 +171,22 @@ public class Menu {
         }else{
             playerAnimalsAsMenu();
             int menuChoice = 0;
+            int otherChoice = 0;
+            System.out.print("First animal to breed: ");
             do {
                 menuChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
-                System.out.print("Write a number: ");
-
-            }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size());
-            System.out.println("success");
-
+                    newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
+                    System.out.print("Write the second animal to breed: ");
+                    otherChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+                    if(otherChoice == menuChoice){
+                        System.out.println("Can't choose the same animal!\n");
+                        System.out.print("First animal to breed: ");
+                    }else{
+                        newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(otherChoice-1));
+                        Factory.tryMating(newAnimalList.get(0),newAnimalList.get(1),currentGame.getCurrentPlayer());
+                    }
+            }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size() || menuChoice == otherChoice);
         }
     }
+
 }
