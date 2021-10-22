@@ -39,7 +39,7 @@ public class Player implements Serializable {
      */
     public void feedAnimal(Animal animal, Food food, int weight) {
         if(animal.eat(food)){
-            if(weight < food.getWeight()){
+            if(weight <= food.getWeight()){
                 int f = weight*10;
                 animal.setHealth(f);
                 if(weight == food.getWeight()){
@@ -47,8 +47,10 @@ public class Player implements Serializable {
                 }else{
                     food.removeWeight(weight);
                 }
+            }else{
+                System.out.println("You dont have " +weight + "kg " +food.getName().toLowerCase() + " to give " +animal.getName());
             }
-            System.out.println("You dont have " +weight + "kg" +food + " to give " +animal.getName());
+
         }
     }
 
