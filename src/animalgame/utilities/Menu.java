@@ -57,7 +57,7 @@ public class Menu {
             case 5:
 
                 for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
-                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + ". Name:"+animal.getName());
+                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + ". Name:"+animal.getName() + " " + animal.getHealth());
                 }
 
                 for(Food food : this.currentGame.getCurrentPlayer().getFoods()){

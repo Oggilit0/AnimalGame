@@ -32,16 +32,16 @@ public class Player implements Serializable {
 
     public void feedAnimal(Animal animal, Food food) {
         if(animal.eat(food)){
-            this.foods.remove(food);
+            int f = (int)(animal.getHealth() + food.getWeight()*(10.0f/100.0f));
+            animal.setHealth(f);
+            this.foods.remove(food.getWeight());
+
         }else{
 
         }
-        //int f = (int)(getPlayerAnimal(animal.getHealth())  +   food.getWeight()*(10.0f/100.0f));
+
         }
-            //int f = (int)(getPlayerAnimal() + food.getWeight()*(10.0f/100.0f));
-            //animal.setHealth(f);
-        //beroende på KG
-        //getPlayerAnimal(animal.getHealth() + );
+
 
     public boolean gameOverCheck(){
         if (this.money == 0 && (this.playerAnimal.size() == 0)) {
