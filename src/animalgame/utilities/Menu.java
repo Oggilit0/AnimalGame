@@ -37,7 +37,7 @@ public class Menu {
 
 
     public void roundMenu(){
-        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals")){
+        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game", "print data")){
             case 1:
                 this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
                 shopMenu();
@@ -49,6 +49,18 @@ public class Menu {
             case 3:
                 mateAnimalsMenu();
                 break;
+            case 4:
+                this.currentGame.saveGame();
+            case 5:
+
+                for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
+                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + ". Name:"+animal.getName());
+                }
+
+                for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
+                    System.out.println("Food: " + food.getClass().getName().substring(16) + ". Amount:"+food.getWeight() + " kg");
+                }
+                roundMenu();
             default:
                 roundMenu();
         }
