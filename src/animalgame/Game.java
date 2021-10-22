@@ -27,7 +27,7 @@ public class Game {
        //Animal testKatten = new Horse( "Katt", 55,5,  Gender.FEMALE);
        // Factory.tryMating(testKatt, testKatten, currentPlayer);
         //Factory.createAnimal("Cat", Gender.MALE);
-        newGame();
+        this.gameMenu.newGameMenu();
         //this is A COMMENT
         //hello
     }
@@ -84,28 +84,6 @@ public class Game {
         }while(!checkRoundInputAmount);
 
         System.out.println("\n".repeat(30));
-    }
-
-    /**
-     * let the user choose between starting a new game
-     * or load a saved game
-     */
-    public void newGame(){
-        // Make menu and call for it    this.gameMenu.newGameMenu();
-
-        System.out.println("1. Start new game");
-        System.out.println("2. Load game");
-
-        if(ProgramUtils.tryCatch(ProgramUtils.userInput()) == 1){
-
-            startGame();
-
-        }else{
-            // make a Check if there is a file saved
-            loadGame();
-        }
-
-
     }
 
     public void loadGame(){

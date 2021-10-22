@@ -45,6 +45,19 @@ public class Menu {
         }
     }
 
+    public void newGameMenu(){
+        switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
+            case 1:
+                this.currentGame.startGame();
+                break;
+            case 2:
+                this.currentGame.loadGame();
+                break;
+            default:
+                newGameMenu();
+        }
+    }
+
     public void shopMenu(){
 
         switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
@@ -60,6 +73,7 @@ public class Menu {
                // this.currentGame.getStore().animalToSell();
                 break;
             default:
+                shopMenu();
         }
     }
     public void shopFoodMenu(){
@@ -77,8 +91,8 @@ public class Menu {
             case 3:
                 this.currentGame.getStore().foodToBuy("Grass",20);
                 break;
-
-
+            default:
+                shopFoodMenu();
         }
     }
 
@@ -153,6 +167,8 @@ public class Menu {
                         }
                         break;
                 }
+            default:
+                animalChoice();
         }
     }
 
