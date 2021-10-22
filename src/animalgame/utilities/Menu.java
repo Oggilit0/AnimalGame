@@ -30,6 +30,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Prints out the players amount and type of food they have bought.
+     */
     public void playerFoodAsMenu(){
         int i = 1;
         for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
@@ -210,9 +213,9 @@ public class Menu {
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
             int foodChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
-            //System.out.println("How many kg do you want to feed your animal: ");
-           // int kgChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
-            currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1));
+            System.out.println("How many kg do you want to feed your animal: ");
+            int kgChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1), kgChoice);
         }
     }
 

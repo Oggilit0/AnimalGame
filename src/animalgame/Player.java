@@ -29,18 +29,28 @@ public class Player implements Serializable {
         this.foods = new ArrayList<>();
     }
 
-
-    public void feedAnimal(Animal animal, Food food) {
+    /**
+     * Checks if the animal eats the food it is given.
+     * Then checks if the player has the amount of food that they try to give the animal.
+     * Add 10% health per kilo food and remove food from players
+     * foodslist if the animal eats the food.
+     * @param animal
+     * @param food
+     */
+    public void feedAnimal(Animal animal, Food food, int weight) {
         if(animal.eat(food)){
-            int f = (int)(animal.getHealth() + food.getWeight()*(10.0f/100.0f));
-            animal.setHealth(f);
-            this.foods.remove(food.getWeight());
-
-        }else{
-
+            if(weight < food.getWeight()){
+                int f = weight*10;
+                animal.setHealth(f);
+                if(weight == food.getWeight()){
+                    this.foods.remove(food);
+                }else{
+                    food.removeWeight(weight);
+                }
+            }
+            System.out.println("You dont have " +weight + "kg" +food + " to give " +animal.getName());
         }
-
-        }
+    }
 
 
     public boolean gameOverCheck(){

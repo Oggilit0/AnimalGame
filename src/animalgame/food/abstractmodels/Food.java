@@ -23,6 +23,10 @@ public abstract class Food implements Serializable {
     this.weight += weight;
     }
 
+    public void removeWeight(int weight){
+        this.weight -= weight;
+    }
+
     public int getWeight() {
         return weight;
     }
