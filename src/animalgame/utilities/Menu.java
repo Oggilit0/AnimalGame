@@ -204,28 +204,27 @@ public class Menu {
     }
 
     public void mateAnimalsMenu(){
-        ArrayList<Animal> newAnimalList = new ArrayList<>();
         if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
+            System.out.println("you currently have "+currentGame.getCurrentPlayer().getPlayerAnimal().size()+" animals");
             System.out.println("\nyou need 2 or more animals!");
-            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().size());
             roundMenu();
         }else{
             playerAnimalsAsMenu();
             int menuChoice = 0;
             int otherChoice = 0;
-            System.out.print("First animal to breed: ");
             do {
+                ArrayList<Animal> newAnimalList = new ArrayList<>();
+                System.out.print("First animal to breed: ");
                 menuChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
-                    newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
-                    System.out.print("Write the second animal to breed: ");
-                    otherChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
-                    if(otherChoice == menuChoice){
-                        System.out.println("Can't choose the same animal!\n");
-                        System.out.print("First animal to breed: ");
-                    }else{
-                        newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(otherChoice-1));
-                        Factory.tryMating(newAnimalList.get(0),newAnimalList.get(1),currentGame.getCurrentPlayer());
-                    }
+                newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
+                System.out.print("Write the second animal to breed: ");
+                otherChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+                if(otherChoice == menuChoice){
+                    System.out.println("\nCan't choose the same animal!\n");
+                }else{
+                    newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(otherChoice-1));
+                    Factory.tryMating(newAnimalList.get(0),newAnimalList.get(1),currentGame.getCurrentPlayer());
+                }
             }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size() || menuChoice == otherChoice);
         }
     }
