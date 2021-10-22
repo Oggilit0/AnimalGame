@@ -22,6 +22,7 @@ public class Game {
         this.store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
+        this.round = 0;
         //Animal testKo = new Cow("TestKo",1000,10,Gender.FEMALE, currentPlayer);
         //Animal testKatt = new Horse( "Katten", 500, 5, Gender.MALE);
        //Animal testKatten = new Horse( "Katt", 55,5,  Gender.FEMALE);
@@ -88,11 +89,23 @@ public class Game {
 
     public void loadGame(){
 
+        SavedGame loadedGameObj = (SavedGame) ProgramUtils.readFile();
+        this.currentPlayer = loadedGameObj.getSavedCurrentPlayer();
+        this.maxRound = loadedGameObj.getSavedMaxRounds();
+        this.allPlayers = loadedGameObj.getSavedPlayerList();
+        this.round = loadedGameObj.getSavedCurrentRound();
+        this.playerAmount = loadedGameObj.getSavedPlayerList().size();
+        newRound();
+    }
+
+    public void saveGame(){
+        SavedGame saveGame = new SavedGame(this.allPlayers,this.currentPlayer,this.round,this.maxRound);
+        ProgramUtils.writeToFile(saveGame);
     }
 
     public void newRound() {
         //this.allPlayers.get(2).setMoney(0); a test to check that the player gets kicked when broke
-        for (int r = 0; r <= this.maxRound; r++) {
+        for (int r = round; r <= this.maxRound; r++) {
             this.round = r;
             if (round != maxRound) {
                 System.out.println(ProgramUtils.RED + "Round " + (r + 1) + ProgramUtils.RESET);
@@ -104,6 +117,10 @@ public class Game {
             }
         }
     }
+
+
+
+
 
     public void gameOver() {
         for (Player winner : allPlayers) {
