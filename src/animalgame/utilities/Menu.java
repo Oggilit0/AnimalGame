@@ -219,5 +219,12 @@ public class Menu {
             System.out.println("success");
 
         }
+
+    public void sellAnimalMenu(){
+
+
+
     }
 }
+
+
