@@ -2,8 +2,11 @@ package animalgame.animals.abstractmodels;
 
 import animalgame.Player;
 import animalgame.enums.Gender;
+import animalgame.food.abstractmodels.Food;
 
-public abstract class Animal {
+import java.io.Serializable;
+
+public abstract class Animal implements Serializable {
     private String name;
     private int health;
     private final int maxAge;
@@ -23,6 +26,8 @@ public abstract class Animal {
         //this.owner = owner;
 
     }
+
+    public abstract boolean eat(Food foodToEat);
 
     /**
      * Kills the animal and removes it from owners list of animals

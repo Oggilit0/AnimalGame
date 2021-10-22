@@ -17,4 +17,20 @@ public class SavedGame implements Serializable {
         this.savedMaxRounds = maxRounds;
     }
 
+
+    public ArrayList<Player> getSavedPlayerList() {
+        return savedPlayerList;
+    }
+
+    public Player getSavedCurrentPlayer() {
+        return savedCurrentPlayer;
+    }
+
+    public int getSavedCurrentRound() {
+        return savedCurrentRound;
+    }
+
+    public int getSavedMaxRounds() {
+        return savedMaxRounds;
+    }
 }

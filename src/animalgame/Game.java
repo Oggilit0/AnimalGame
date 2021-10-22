@@ -1,9 +1,6 @@
 package animalgame;
 
-import animalgame.animals.*;
 import animalgame.animals.abstractmodels.Animal;
-import animalgame.enums.Gender;
-import animalgame.utilities.Factory;
 import animalgame.utilities.Menu;
 import animalgame.utilities.ProgramUtils;
 
@@ -12,7 +9,7 @@ import java.util.ArrayList;
 public class Game {
     private ArrayList<Player> allPlayers;
     private int maxRound;
-    private int round;
+    private int currentRound;
     private int playerAmount;
     private Player currentPlayer;
     private Menu gameMenu;
@@ -22,6 +19,7 @@ public class Game {
         this.store = new Store();
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
+        this.currentRound = 0;
         //Animal testKo = new Cow("TestKo",1000,10,Gender.FEMALE, currentPlayer);
         //Animal testKatt = new Horse( "Katten", 500, 5, Gender.MALE);
        //Animal testKatten = new Horse( "Katt", 55,5,  Gender.FEMALE);
@@ -62,7 +60,7 @@ public class Game {
             }
 
         }while(!checkPlayerInputAmount);
-
+        this.currentPlayer = this.allPlayers.get(0);
     }
 
     /**
@@ -86,15 +84,29 @@ public class Game {
         System.out.println("\n".repeat(30));
     }
 
+    /**
+     * Load saved game from file and set variables to 
+     */
     public void loadGame(){
+        SavedGame loadedGameObj = (SavedGame) ProgramUtils.readFile();
+        this.currentPlayer = loadedGameObj.getSavedCurrentPlayer();
+        this.maxRound = loadedGameObj.getSavedMaxRounds();
+        this.allPlayers = loadedGameObj.getSavedPlayerList();
+        this.currentRound = loadedGameObj.getSavedCurrentRound();
+        this.playerAmount = loadedGameObj.getSavedPlayerList().size();
+        newRound();
+    }
 
+    public void saveGame(){
+        SavedGame saveGame = new SavedGame(this.allPlayers,this.currentPlayer,this.currentRound,this.maxRound);
+        ProgramUtils.writeToFile(saveGame);
     }
 
     public void newRound() {
         //this.allPlayers.get(2).setMoney(0); a test to check that the player gets kicked when broke
-        for (int r = 0; r <= this.maxRound; r++) {
-            this.round = r;
-            if (round != maxRound) {
+        for (int r = currentRound; r <= this.maxRound; r++) {
+            this.currentRound = r;
+            if (currentRound != maxRound) {
                 System.out.println(ProgramUtils.RED + "Round " + (r + 1) + ProgramUtils.RESET);
                 newRoundGetPlayer();
                 ageAnimal();
@@ -104,6 +116,10 @@ public class Game {
             }
         }
     }
+
+
+
+
 
     public void gameOver() {
         for (Player winner : allPlayers) {
@@ -118,8 +134,7 @@ public class Game {
     }
 
     public void newRoundGetPlayer() {
-        this.currentPlayer = allPlayers.get(0);
-        for (int i = 0; i < playerAmount; i++) {
+        for (int i = this.allPlayers.indexOf(this.currentPlayer); i < playerAmount; i++) {
             //TEST
             //createAnimal("Cat", Animal.Gender.MALE);
             //createAnimal("Cat", Animal.Gender.FEMALE);
@@ -139,14 +154,20 @@ public class Game {
                     gameOver();
                 }
             }
+
             System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
             System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold\n" + ProgramUtils.RESET);
             gameMenu.roundMenu();
 
             if (i != playerAmount - 1) {
+
                 this.currentPlayer = allPlayers.get(1 + i);
+            }else{
+                this.currentPlayer = this.allPlayers.get(0);
             }
+
         }
+
     }
 
     public void ageAnimal() {
