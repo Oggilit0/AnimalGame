@@ -1,6 +1,7 @@
 package animalgame;
 
 import animalgame.animals.abstractmodels.Animal;
+import animalgame.enums.Gender;
 import animalgame.food.Fish;
 import animalgame.food.abstractmodels.Food;
 import animalgame.food.Grass;
@@ -21,10 +22,15 @@ public class Store {
 
     }
 
-    public void animalToBuy(){
-
-
-        // customer.deliverAnimals( animalsList )
+    public boolean animalToBuy(String animal, Gender gender, int price){
+       if(this.customer.getMoney() < price){
+           System.out.println("Not enough money! The animal costs "+price+" And you have "+customer.getMoney());
+           return false;
+       }else{
+            customer.removeMoney(price);
+            customer.setPlayerAnimal(Factory.createAnimal(animal,gender));
+            return true;
+       }
     }
 
     public void foodToBuy(String food, int foodPrice){
@@ -66,10 +72,11 @@ public class Store {
 
     public void animalToSell(Animal animal){
        int animalPrice = animal.getAnimalPrice()* (animal.getHealth()/100);
-
+       this.customer.addMoney(animalPrice);
        this.customer.getPlayerAnimal().remove(animal);
+
     }
-} // häst , ta djuret och ta bort från spellistan
+} // häst,ta djuret och ta bort från spellistan
 //djur remove från player list
 //spelarens pengar ska plussas på djurets värde
 //

@@ -1,5 +1,6 @@
 package animalgame.utilities;
 
+import animalgame.Player;
 import animalgame.animals.*;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
@@ -12,65 +13,54 @@ public class Factory {
     }
 
     /**
-     *
      * @param animalType
      * @param gender
      */
-    public void createAnimal(String animalType, Gender gender) {
-        // "animalgame.animals.Cat"
-        //animalType.getClass().getName().substring(11);
+    public static  Animal createAnimal(String animalType, Gender gender) {
+        System.out.println("Congratulations to your new "+ gender.toString().toLowerCase()+ " animal, Name your new animal : ");
         switch(animalType){
             case "Cat":
-                if(gender == Gender.FEMALE){
-                    Cat cat = new Cat("Martina", 500, 9, Gender.FEMALE, currentPlayer);
-                    System.out.println("Hej katten!");
-                    this.currentPlayer.setPlayerAnimal(cat);
-                }else{
-                    Cat cat = new Cat("Martin",500,9, Gender.MALE, currentPlayer);
-                    System.out.println("Hej katt!");
-                    this.currentPlayer.setPlayerAnimal(cat);
+                Cat cat;
+                if(gender == Gender.FEMALE) {
+                    cat = new Cat(ProgramUtils.userInput(), 500, 9, Gender.FEMALE);
+                } else {
+                    cat = new Cat(ProgramUtils.userInput(), 500, 9, Gender.MALE);
                 }
-                break;
+                return cat;
             case "Cow":
-                if(gender == Gender.FEMALE){
-                    Cow cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.FEMALE, currentPlayer);
-                    System.out.println("Hej ko!");
-                    this.currentPlayer.setPlayerAnimal(cow);
-                }else{
-                    Cow cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.MALE, currentPlayer);
-                    this.currentPlayer.setPlayerAnimal(cow);
+                Cow cow;
+                if (gender == Gender.FEMALE) {
+                    cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.FEMALE);
+                } else {
+                    cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.MALE);
                 }
-                break;
+                return cow;
             case "Dog":
-                if(gender == Gender.FEMALE){
-                    Dog dog = new Dog(ProgramUtils.userInput(),500, 15, Gender.FEMALE, currentPlayer);
-                    this.currentPlayer.setPlayerAnimal(dog);
-                }else{
-                    Dog dog = new Dog(ProgramUtils.userInput(), 500,15, Gender.MALE, currentPlayer);
-                    this.currentPlayer.setPlayerAnimal(dog);
+                Dog dog;
+                if (gender == Gender.FEMALE) {
+                    dog = new Dog(ProgramUtils.userInput(), 500, 15, Gender.FEMALE);
+                } else {
+                    dog = new Dog(ProgramUtils.userInput(), 500, 15, Gender.MALE);
                 }
+                return dog;
             case "Horse":
-                if(gender == Gender.FEMALE){
-                    Horse horse = new Horse(ProgramUtils.userInput(),500,20, Gender.FEMALE, currentPlayer);
-                    this.currentPlayer.setPlayerAnimal(horse);
-
-                }else{
-                    Horse horse = new Horse(ProgramUtils.userInput(),500,20, Gender.MALE, currentPlayer);
-                    this.currentPlayer.setPlayerAnimal(horse);
+                Horse horse;
+                if (gender == Gender.FEMALE) {
+                    horse = new Horse(ProgramUtils.userInput(), 500, 20, Gender.FEMALE);
+                } else {
+                    horse = new Horse(ProgramUtils.userInput(), 500, 20, Gender.MALE);
                 }
+                return horse;
             case "Snake":
-                if(gender == Gender.FEMALE){
-                    Snake snake = new Snake(ProgramUtils.userInput(),500, 7, Gender.FEMALE, currentPlayer);
-                    this.currentPlayer.setPlayerAnimal(snake);
-                }else{
-                    Snake snake = new Snake(ProgramUtils.userInput(),500, 7, Gender.FEMALE, currentPlayer);
-                    this.currentPlayer.setPlayerAnimal(snake);
+                Snake snake;
+                if (gender == Gender.FEMALE) {
+                    snake = new Snake(ProgramUtils.userInput(), 500, 7, Gender.FEMALE);
+                } else {
+                    snake = new Snake(ProgramUtils.userInput(), 500, 7, Gender.FEMALE);
                 }
+                return snake;
             default:
-                // if (animalType.getClass().equals(Cat.class))
-                //100% hälsa
-                //köpa djur: döpa och välja kön
-        }
+        }return null;
     }
 
     /**
@@ -80,7 +70,7 @@ public class Factory {
      * @param animal1
      * @param animal2
      */
-    public boolean tryMating(Animal animal1, Animal animal2) {
+    public static boolean tryMating(Animal animal1, Animal animal2, Player currentPlayer) {
         if (animal1.getClass().equals(animal2.getClass())) {
             if (animal1.getGender() != animal2.getGender()) {
                 int startMating = (int) (Math.random() * 2); //random if mating is successful
@@ -89,9 +79,10 @@ public class Factory {
                     for (int i = 0; i < makeBabies; i++) {
                         int getGender = (int) (Math.random() * 2); //random gender of baby
                         if (getGender == 0) {
-                            createAnimal(animal1.getClass().getName(), Gender.FEMALE);
+                            currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().toString().substring(25), Gender.FEMALE));
+
                         } else {
-                            createAnimal(animal1.getClass().getName(), Gender.MALE);
+                            currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().toString().substring(25), Gender.MALE));
                         }
                     }return true;
 

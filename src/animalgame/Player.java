@@ -55,6 +55,10 @@ public class Player implements Serializable {
         this.money -= money;
     }
 
+    public void addMoney(int money){
+        this.money += money;
+    }
+
     public void setMoney(int money){
         this.money = money;
     }
@@ -66,5 +70,6 @@ public class Player implements Serializable {
     public ArrayList<Food> getFoods(){
         return this.foods;
     }
+
 
 }
