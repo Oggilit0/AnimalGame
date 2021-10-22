@@ -27,36 +27,67 @@ public class Game {
        //Animal testKatten = new Horse( "Katt", 55,5,  Gender.FEMALE);
        // Factory.tryMating(testKatt, testKatten, currentPlayer);
         //Factory.createAnimal("Cat", Gender.MALE);
-        gameStartPlayer();
+        this.gameMenu.newGameMenu();
         //this is A COMMENT
         //hello
     }
 
-    public void gameStartPlayer() {
-        System.out.print("Write in how many players (Min 2 Max 4): ");
-        this.playerAmount = ProgramUtils.tryCatch(ProgramUtils.userInput());
-        if (playerAmount >= 2 && playerAmount <= 4) {
-            for (int i = 0; i < playerAmount; i++) {
-                System.out.print("Write player " + (i + 1) + ": ");
-                createPlayer(ProgramUtils.userInput());
-
-            }
-        } else {
-            System.out.println("Min 2 Max 4");
-            gameStartPlayer();
-        }
-        gameStartRounds();
+    public void startGame() {
+        choosePlayers();
+        chooseRounds();
+        newRound();
     }
 
-    public void gameStartRounds() {
-        System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
-        this.maxRound = ProgramUtils.tryCatch(ProgramUtils.userInput());
-        if (!(maxRound >= 5 && maxRound <= 30)) {
-            System.out.println("Min 5 rounds and Max 30 rounds");
-            gameStartRounds();
-        }
+    /**
+     * User choose how many players he or she wants to play with
+     * aslong as its between 2 and 4.
+     * Calls on method to create each player if condition is true.
+     * loops if input is wrong
+     */
+    public void choosePlayers(){
+        boolean checkPlayerInputAmount;
+        do {
+            System.out.print("Write in how many players (Min 2 Max 4): ");
+            this.playerAmount = ProgramUtils.tryCatch(ProgramUtils.userInput());
+
+            if (playerAmount >= 2 && playerAmount <= 4) {
+                for (int i = 0; i < playerAmount; i++) {
+                    System.out.print("Write player " + (i + 1) + ": ");
+                    createPlayer(ProgramUtils.userInput());
+                }
+                checkPlayerInputAmount = true;
+            } else {
+                System.out.println("Min 2 Max 4");
+                checkPlayerInputAmount = false;
+            }
+
+        }while(!checkPlayerInputAmount);
+
+    }
+
+    /**
+     * User choose how many rounds he or she wants to play
+     * aslong as its between 5 and 30.
+     */
+    public void chooseRounds(){
+        boolean checkRoundInputAmount;
+        do {
+            System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
+            this.maxRound = ProgramUtils.tryCatch(ProgramUtils.userInput());
+
+            if (!(this.maxRound >= 5 && this.maxRound <= 30)) {
+                System.out.println("Min 5 rounds and Max 30 rounds");
+                checkRoundInputAmount = false;
+            }else{
+                checkRoundInputAmount = true;
+            }
+        }while(!checkRoundInputAmount);
+
         System.out.println("\n".repeat(30));
-        newRound();
+    }
+
+    public void loadGame(){
+
     }
 
     public void newRound() {

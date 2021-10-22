@@ -2,6 +2,7 @@ package animalgame.utilities;
 
 import animalgame.Game;
 import animalgame.Player;
+import animalgame.animals.Cat;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
 import animalgame.utilities.ProgramUtils;
@@ -19,7 +20,7 @@ public class Menu {
 
         int i = 1;
         for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
-            System.out.println(i + ".\t" + animal.getClass().getName().substring(11) + " :  namn:" + animal.getName());
+            System.out.println(i + ".\t" + animal.getClass().getName().substring(19) + " :  namn: " + animal.getName()+ " Gender: "+animal.getGender().toString().toLowerCase());
             i++;
         }
     }
@@ -38,10 +39,22 @@ public class Menu {
                 break;
             case 3:
                 mateAnimalsMenu();
-                playerAnimalsAsMenu();
                 break;
             default:
                 roundMenu();
+        }
+    }
+
+    public void newGameMenu(){
+        switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
+            case 1:
+                this.currentGame.startGame();
+                break;
+            case 2:
+                this.currentGame.loadGame();
+                break;
+            default:
+                newGameMenu();
         }
     }
 
@@ -60,6 +73,7 @@ public class Menu {
                // this.currentGame.getStore().animalToSell();
                 break;
             default:
+                shopMenu();
         }
     }
     public void shopFoodMenu(){
@@ -77,8 +91,8 @@ public class Menu {
             case 3:
                 this.currentGame.getStore().foodToBuy("Grass",20);
                 break;
-
-
+            default:
+                shopFoodMenu();
         }
     }
 
@@ -153,6 +167,8 @@ public class Menu {
                         }
                         break;
                 }
+            default:
+                animalChoice();
         }
     }
 
@@ -163,11 +179,20 @@ public class Menu {
     }
 
     public void mateAnimalsMenu(){
-        for(Animal animal : currentGame.getCurrentPlayer().getPlayerAnimal()) {
-            if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
-                System.out.println("you need 2 or more animals!");
-            }else{
-                }
-            }
+        if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
+            System.out.println("\nyou need 2 or more animals!");
+            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().size());
+            roundMenu();
+        }else{
+            playerAnimalsAsMenu();
+            int menuChoice = 0;
+            do {
+                menuChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+                System.out.print("Write a number: ");
+
+            }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size());
+            System.out.println("success");
+
         }
+    }
 }
