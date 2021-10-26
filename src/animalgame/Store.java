@@ -46,15 +46,15 @@ public class Store {
                     containFoodType = true;
                 }
             }
-            if (!containFoodType && food.equals("Meat")){
-                Food meat = new Sausage("Meat", amountToBuy);
-                this.customer.setFoods(meat);
-            }else if (!containFoodType && food.equals("Fish")){
-                Food fish = new Taco("Fish", amountToBuy);
-                this.customer.setFoods(fish);
-            }else if (!containFoodType && food.equals("Grass")){
-                Food grass = new Waffles("Grass", amountToBuy);
-                this.customer.setFoods(grass);
+            if (!containFoodType && food.equals("Sausage")){
+                Food sausage = new Sausage("Meat", amountToBuy);
+                this.customer.setFoods(sausage);
+            }else if (!containFoodType && food.equals("Taco")){
+                Food taco = new Taco("Taco", amountToBuy);
+                this.customer.setFoods(taco);
+            }else if (!containFoodType && food.equals("Waffles")){
+                Food waffles = new Waffles("Waffles", amountToBuy);
+                this.customer.setFoods(waffles);
             }
             this.customer.removeMoney(sum);
         }else{
