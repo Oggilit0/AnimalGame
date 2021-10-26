@@ -19,46 +19,46 @@ public class Factory {
     public static  Animal createAnimal(String animalType, Gender gender) {
         System.out.println("Congratulations to your new "+ gender.toString().toLowerCase()+ " animal, Name your new animal : ");
         switch(animalType){
-            case "Cat":
-                Cat cat;
+            case "Ferret":
+                Ferret ferret;
                 if(gender == Gender.FEMALE) {
-                    cat = new Cat(ProgramUtils.userInput(), 500, 9, Gender.FEMALE);
+                    ferret = new Ferret(ProgramUtils.userInput(), 500, 9, Gender.FEMALE);
                 } else {
-                    cat = new Cat(ProgramUtils.userInput(), 500, 9, Gender.MALE);
+                    ferret = new Ferret(ProgramUtils.userInput(), 500, 9, Gender.MALE);
                 }
-                return cat;
-            case "Cow":
-                Cow cow;
+                return ferret;
+            case "MexicanAlligatorLizard":
+                MexicanAlligatorLizard mexicanAlligatorLizard;
                 if (gender == Gender.FEMALE) {
-                    cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.FEMALE);
+                    mexicanAlligatorLizard = new MexicanAlligatorLizard(ProgramUtils.userInput(), 500, 10, Gender.FEMALE);
                 } else {
-                    cow = new Cow(ProgramUtils.userInput(), 500, 10, Gender.MALE);
+                    mexicanAlligatorLizard = new MexicanAlligatorLizard(ProgramUtils.userInput(), 500, 10, Gender.MALE);
                 }
-                return cow;
-            case "Dog":
-                Dog dog;
+                return mexicanAlligatorLizard;
+            case "Giraffe":
+                Giraffe giraffe;
                 if (gender == Gender.FEMALE) {
-                    dog = new Dog(ProgramUtils.userInput(), 500, 15, Gender.FEMALE);
+                    giraffe = new Giraffe(ProgramUtils.userInput(), 500, 15, Gender.FEMALE);
                 } else {
-                    dog = new Dog(ProgramUtils.userInput(), 500, 15, Gender.MALE);
+                    giraffe = new Giraffe(ProgramUtils.userInput(), 500, 15, Gender.MALE);
                 }
-                return dog;
-            case "Horse":
-                Horse horse;
+                return giraffe;
+            case "PolarBear":
+                PolarBear polarBear;
                 if (gender == Gender.FEMALE) {
-                    horse = new Horse(ProgramUtils.userInput(), 500, 20, Gender.FEMALE);
+                    polarBear = new PolarBear(ProgramUtils.userInput(), 500, 20, Gender.FEMALE);
                 } else {
-                    horse = new Horse(ProgramUtils.userInput(), 500, 20, Gender.MALE);
+                    polarBear = new PolarBear(ProgramUtils.userInput(), 500, 20, Gender.MALE);
                 }
-                return horse;
-            case "Snake":
-                Snake snake;
+                return polarBear;
+            case "Troll":
+                Troll troll;
                 if (gender == Gender.FEMALE) {
-                    snake = new Snake(ProgramUtils.userInput(), 500, 7, Gender.FEMALE);
+                    troll = new Troll(ProgramUtils.userInput(), 500, 7, Gender.FEMALE);
                 } else {
-                    snake = new Snake(ProgramUtils.userInput(), 500, 7, Gender.FEMALE);
+                    troll = new Troll(ProgramUtils.userInput(), 500, 7, Gender.FEMALE);
                 }
-                return snake;
+                return troll;
             default:
         }return null;
     }
