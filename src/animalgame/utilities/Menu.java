@@ -49,7 +49,7 @@ public class Menu {
                 mateAnimalsMenu();
                 break;
             case 4:
-                this.currentGame.saveGame();
+                saveGameMenu();
             case 5:
 
                 for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
@@ -65,13 +65,57 @@ public class Menu {
         }
     }
 
+    public void saveGameMenuHelper(String menuOptionName, int menuIndex){
+
+        if(!menuOptionName.equals("")){
+            System.out.println("Are you sure you want to delete your saved game? y/n");
+            String yesOrNo = ProgramUtils.userInput();
+            if(yesOrNo.equalsIgnoreCase("y") ){
+                ProgramUtils.DeleteFile(ProgramUtils.readAllLines().get(menuIndex-1));
+            }else{
+                saveGameMenu();
+            }
+        }
+        System.out.println("Write the name of your save file");
+        String fileName = ProgramUtils.userInput();
+        this.currentGame.saveGame(fileName);
+
+
+        ProgramUtils.writeFromSaveFile(fileName,menuIndex);
+    }
+
+
+    public void saveGameMenu(){
+        String[] menuArray = {"","",""};
+        for(int i = 0; i < ProgramUtils.readAllLines().size() ; i++){
+            menuArray[i] = ProgramUtils.readAllLines().get(i);
+        }
+
+        switch (ProgramUtils.menuBuilder("\nSave game)",menuArray[0],menuArray[1],menuArray[2], "Back")){
+            case 1:
+                saveGameMenuHelper(menuArray[0],1);
+                break;
+            case 2:
+                saveGameMenuHelper(menuArray[1],2);
+                break;
+            case 3:
+                saveGameMenuHelper(menuArray[2],3);
+                break;
+            case 4:
+                roundMenu();
+                break;
+            default:
+                break;
+        }
+    }
+
     public void newGameMenu(){
         switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
             case 1:
                 this.currentGame.startGame();
                 break;
             case 2:
-                this.currentGame.loadGame();
+                loadGameMenu();
                 break;
             default:
                 newGameMenu();
@@ -189,6 +233,23 @@ public class Menu {
                 }
             default:
                 animalChoice();
+        }
+    }
+
+    public void loadGameMenu(){
+
+        switch(ProgramUtils.menuBuilder("\nLoad game","Saved game 1","Saved game 2","Saved game 3", "Back")){
+            case 1:
+
+            case 2:
+
+            case 3:
+
+            case 4:
+                newGameMenu();
+                break;
+            default:
+                loadGameMenu();
         }
     }
 
