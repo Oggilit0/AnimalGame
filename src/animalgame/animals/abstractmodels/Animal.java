@@ -60,7 +60,7 @@ public abstract class Animal implements Serializable {
     }
 
     public int getMaxAge(){
-        return this.currentAge;
+        return this.maxAge;
     }
 
     public void setCurrentAge(int currentAge) {
