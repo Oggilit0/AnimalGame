@@ -68,7 +68,7 @@ public abstract class Animal implements Serializable {
     }
 
     public void setHealth(int health){
-        this.health += health;
+        this.health = health;
     }
 
     public int getCurrentAge(){
