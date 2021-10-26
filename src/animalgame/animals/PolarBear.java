@@ -1,9 +1,9 @@
 package animalgame.animals;
 
-import animalgame.Player;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
-import animalgame.food.Fish;
+import animalgame.food.Taco;
+import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
 public class PolarBear extends Animal {
@@ -14,8 +14,8 @@ public class PolarBear extends Animal {
 
     @Override
     public boolean eat(Food foodToEat) {
-        if(foodToEat instanceof Fish){
-            System.out.println("Your horse doesn´t eat " + foodToEat.getName());
+        if(foodToEat instanceof Taco || foodToEat instanceof Waffles){
+            System.out.println("Your polar bear doesn´t eat " + foodToEat.getName());
             return false;
         }else{
             return true;
