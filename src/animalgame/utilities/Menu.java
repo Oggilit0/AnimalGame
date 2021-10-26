@@ -98,18 +98,18 @@ public class Menu {
     }
     public void shopFoodMenu(){
 
-        switch( ProgramUtils.menuBuilder("\nAvailable food","meat", "fish","grass")){
+        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage", "Taco","Waffles")){
 
             case 1:
-                this.currentGame.getStore().foodToBuy("Meat",50);
+                this.currentGame.getStore().foodToBuy("Sausage",50);
                 break;
 
             case 2:
-                this.currentGame.getStore().foodToBuy("Fish",100);
+                this.currentGame.getStore().foodToBuy("Taco",100);
                 break;
 
             case 3:
-                this.currentGame.getStore().foodToBuy("Grass",20);
+                this.currentGame.getStore().foodToBuy("Waffles",20);
                 break;
             default:
                 shopFoodMenu();

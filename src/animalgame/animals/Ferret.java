@@ -1,12 +1,9 @@
 package animalgame.animals;
 
-import animalgame.Player;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
-import animalgame.food.Grass;
-import animalgame.food.Meat;
+import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
-import animalgame.utilities.ProgramUtils;
 
 
 public class Ferret extends Animal {
@@ -17,8 +14,8 @@ public class Ferret extends Animal {
 
     @Override
     public boolean eat(Food foodToEat) {
-        if (foodToEat instanceof Grass ) {
-            System.out.println("Your cat doesn´t eat: " + foodToEat.getName());
+        if (foodToEat instanceof Waffles) {
+            System.out.println("Your ferret doesn´t eat: " + foodToEat.getName());
             return false;
         }else{
             return true;
