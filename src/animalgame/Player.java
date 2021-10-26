@@ -35,7 +35,7 @@ public class Player implements Serializable {
         if(animal.eat(food)){
             if(weight <= food.getWeight()){
                 int f = weight*10;
-                animal.setHealth(+f);
+                animal.setHealth(animal.getHealth()+f);
                 if(animal.getHealth() >= 100){
                     animal.setHealth(100);
                 }
