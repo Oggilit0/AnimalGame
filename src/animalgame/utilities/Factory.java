@@ -28,11 +28,11 @@ public class Factory {
                 }
                 return ferret;
             case "MexicanAlligatorLizard":
-                MexicanAlligatorLizard mexicanAlligatorLizard;
+                Mexican_Alligator_Lizard mexicanAlligatorLizard;
                 if (gender == Gender.FEMALE) {
-                    mexicanAlligatorLizard = new MexicanAlligatorLizard(ProgramUtils.userInput(), 500, 10, Gender.FEMALE);
+                    mexicanAlligatorLizard = new Mexican_Alligator_Lizard(ProgramUtils.userInput(), 500, 10, Gender.FEMALE);
                 } else {
-                    mexicanAlligatorLizard = new MexicanAlligatorLizard(ProgramUtils.userInput(), 500, 10, Gender.MALE);
+                    mexicanAlligatorLizard = new Mexican_Alligator_Lizard(ProgramUtils.userInput(), 500, 10, Gender.MALE);
                 }
                 return mexicanAlligatorLizard;
             case "Giraffe":
