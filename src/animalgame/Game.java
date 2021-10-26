@@ -1,6 +1,7 @@
 package animalgame;
 
 import animalgame.animals.abstractmodels.Animal;
+import animalgame.food.abstractmodels.Food;
 import animalgame.utilities.Menu;
 import animalgame.utilities.ProgramUtils;
 
@@ -48,7 +49,7 @@ public class Game {
             System.out.print("Write in how many players (Min 2 Max 4): ");
             this.playerAmount = ProgramUtils.tryCatch(ProgramUtils.userInput());
 
-            if (playerAmount >= 2 && playerAmount <= 4) {
+            if (playerAmount >= 1 && playerAmount <= 4) {
                 for (int i = 0; i < playerAmount; i++) {
                     System.out.print("Write player " + (i + 1) + ": ");
                     createPlayer(ProgramUtils.userInput());
@@ -107,10 +108,9 @@ public class Game {
         for (int r = currentRound; r <= this.maxRound; r++) {
             this.currentRound = r;
             if (currentRound != maxRound) {
-                System.out.println(ProgramUtils.RED + "Round " + (r + 1) + ProgramUtils.RESET);
-                newRoundGetPlayer();
+                System.out.println(ProgramUtils.RED + "\nRound " + (r + 1) + ProgramUtils.RESET);
                 ageAnimal();
-                System.out.println("\n".repeat(10));
+                newRoundGetPlayer();
             } else {
                 endGame();
             }
@@ -129,8 +129,25 @@ public class Game {
     }
 
     public void endGame() {
-
-        System.out.println(ProgramUtils.RED + "Good Game!" + ProgramUtils.RESET);
+        ArrayList<Integer> money = new ArrayList<>();
+        ArrayList<Player> player = new ArrayList<>();
+        int max = 0;
+        for(Player players : allPlayers){
+            for(Animal animal : players.getPlayerAnimal()){
+             //will sell animal here later!
+                money.add(players.getMoney());
+                player.add(players);
+                max = money.get(0);
+            }
+        }
+        int n = money.size();
+        for(int i = 1; i < n; i++){
+            if(money.get(i) > max){
+                max = money.get(i);
+                System.out.println("\nThe winner is "+ player.get(i).getName()+" with "+max+ProgramUtils.YELLOW+"Gold"+ProgramUtils.YELLOW);
+            }
+        }
+        System.out.println(ProgramUtils.RED + "\nGood Game!" + ProgramUtils.RESET);
     }
 
     public void newRoundGetPlayer() {
@@ -156,14 +173,16 @@ public class Game {
             }
             System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
             System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold" + ProgramUtils.RESET);
+            for(Food food : currentPlayer.getFoods()){
+                System.out.println(food.getName()+": "+food.getWeight()+" kg");
+            }
             for (Animal animal : currentPlayer.getPlayerAnimal()) {
                 animal.healthOverTime();
-                System.out.println(animal.getName() + " health is at " + ProgramUtils.RED + animal.getHealth() + ProgramUtils.RESET);
+                System.out.println(animal.getClass().getName().substring(19)+": "+animal.getName()+", Health: "+ProgramUtils.RED+animal.getHealth()+ProgramUtils.RESET+", Age: "+ProgramUtils.PURPLE+animal.getCurrentAge()+ProgramUtils.RESET);
             }
             gameMenu.roundMenu();
 
             if (i != playerAmount - 1) {
-
                 this.currentPlayer = allPlayers.get(1 + i);
             }else{
                 this.currentPlayer = this.allPlayers.get(0);
@@ -177,7 +196,7 @@ public class Game {
         for (Animal animal : currentPlayer.getPlayerAnimal()) {
             if (!(animal.getCurrentAge() == animal.getMaxAge())) {
                 animal.setCurrentAge(1);
-                System.out.println("Every animal you have aged with 1 year!");
+                System.out.println("\nEvery animal you have aged with 1 year!");
             } else {
                 animal.death();
             }
