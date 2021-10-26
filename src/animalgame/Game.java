@@ -88,8 +88,8 @@ public class Game {
     /**
      * Load saved game from file and set variables to 
      */
-    public void loadGame(){
-        SavedGame loadedGameObj = (SavedGame) ProgramUtils.readFile();
+    public void loadGame(String fileName){
+        SavedGame loadedGameObj = (SavedGame) ProgramUtils.readFile(fileName);
         this.currentPlayer = loadedGameObj.getSavedCurrentPlayer();
         this.maxRound = loadedGameObj.getSavedMaxRounds();
         this.allPlayers = loadedGameObj.getSavedPlayerList();
@@ -98,9 +98,9 @@ public class Game {
         newRound();
     }
 
-    public void saveGame(){
+    public void saveGame(String fileName){
         SavedGame saveGame = new SavedGame(this.allPlayers,this.currentPlayer,this.currentRound,this.maxRound);
-        ProgramUtils.writeToFile(saveGame);
+        ProgramUtils.writeToFile(saveGame,fileName);
     }
 
     public void newRound() {
