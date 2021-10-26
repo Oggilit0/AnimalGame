@@ -1,17 +1,11 @@
 package animalgame;
 
-import animalgame.animals.Cat;
-import animalgame.animals.Cow;
 import animalgame.animals.abstractmodels.Animal;
-import animalgame.food.Fish;
-import animalgame.food.Grass;
-import animalgame.food.Meat;
 import animalgame.food.abstractmodels.Food;
 import animalgame.utilities.ProgramUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * @author

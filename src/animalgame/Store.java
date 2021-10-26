@@ -2,10 +2,10 @@ package animalgame;
 
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
-import animalgame.food.Fish;
+import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
-import animalgame.food.Grass;
-import animalgame.food.Meat;
+import animalgame.food.Waffles;
+import animalgame.food.Sausage;
 import animalgame.utilities.Factory;
 import animalgame.utilities.ProgramUtils;
 
@@ -38,7 +38,7 @@ public class Store {
         int amountToBuy = ProgramUtils.tryCatch(ProgramUtils.userInput());
         int sum = foodPrice * amountToBuy;
 
-        if(this.customer.getMoney() >= sum || this.customer.getMoney() < 0){
+        if(this.customer.getMoney() >= sum){
             boolean containFoodType = false;
             for(Food foodType : this.customer.getFoods()){
                 if (foodType.getName().equals(food)){
@@ -46,21 +46,21 @@ public class Store {
                     containFoodType = true;
                 }
             }
-            if (!containFoodType && food.equals("Meat")){
-                Food meat = new Meat("Meat", amountToBuy);
-                this.customer.setFoods(meat);
-            }else if (!containFoodType && food.equals("Fish")){
-                Food fish = new Fish("Fish", amountToBuy);
-                this.customer.setFoods(fish);
-            }else if (!containFoodType && food.equals("Grass")){
-                Food grass = new Grass("Grass", amountToBuy);
-                this.customer.setFoods(grass);
+            if (!containFoodType && food.equals("Sausage")){
+                Food sausage = new Sausage("Meat", amountToBuy);
+                this.customer.setFoods(sausage);
+            }else if (!containFoodType && food.equals("Taco")){
+                Food taco = new Taco("Taco", amountToBuy);
+                this.customer.setFoods(taco);
+            }else if (!containFoodType && food.equals("Waffles")){
+                Food waffles = new Waffles("Waffles", amountToBuy);
+                this.customer.setFoods(waffles);
             }
-
+            this.customer.removeMoney(sum);
         }else{
             System.out.println("Can't afford $" + sum + " with your $"+this.customer.getMoney());
         }
-        this.customer.removeMoney(sum);
+
         //Debug
         for(Food fooder : this.customer.getFoods()){
 
