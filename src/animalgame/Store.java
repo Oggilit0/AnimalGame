@@ -2,10 +2,10 @@ package animalgame;
 
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
-import animalgame.food.Fish;
+import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
-import animalgame.food.Grass;
-import animalgame.food.Meat;
+import animalgame.food.Waffles;
+import animalgame.food.Sausage;
 import animalgame.utilities.Factory;
 import animalgame.utilities.ProgramUtils;
 
@@ -47,13 +47,13 @@ public class Store {
                 }
             }
             if (!containFoodType && food.equals("Meat")){
-                Food meat = new Meat("Meat", amountToBuy);
+                Food meat = new Sausage("Meat", amountToBuy);
                 this.customer.setFoods(meat);
             }else if (!containFoodType && food.equals("Fish")){
-                Food fish = new Fish("Fish", amountToBuy);
+                Food fish = new Taco("Fish", amountToBuy);
                 this.customer.setFoods(fish);
             }else if (!containFoodType && food.equals("Grass")){
-                Food grass = new Grass("Grass", amountToBuy);
+                Food grass = new Waffles("Grass", amountToBuy);
                 this.customer.setFoods(grass);
             }
             this.customer.removeMoney(sum);
