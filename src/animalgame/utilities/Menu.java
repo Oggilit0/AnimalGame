@@ -3,8 +3,12 @@ package animalgame.utilities;
 import animalgame.Game;
 import animalgame.Player;
 import animalgame.animals.Cat;
+import animalgame.animals.Cow;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
+import animalgame.food.Fish;
+import animalgame.food.Grass;
+import animalgame.food.Meat;
 import animalgame.food.abstractmodels.Food;
 import animalgame.utilities.ProgramUtils;
 
@@ -26,6 +30,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Prints out the players amount and type of food they have bought.
+     */
     public void playerFoodAsMenu(){
         int i = 1;
         for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
@@ -37,14 +44,13 @@ public class Menu {
 
 
     public void roundMenu(){
-        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals")){
+        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game","Debug")){
             case 1:
                 this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
                 shopMenu();
                 break;
             case 2:
                 feedAnimalsMenu();
-                playerAnimalsAsMenu();
                 break;
             case 3:
                 mateAnimalsMenu();
@@ -54,7 +60,7 @@ public class Menu {
             case 5:
 
                 for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
-                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + ". Name:"+animal.getName());
+                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + ". Name:"+animal.getName() + " " + animal.getHealth());
                 }
 
                 for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
@@ -118,7 +124,7 @@ public class Menu {
     }
 
     public void animalChoice(){
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","cat"+": 1000 Gold","Dog"+": 1000 Gold","Cow"+": 1000 Gold","Horse"+": 1000 Gold","Snake"+": 1000 Gold")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Cat"+": 1000 Gold","Dog"+": 1000 Gold","Cow"+": 1000 Gold","Horse"+": 1000 Gold","Snake"+": 1000 Gold")){
             case 1:
                 switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
                     case 1:
@@ -193,39 +199,48 @@ public class Menu {
         }
     }
 
-    public void feedAnimalsMenu(){
-        System.out.println("Choose which animals to feed: ");
-        playerAnimalsAsMenu();
-        System.out.println("Choose which food to feed your animal with: ");
-        playerFoodAsMenu();
-        System.out.println("How many kg do you want to feed your animal: ");
-        //currentGame.getCurrentPlayer().feedAnimal();
+    public void feedAnimalsMenu() {
+        if (currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0) {
+            System.out.println("You must have one animal to feed!");
 
+        } else if (currentGame.getCurrentPlayer().getFoods().size() == 0) {
+            System.out.println("You must buy food to feed your animal with!");
+
+        } else {
+            System.out.println("Choose which animals to feed: ");
+            playerAnimalsAsMenu();
+            int animalChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            System.out.println("Choose which food to feed your animal with: ");
+            playerFoodAsMenu();
+            int foodChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            System.out.println("How many kg do you want to feed your animal: ");
+            int kgChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1), kgChoice);
+        }
     }
 
     public void mateAnimalsMenu(){
-        ArrayList<Animal> newAnimalList = new ArrayList<>();
         if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
+            System.out.println("you currently have "+currentGame.getCurrentPlayer().getPlayerAnimal().size()+" animals");
             System.out.println("\nyou need 2 or more animals!");
-            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().size());
             roundMenu();
         }else{
             playerAnimalsAsMenu();
             int menuChoice = 0;
             int otherChoice = 0;
-            System.out.print("First animal to breed: ");
             do {
+                ArrayList<Animal> newAnimalList = new ArrayList<>();
+                System.out.print("First animal to breed: ");
                 menuChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
-                    newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
-                    System.out.print("Write the second animal to breed: ");
-                    otherChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
-                    if(otherChoice == menuChoice){
-                        System.out.println("Can't choose the same animal!\n");
-                        System.out.print("First animal to breed: ");
-                    }else{
-                        newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(otherChoice-1));
-                        Factory.tryMating(newAnimalList.get(0),newAnimalList.get(1),currentGame.getCurrentPlayer());
-                    }
+                newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
+                System.out.print("Write the second animal to breed: ");
+                otherChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+                if(otherChoice == menuChoice){
+                    System.out.println("\nCan't choose the same animal!\n");
+                }else{
+                    newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(otherChoice-1));
+                    Factory.tryMating(newAnimalList.get(0),newAnimalList.get(1),currentGame.getCurrentPlayer());
+                }
             }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size() || menuChoice == otherChoice);
         }
     }

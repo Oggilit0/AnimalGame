@@ -1,10 +1,17 @@
 package animalgame;
 
+import animalgame.animals.Cat;
+import animalgame.animals.Cow;
 import animalgame.animals.abstractmodels.Animal;
+import animalgame.food.Fish;
+import animalgame.food.Grass;
+import animalgame.food.Meat;
 import animalgame.food.abstractmodels.Food;
+import animalgame.utilities.ProgramUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author
@@ -22,18 +29,46 @@ public class Player implements Serializable {
         this.foods = new ArrayList<>();
     }
 
+    /**
+     * Checks if the animal eats the food it is given.
+     * Then checks if the player has the amount of food that they try to give the animal.
+     * Add 10% health per kilo food and remove food from players
+     * foodslist if the animal eats the food.
+     * @param animal
+     * @param food
+     */
+    public void feedAnimal(Animal animal, Food food, int weight) {
+        if(animal.eat(food)){
+            if(weight <= food.getWeight()){
+                int f = weight*10;
+                animal.setHealth(f);
+                if(weight == food.getWeight()){
+                    this.foods.remove(food);
+                }else{
+                    food.removeWeight(weight);
+                }
+            }else{
+                System.out.println("You dont have " +weight + "kg " +food.getName().toLowerCase() + " to give " +animal.getName());
+            }
 
-    public void feedAnimal(Animal animal, Food food) {
-        //if(animal äter det den blir serverad){
-        int f = (int)(animal.getHealth()*(10.0f/100.0f));
-        animal.setHealth(f);
-        this.foods.remove(food);
-        //beroende på KG
-        //set health
-        //getPlayerAnimal(animal.getHealth() + );
+        }
     }
 
 
+    public boolean gameOverCheck(){
+        if (this.money == 0 && (this.playerAnimal.size() == 0)) {
+            //this.allPlayers.remove(this);
+            System.out.println("\n".repeat(10));
+            try {
+                System.out.println(ProgramUtils.RED + "GAME OVER " + this.name + "!" + ProgramUtils.RESET);
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return false;
+    }
 
     public String getName() {
         return name;
