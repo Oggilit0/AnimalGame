@@ -7,10 +7,12 @@ import animalgame.food.Taco;
 import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
-public class MexicanAlligatorLizard extends Animal {
+public class Mexican_Alligator_Lizard extends Animal {
 
-    public MexicanAlligatorLizard(String name, int value, int maxAge, Gender gender) {
-        super(name, value, maxAge, gender);
+    public Mexican_Alligator_Lizard(String name, Gender gender) {
+        super(name, gender);
+        super.setAnimalPrice(4000);
+        super.setMaxAge(10);
     }
 
     @Override

@@ -9,8 +9,10 @@ import animalgame.food.abstractmodels.Food;
 
 public class Giraffe extends Animal {
 
-    public Giraffe(String name, int value, int maxAge, Gender gender) {
-        super(name, value, maxAge, gender);
+    public Giraffe(String name, Gender gender) {
+        super(name, gender);
+        super.setAnimalPrice(1000);
+        super.setMaxAge(15);
     }
 
     @Override

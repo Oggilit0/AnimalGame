@@ -49,7 +49,7 @@ public class Menu {
                 mateAnimalsMenu();
                 break;
             case 4:
-                this.currentGame.saveGame();
+                saveGameMenu();
             case 5:
 
                 for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
@@ -65,32 +65,99 @@ public class Menu {
         }
     }
 
+    public void saveGameMenuHelper(String menuOptionName, int menuIndex){
+
+        if(!menuOptionName.equals("")){
+            System.out.println("Are you sure you want to delete your saved game? y/n");
+            String yesOrNo = ProgramUtils.userInput();
+            if(yesOrNo.equalsIgnoreCase("y") ){
+                ProgramUtils.DeleteFile(ProgramUtils.readAllLines().get(menuIndex-1));
+            }else{
+                saveGameMenu();
+            }
+        }
+        System.out.println("Write the name of your save file");
+        String fileName = ProgramUtils.userInput();
+        this.currentGame.saveGame(fileName);
+
+
+        ProgramUtils.writeFromSaveFile(fileName,menuIndex);
+    }
+
+
+    public void saveGameMenu(){
+        String[] menuArray = {"","",""};
+        for(int i = 0; i < ProgramUtils.readAllLines().size() ; i++){
+            menuArray[i] = ProgramUtils.readAllLines().get(i);
+        }
+
+        switch (ProgramUtils.menuBuilder("\nSave game)",menuArray[0],menuArray[1],menuArray[2], "Back")){
+            case 1:
+                saveGameMenuHelper(menuArray[0],1);
+                break;
+            case 2:
+                saveGameMenuHelper(menuArray[1],2);
+                break;
+            case 3:
+                saveGameMenuHelper(menuArray[2],3);
+                break;
+            case 4:
+                roundMenu();
+                break;
+            default:
+                break;
+        }
+    }
+
     public void newGameMenu(){
         switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
             case 1:
                 this.currentGame.startGame();
                 break;
             case 2:
-                this.currentGame.loadGame();
+                loadGameMenu();
                 break;
             default:
                 newGameMenu();
         }
     }
 
-    public void shopMenu(){
+    public boolean continueMenu(String type, String buySell){
 
+        switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " " + type +" ?","Yes","No")){
+            case 1:
+                return true;
+            case 2:
+                return false;
+            default:
+        }
+        return true;
+    }
+
+
+    public void shopMenu(){
         switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
             case 1:
-                animalChoice();
-                break;
-               // this.currentGame.getStore().animalToBuy();
-            case 2:
-                shopFoodMenu();
-                break;
+                do{
+                    animalChoice();
 
+                }while(continueMenu("animal","buy"));
+
+                break;
+            case 2:
+                do{
+                    shopFoodMenu();
+
+                }while(continueMenu("food","buy"));
+
+                break;
             case 3:
-               // this.currentGame.getStore().animalToSell();
+
+                do{
+                    // this.currentGame.getStore().animalToSell();
+
+                }while(continueMenu("animal","sell"));
+
                 break;
             default:
                 shopMenu();
@@ -98,97 +165,107 @@ public class Menu {
     }
     public void shopFoodMenu(){
 
-        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage", "Taco","Waffles")){
+        String food ="";
+        int price = 0;
+
+        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage" + ": 20 Gold/kg", "Waffles" + ": 50 Gold/kg","Taco" + ":    100 Gold/kg")){
 
             case 1:
-                this.currentGame.getStore().foodToBuy("Sausage",50);
+                food = "Sausage";
+                price = 20;
                 break;
 
             case 2:
-                this.currentGame.getStore().foodToBuy("Taco",100);
+                food = "Waffles";
+                price = 50;
                 break;
 
             case 3:
-                this.currentGame.getStore().foodToBuy("Waffles",20);
+                food = "Taco";
+                price = 100;
                 break;
             default:
                 shopFoodMenu();
         }
+
+        this.currentGame.getStore().foodToBuy(food,price);
+
+    }
+
+    public Gender genderSelectionMenu(){
+
+        switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
+            case 1:
+                return Gender.MALE;
+            case 2:
+                return Gender.FEMALE;
+            default:
+                return null;
+        }
     }
 
     public void animalChoice(){
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Ferret"+": 1000 Gold","Giraffe"+": 1000 Gold","Mexican Alligator Lizard"+": 1000 Gold","Polar Bear"+": 1000 Gold","Troll"+": 1000 Gold")){
+
+        String animal ="";
+        Gender gender = null;
+        int price = 0;
+
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":   800 Gold","Giraffe"+": 1000 Gold","Polar bear"+": 1500 Gold","Ferret"+":     2250 Gold","Mexican Alligator Lizard"+": 4000 Gold")){
+
             case 1:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("Ferret",Gender.MALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("Ferret",Gender.FEMALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "Troll";
+                price = 800;
+                gender = genderSelectionMenu();
                 break;
             case 2:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("Giraffe",Gender.MALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("Giraffe",Gender.FEMALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "Giraffe";
+                price = 1000;
+                gender = genderSelectionMenu();
                 break;
             case 3:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("MexicanAlligatorLizard",Gender.MALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("MexicanAlligatorLizard",Gender.FEMALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "PolarBear";
+                price = 1500;
+                gender = genderSelectionMenu();
                 break;
             case 4:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("PolarBear",Gender.MALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("PolarBear",Gender.FEMALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "Ferret";
+                price = 2250;
+                gender = genderSelectionMenu();
                 break;
             case 5:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("Troll",Gender.MALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("Troll",Gender.FEMALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "Mexican_Alligator_Lizard";
+                price = 4000;
+                gender = genderSelectionMenu();
+                break;
             default:
                 animalChoice();
+        }
+
+        if(!currentGame.getStore().animalToBuy(animal,gender,price)){
+            animalChoice();
+        }
+
+    }
+
+    public void loadGameMenu(){
+
+        String[] menuArray = {"","",""};
+        for(int i = 0; i < ProgramUtils.readAllLines().size() ; i++){
+            menuArray[i] = ProgramUtils.readAllLines().get(i);
+        }
+
+        switch(ProgramUtils.menuBuilder("\nLoad game",menuArray[0],menuArray[1],menuArray[2], "Back")){
+            case 1:
+                this.currentGame.loadGame(ProgramUtils.readAllLines().get(0));
+            case 2:
+                this.currentGame.loadGame(ProgramUtils.readAllLines().get(1));
+            case 3:
+                this.currentGame.loadGame(ProgramUtils.readAllLines().get(2));
+            case 4:
+                newGameMenu();
+                break;
+            default:
+                loadGameMenu();
         }
     }
 

@@ -9,19 +9,17 @@ import java.io.Serializable;
 public abstract class Animal implements Serializable {
     private String name;
     private int health;
-    private final int maxAge;
+    private int maxAge;
     private int currentAge;
     private int animalPrice;
     //private Player owner;
     private final Gender gender;
     private Boolean aliveStatus = true;
 
-    public Animal(String name, int animalPrice, int maxAge, Gender gender){
+    public Animal(String name, Gender gender){
         this.name = name;
         this.health = 100;
         this.currentAge = 0;
-        this.animalPrice = animalPrice;
-        this.maxAge = maxAge;
         this.gender = gender;
         //this.owner = owner;
 
@@ -63,12 +61,16 @@ public abstract class Animal implements Serializable {
         return this.maxAge;
     }
 
+    public void setMaxAge(int maxAge){
+        this.maxAge = maxAge;
+    }
+
     public void setCurrentAge(int currentAge) {
         this.currentAge += currentAge;
     }
 
     public void setHealth(int health){
-        this.health += health;
+        this.health = health;
     }
 
     public int getCurrentAge(){
@@ -85,6 +87,11 @@ public abstract class Animal implements Serializable {
 //    public void setOwner(Player owner){
 //        this.owner = owner;
 //    }
+
+
+    public void setAnimalPrice(int animalPrice) {
+        this.animalPrice = animalPrice;
+    }
 
 
 }

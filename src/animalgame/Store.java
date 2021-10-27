@@ -47,7 +47,7 @@ public class Store {
                 }
             }
             if (!containFoodType && food.equals("Sausage")){
-                Food sausage = new Sausage("Meat", amountToBuy);
+                Food sausage = new Sausage("Sausage", amountToBuy);
                 this.customer.setFoods(sausage);
             }else if (!containFoodType && food.equals("Taco")){
                 Food taco = new Taco("Taco", amountToBuy);
