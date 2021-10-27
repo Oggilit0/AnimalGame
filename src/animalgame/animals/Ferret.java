@@ -8,8 +8,10 @@ import animalgame.food.abstractmodels.Food;
 
 public class Ferret extends Animal {
 
-    public Ferret(String name, int value, int maxAge, Gender gender) {
-        super(name, value, maxAge, gender);
+    public Ferret(String name, Gender gender) {
+        super(name, gender);
+        super.setAnimalPrice(2250);
+        super.setMaxAge(9);
     }
 
     @Override

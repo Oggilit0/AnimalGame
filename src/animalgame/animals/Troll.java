@@ -8,8 +8,9 @@ import animalgame.food.abstractmodels.Food;
 
 public class Troll extends Animal {
 
-    public Troll(String name, int value, int maxAge, Gender gender) {
-        super(name, value, maxAge, gender);
+    public Troll(String name, Gender gender) {
+        super(name, gender);
+        super.setMaxAge(7);
     }
 
     @Override
