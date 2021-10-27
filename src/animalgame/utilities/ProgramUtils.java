@@ -26,7 +26,7 @@ public class ProgramUtils {
         ObjectInputStream o = null;
         Object object = null;
         try{
-            FileInputStream f = new FileInputStream("src/animalgame/"+fileName+".txt");
+            FileInputStream f = new FileInputStream("src/animalgame/programfiles/"+fileName+".txt");
             o = new ObjectInputStream(f);
             object = o.readObject();
             System.out.println("Sucess!");
@@ -49,7 +49,7 @@ public class ProgramUtils {
         FileOutputStream f = null;
 
         try{
-            f = new FileOutputStream("src/animalgame/"+fileName+".txt",false);
+            f = new FileOutputStream("src/animalgame/programfiles/"+fileName+".txt",false);
             o = new ObjectOutputStream(f);
             o.writeObject(object);
             o.close();
@@ -107,7 +107,7 @@ public class ProgramUtils {
         List<String> lines = null;
         try {
             lines = new ArrayList<>();
-            lines = Files.readAllLines(Paths.get("src/animalgame/storedSaveName.txt"));
+            lines = Files.readAllLines(Paths.get("src/animalgame/programfiles/storedSaveName.txt"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,7 +171,7 @@ public class ProgramUtils {
         ArrayList<String> oldSave = saveFileHandler(saveName, oldSaveIndex);
 
         try {
-            Path path = Paths.get("src/animalgame/storedSaveName.txt");
+            Path path = Paths.get("src/animalgame/programfiles/storedSaveName.txt");
             Files.write(path, oldSave, StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,7 +179,7 @@ public class ProgramUtils {
     }
 
     public static void DeleteFile(String fileName) {
-            File myObj = new File("src/animalgame/"+fileName+".txt");
+            File myObj = new File("src/animalgame/programfiles/"+fileName+".txt");
             if (myObj.delete()) {
                 System.out.println("Deleted the file: " + myObj.getName());
             } else {
