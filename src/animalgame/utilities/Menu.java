@@ -309,7 +309,7 @@ public class Menu {
             System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().toString().substring(25)));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
-            int foodChoice = ProgramUtils.tryCatch(this.currentGame.getCurrentPlayer().getFoods().size());
+            int foodChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getFoods().size());
             System.out.println("How many kg do you want to feed your animal: ");
             int kgChoice = ProgramUtils.tryCatch();
             currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1), kgChoice);

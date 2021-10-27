@@ -102,15 +102,15 @@ public class ProgramUtils {
         return newInput;
     }
 
-    public static int tryCatch( int maxvMenuValue){
+    public static int tryCatch(int minMenuValue, int maxvMenuValue){
         int newInput = -1;
         try{
             do{
                 newInput = Integer.parseInt(userInput());
-                if(maxvMenuValue < newInput){
+                if(maxvMenuValue < newInput || newInput < minMenuValue){
                     System.out.println("Invalid input");
                 }
-            }while(maxvMenuValue < newInput);
+            }while(maxvMenuValue < newInput || newInput < minMenuValue);
 
         }catch(Exception e){
             //e.printStackTrace();
