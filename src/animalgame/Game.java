@@ -47,7 +47,7 @@ public class Game {
         boolean checkPlayerInputAmount;
         do {
             System.out.print("Write in how many players (Min 2 Max 4): ");
-            this.playerAmount = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            this.playerAmount = ProgramUtils.tryCatch();
 
             if (playerAmount >= 1 && playerAmount <= 4) {
                 for (int i = 0; i < playerAmount; i++) {
@@ -72,7 +72,7 @@ public class Game {
         boolean checkRoundInputAmount;
         do {
             System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
-            this.maxRound = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            this.maxRound = ProgramUtils.tryCatch();
 
             if (!(this.maxRound >= 5 && this.maxRound <= 30)) {
                 System.out.println("Min 5 rounds and Max 30 rounds");
