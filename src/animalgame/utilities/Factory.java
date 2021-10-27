@@ -5,62 +5,39 @@ import animalgame.animals.*;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
 
+import java.awt.datatransfer.ClipboardOwner;
+import java.util.ArrayList;
+
 public class Factory {
-
-
-    public Factory(){
-
-    }
 
     /**
      * @param animalType
      * @param gender
      */
     public static  Animal createAnimal(String animalType, Gender gender) {
+        Animal animal = null;
         System.out.println("Congratulations to your new "+ gender.toString().toLowerCase()+ " animal, Name your new animal : ");
+
         switch(animalType){
             case "Ferret":
-                Ferret ferret;
-                if(gender == Gender.FEMALE) {
-                    ferret = new Ferret(ProgramUtils.userInput(), 500, 9, Gender.FEMALE);
-                } else {
-                    ferret = new Ferret(ProgramUtils.userInput(), 500, 9, Gender.MALE);
-                }
-                return ferret;
+                animal = new Ferret(ProgramUtils.userInput(), gender);
+                break;
             case "MexicanAlligatorLizard":
-                Mexican_Alligator_Lizard mexicanAlligatorLizard;
-                if (gender == Gender.FEMALE) {
-                    mexicanAlligatorLizard = new Mexican_Alligator_Lizard(ProgramUtils.userInput(), 500, 10, Gender.FEMALE);
-                } else {
-                    mexicanAlligatorLizard = new Mexican_Alligator_Lizard(ProgramUtils.userInput(), 500, 10, Gender.MALE);
-                }
-                return mexicanAlligatorLizard;
+                animal = new Mexican_Alligator_Lizard(ProgramUtils.userInput(), gender);
+                break;
             case "Giraffe":
-                Giraffe giraffe;
-                if (gender == Gender.FEMALE) {
-                    giraffe = new Giraffe(ProgramUtils.userInput(), 500, 15, Gender.FEMALE);
-                } else {
-                    giraffe = new Giraffe(ProgramUtils.userInput(), 500, 15, Gender.MALE);
-                }
-                return giraffe;
+                animal = new Giraffe(ProgramUtils.userInput(),gender);
+                break;
             case "PolarBear":
-                PolarBear polarBear;
-                if (gender == Gender.FEMALE) {
-                    polarBear = new PolarBear(ProgramUtils.userInput(), 500, 20, Gender.FEMALE);
-                } else {
-                    polarBear = new PolarBear(ProgramUtils.userInput(), 500, 20, Gender.MALE);
-                }
-                return polarBear;
+                animal = new PolarBear(ProgramUtils.userInput(), gender);
+                break;
             case "Troll":
-                Troll troll;
-                if (gender == Gender.FEMALE) {
-                    troll = new Troll(ProgramUtils.userInput(), 500, 7, Gender.FEMALE);
-                } else {
-                    troll = new Troll(ProgramUtils.userInput(), 500, 7, Gender.FEMALE);
-                }
-                return troll;
+                animal = new Troll(ProgramUtils.userInput(),gender);
+                break;
             default:
-        }return null;
+        }
+
+        return animal;
     }
 
     /**

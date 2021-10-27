@@ -8,8 +8,10 @@ import animalgame.food.abstractmodels.Food;
 
 public class PolarBear extends Animal {
 
-    public PolarBear(String name, int value, int maxAge, Gender gender) {
-        super(name, value, maxAge, gender);
+    public PolarBear(String name, Gender gender) {
+        super(name, gender);
+        super.setAnimalPrice(1500);
+        super.setMaxAge(20);
     }
 
     @Override
