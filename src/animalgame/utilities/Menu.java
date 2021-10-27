@@ -1,10 +1,14 @@
 package animalgame.utilities;
 
 import animalgame.Game;
+import animalgame.animals.Ferret;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
+import animalgame.food.Sausage;
+import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
 
+import javax.swing.text.TabableView;
 import java.util.ArrayList;
 
 public class Menu {
@@ -32,6 +36,24 @@ public class Menu {
             System.out.println(i + ".\t Amount of weight: " + food.getWeight() + "KG  :  Type of food: " + food.getName());
             i++;
         }
+    }
+
+    public String whatAnimalEats(String animal){
+        switch (animal){
+            case "Ferret":
+                return "Taco and Sausage";
+            case "Giraffe":
+                return "Waffles";
+            case "Mexican_Alligator_Lizard":
+                return "Taco";
+            case "PolarBear":
+                return "Sausage";
+            case "Troll":
+                return "Waffles and Taco";
+            default:
+                return"";
+        }
+
     }
 
 
@@ -280,6 +302,7 @@ public class Menu {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
             int animalChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().toString().substring(25)));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
             int foodChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
