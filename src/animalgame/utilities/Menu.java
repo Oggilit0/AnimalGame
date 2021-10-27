@@ -160,91 +160,75 @@ public class Menu {
         }
     }
 
-    public void animalChoice(){
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":   800 Gold","Giraffe"+": 1000 Gold","Polar bear"+": 1500 Gold","Ferret"+":     2250 Gold","Mexican Alligator Lizard"+": 4000 Gold")){
+    public Gender genderSelectionMenu(){
+
+        switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
             case 1:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("Troll",Gender.MALE,800)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("Troll",Gender.FEMALE,800)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                return Gender.MALE;
+            case 2:
+                return Gender.FEMALE;
+            default:
+                return null;
+        }
+    }
+
+    public void animalChoice(){
+
+        String animal ="";
+        Gender gender = null;
+        int price = 0;
+
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":   800 Gold","Giraffe"+": 1000 Gold","Polar bear"+": 1500 Gold","Ferret"+":     2250 Gold","Mexican Alligator Lizard"+": 4000 Gold")){
+
+            case 1:
+                animal = "Troll";
+                price = 800;
+                gender = genderSelectionMenu();
                 break;
             case 2:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("Giraffe",Gender.MALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("Giraffe",Gender.FEMALE,1000)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "Giraffe";
+                price = 1000;
+                gender = genderSelectionMenu();
                 break;
             case 3:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("PolarBear",Gender.MALE,1500)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("PolarBear",Gender.FEMALE,1500)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "PolarBear";
+                price = 1500;
+                gender = genderSelectionMenu();
                 break;
             case 4:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("Ferret",Gender.MALE,2250)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("Ferret",Gender.FEMALE,2250)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "Ferret";
+                price = 2250;
+                gender = genderSelectionMenu();
                 break;
             case 5:
-                switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-                    case 1:
-                        if(!currentGame.getStore().animalToBuy("Mexican_Alligator_Lizard",Gender.MALE,4000)){
-                            animalChoice();
-                        }
-                        break;
-                    case 2:
-                        if(!currentGame.getStore().animalToBuy("Mexican_Alligator_Lizard",Gender.FEMALE,4000)){
-                            animalChoice();
-                        }
-                        break;
-                }
+                animal = "Mexican_Alligator_Lizard";
+                price = 4000;
+                gender = genderSelectionMenu();
+                break;
             default:
                 animalChoice();
         }
+
+        if(!currentGame.getStore().animalToBuy(animal,gender,price)){
+            animalChoice();
+        }
+
     }
 
     public void loadGameMenu(){
 
-        switch(ProgramUtils.menuBuilder("\nLoad game","Saved game 1","Saved game 2","Saved game 3", "Back")){
+        String[] menuArray = {"","",""};
+        for(int i = 0; i < ProgramUtils.readAllLines().size() ; i++){
+            menuArray[i] = ProgramUtils.readAllLines().get(i);
+        }
+
+        switch(ProgramUtils.menuBuilder("\nLoad game",menuArray[0],menuArray[1],menuArray[2], "Back")){
             case 1:
-
+                this.currentGame.loadGame(ProgramUtils.readAllLines().get(0));
             case 2:
-
+                this.currentGame.loadGame(ProgramUtils.readAllLines().get(1));
             case 3:
-
+                this.currentGame.loadGame(ProgramUtils.readAllLines().get(2));
             case 4:
                 newGameMenu();
                 break;
