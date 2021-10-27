@@ -74,7 +74,7 @@ public class ProgramUtils {
             menuCounter += 1;
         }
         System.out.print("\nUser input: ");
-        return tryCatch(userInput());
+        return tryCatch();
     }
 
     /**
@@ -90,15 +90,32 @@ public class ProgramUtils {
         return userInput;
     }
 
-    public static int tryCatch(String numberInput){
-        int newInput;
+    public static int tryCatch(){
+        int newInput = -1;
             try{
-                newInput = Integer.parseInt(numberInput);
+                newInput = Integer.parseInt(userInput());
             }catch(Exception e){
                 //e.printStackTrace();
                 System.out.println("Write a number you goof!");
-                newInput = tryCatch(userInput());
             }
+
+        return newInput;
+    }
+
+    public static int tryCatch(int minMenuValue, int maxvMenuValue){
+        int newInput = -1;
+        try{
+            do{
+                newInput = Integer.parseInt(userInput());
+                if(maxvMenuValue < newInput || newInput < minMenuValue){
+                    System.out.println("Invalid input");
+                }
+            }while(maxvMenuValue < newInput || newInput < minMenuValue);
+
+        }catch(Exception e){
+            //e.printStackTrace();
+            System.out.println("Write a number you goof!");
+        }
 
         return newInput;
     }

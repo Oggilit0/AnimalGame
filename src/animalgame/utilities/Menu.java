@@ -305,13 +305,13 @@ public class Menu {
         } else {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
-            int animalChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            int animalChoice = ProgramUtils.tryCatch();
             System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().toString().substring(25)));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
-            int foodChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            int foodChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getFoods().size());
             System.out.println("How many kg do you want to feed your animal: ");
-            int kgChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            int kgChoice = ProgramUtils.tryCatch();
             currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1), kgChoice);
         }
     }
@@ -328,10 +328,10 @@ public class Menu {
             do {
                 ArrayList<Animal> newAnimalList = new ArrayList<>();
                 System.out.print("First animal to breed: ");
-                menuChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+                menuChoice = ProgramUtils.tryCatch();
                 newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
                 System.out.print("Write the second animal to breed: ");
-                otherChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+                otherChoice = ProgramUtils.tryCatch();
                 if(otherChoice == menuChoice){
                     System.out.println("\nCan't choose the same animal!\n");
                 }else{
