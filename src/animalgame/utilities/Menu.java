@@ -38,6 +38,11 @@ public class Menu {
         }
     }
 
+    /**
+     * Takes an animal as a string and checks what kind of food that animal eats.
+     * @param animal
+     * @return what animal eats as a String
+     */
     public String whatAnimalEats(String animal){
         switch (animal){
             case "Ferret":
@@ -57,7 +62,6 @@ public class Menu {
     }
 
 
-
     public void roundMenu(){
         switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game","Debug")){
             case 1:
@@ -75,11 +79,11 @@ public class Menu {
             case 5:
 
                 for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
-                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + ". Name:"+animal.getName() + " " + animal.getHealth());
+                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + " Name:"+animal.getName() + " " + animal.getHealth());
                 }
 
                 for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
-                    System.out.println("Food: " + food.getClass().getName().substring(16) + ". Amount:"+food.getWeight() + " kg");
+                    System.out.println("Food: " + food.getClass().getName().substring(16) + " Amount:"+food.getWeight() + " kg");
                 }
                 roundMenu();
             default:
