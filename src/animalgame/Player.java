@@ -45,7 +45,7 @@ public class Player implements Serializable {
                     food.removeWeight(weight);
                 }
             }else{
-                System.out.println("You dont have " +weight + "kg " +food.getName().toLowerCase() + " to give " +animal.getName());
+                System.out.println("You don't have " +weight + "kg " +food.getName().toLowerCase() + " to give " +animal.getName());
             }
 
         }

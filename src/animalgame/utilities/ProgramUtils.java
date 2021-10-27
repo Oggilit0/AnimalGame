@@ -1,9 +1,13 @@
 package animalgame.utilities;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,11 +22,11 @@ public class ProgramUtils {
      * Load object from file and return that object
      * @return object from file
      */
-    public static Object readFile(){
+    public static Object readFile(String fileName){
         ObjectInputStream o = null;
         Object object = null;
         try{
-            FileInputStream f = new FileInputStream("src/animalgame/savegame.txt");
+            FileInputStream f = new FileInputStream("src/animalgame/"+fileName+".txt");
             o = new ObjectInputStream(f);
             object = o.readObject();
             System.out.println("Sucess!");
@@ -30,8 +34,8 @@ public class ProgramUtils {
 
 
         }catch(Exception e){
-            System.out.println("WRONG!");
-            e.printStackTrace();
+            //e.printStackTrace();
+            return null;
         }
         return object;
     }
@@ -40,12 +44,12 @@ public class ProgramUtils {
      * Save input object to file
      * @param object input object to save
      */
-    public static void writeToFile(Object object){
+    public static void writeToFile(Object object,String fileName){
         ObjectOutputStream o = null;
         FileOutputStream f = null;
 
         try{
-            f = new FileOutputStream("src/animalgame/savegame.txt",false);
+            f = new FileOutputStream("src/animalgame/"+fileName+".txt",false);
             o = new ObjectOutputStream(f);
             o.writeObject(object);
             o.close();
@@ -99,4 +103,87 @@ public class ProgramUtils {
         return newInput;
     }
 
+    public static List<String> readAllLines() {
+        List<String> lines = null;
+        try {
+            lines = new ArrayList<>();
+            lines = Files.readAllLines(Paths.get("src/animalgame/storedSaveName.txt"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    public static ArrayList<String> saveFileHandler(String saveName, int index){
+        ArrayList<String> oldSave = (ArrayList<String>) readAllLines();
+        ArrayList<String> temp = new ArrayList<>();
+
+        switch(index){
+            case 1:
+
+                if(oldSave.size() > 0){
+                    oldSave.remove(0);
+                }
+
+                temp.add(saveName);
+
+                if (oldSave.size() > 0){
+                    temp.add(oldSave.get(0));
+                }
+
+                if (oldSave.size() > 1){
+                    temp.add(oldSave.get(1));
+                }
+
+                oldSave = temp;
+                    return oldSave;
+
+            case 2:
+
+                if(oldSave.size() > 0){
+                    temp.add(oldSave.get(0));
+                }
+
+                temp.add(saveName);
+
+                if (oldSave.size() > 2){
+                    temp.add(oldSave.get(2));
+                }
+
+                oldSave = temp;
+                return oldSave;
+
+            case 3:
+                if(oldSave.size() == 3){
+                    oldSave.remove(2);
+                    oldSave.add(saveName);
+                }else{
+                    oldSave.add(saveName);
+                }
+                return oldSave;
+        }
+
+        return null;
+    }
+
+    public static void writeFromSaveFile(String saveName, int oldSaveIndex){
+
+        ArrayList<String> oldSave = saveFileHandler(saveName, oldSaveIndex);
+
+        try {
+            Path path = Paths.get("src/animalgame/storedSaveName.txt");
+            Files.write(path, oldSave, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void DeleteFile(String fileName) {
+            File myObj = new File("src/animalgame/"+fileName+".txt");
+            if (myObj.delete()) {
+                System.out.println("Deleted the file: " + myObj.getName());
+            } else {
+                System.out.println("Failed to delete the file.");
+            }
+    }
 }
