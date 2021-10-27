@@ -1,10 +1,14 @@
 package animalgame.utilities;
 
 import animalgame.Game;
+import animalgame.animals.Ferret;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
+import animalgame.food.Sausage;
+import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
 
+import javax.swing.text.TabableView;
 import java.util.ArrayList;
 
 public class Menu {
@@ -32,6 +36,24 @@ public class Menu {
             System.out.println(i + ".\t Amount of weight: " + food.getWeight() + "KG  :  Type of food: " + food.getName());
             i++;
         }
+    }
+
+    public String whatAnimalEats(String animal){
+        switch (animal){
+            case "Ferret":
+                return "Taco and Sausage";
+            case "Giraffe":
+                return "Waffles";
+            case "Mexican_Alligator_Lizard":
+                return "Taco";
+            case "PolarBear":
+                return "Sausage";
+            case "Troll":
+                return "Waffles and Taco";
+            default:
+                return"";
+        }
+
     }
 
 
@@ -122,19 +144,42 @@ public class Menu {
         }
     }
 
-    public void shopMenu(){
+    public boolean continueMenu(String type, String buySell){
 
+        switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " " + type +" ?","Yes","No")){
+            case 1:
+                return true;
+            case 2:
+                return false;
+            default:
+        }
+        return true;
+    }
+
+
+    public void shopMenu(){
         switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
             case 1:
-                animalChoice();
-                break;
-               // this.currentGame.getStore().animalToBuy();
-            case 2:
-                shopFoodMenu();
-                break;
+                do{
+                    animalChoice();
 
+                }while(continueMenu("animal","buy"));
+
+                break;
+            case 2:
+                do{
+                    shopFoodMenu();
+
+                }while(continueMenu("food","buy"));
+
+                break;
             case 3:
-               // this.currentGame.getStore().animalToSell();
+
+                do{
+                    // this.currentGame.getStore().animalToSell();
+
+                }while(continueMenu("animal","sell"));
+
                 break;
             default:
                 shopMenu();
@@ -142,22 +187,31 @@ public class Menu {
     }
     public void shopFoodMenu(){
 
+        String food ="";
+        int price = 0;
+
         switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage" + ": 20 Gold/kg", "Waffles" + ": 50 Gold/kg","Taco" + ":    100 Gold/kg")){
 
             case 1:
-                this.currentGame.getStore().foodToBuy("Sausage",20);
+                food = "Sausage";
+                price = 20;
                 break;
 
             case 2:
-                this.currentGame.getStore().foodToBuy("Waffles",50);
+                food = "Waffles";
+                price = 50;
                 break;
 
             case 3:
-                this.currentGame.getStore().foodToBuy("Taco",100);
+                food = "Taco";
+                price = 100;
                 break;
             default:
                 shopFoodMenu();
         }
+
+        this.currentGame.getStore().foodToBuy(food,price);
+
     }
 
     public Gender genderSelectionMenu(){
@@ -248,6 +302,7 @@ public class Menu {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
             int animalChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().toString().substring(25)));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
             int foodChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
