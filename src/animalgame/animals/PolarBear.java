@@ -22,8 +22,5 @@ public class PolarBear extends Animal {
         }else{
             return true;
         }
-
     }
-
-
 }

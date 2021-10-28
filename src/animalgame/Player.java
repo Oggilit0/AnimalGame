@@ -51,24 +51,20 @@ public class Player implements Serializable {
         }
     }
 
+    public ArrayList<Food> getFoods(){
+        return this.foods;
+    }
+
+    public void setFoods(Food food){
+        this.foods.add(food);
+    }
+
     public String getName() {
         return name;
     }
 
-    public void addPlayerAnimal(Animal animal) {
-        this.playerAnimal.add(animal);
-    }
-
-    public void setPlayerAnimal(ArrayList<Animal> animalList) {
-        this.playerAnimal = animalList;
-    }
-
-    public ArrayList<Animal> getPlayerAnimal() {
-        return this.playerAnimal;
-    }
-
-    public void removePlayerAnimal(Animal animal){
-        this.playerAnimal.remove(animal);
+    public void addMoney(int money){
+        this.money += money;
     }
 
     public int getMoney() {
@@ -79,21 +75,15 @@ public class Player implements Serializable {
         this.money -= money;
     }
 
-    public void addMoney(int money){
-        this.money += money;
+    public void addPlayerAnimal(Animal animal) {
+        this.playerAnimal.add(animal);
     }
 
-    public void setMoney(int money){
-        this.money = money;
+    public ArrayList<Animal> getPlayerAnimal() {
+        return this.playerAnimal;
     }
 
-    public void setFoods(Food food){
-        this.foods.add(food);
+    public void setPlayerAnimal(ArrayList<Animal> animalList) {
+        this.playerAnimal = animalList;
     }
-
-    public ArrayList<Food> getFoods(){
-        return this.foods;
-    }
-
-
 }

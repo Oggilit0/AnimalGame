@@ -209,7 +209,6 @@ public class Game {
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
-
     public Store getStore(){
         return store;
     }

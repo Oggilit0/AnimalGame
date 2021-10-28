@@ -22,7 +22,5 @@ public class Giraffe extends Animal {
         }else{
             return true;
         }
-
     }
-
 }

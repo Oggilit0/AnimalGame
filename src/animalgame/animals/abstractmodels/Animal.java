@@ -23,7 +23,6 @@ public abstract class Animal implements Serializable {
         this.health = 100;
         this.gender = gender;
         this.aliveStatus = true;
-        //this.owner = owner;
     }
 
     /**
@@ -33,7 +32,6 @@ public abstract class Animal implements Serializable {
      * @return if the animal eats the food or not
      */
     public abstract boolean eat(Food foodToEat);
-
 
     /**
      * Kills the animal and removes it from owners list of animals
@@ -83,12 +81,36 @@ public abstract class Animal implements Serializable {
         }return 0;
     }
 
-    public String getName(){
-        return this.name;
+    public int animalSellPrice(){
+        return animalPrice * ((health-currentAge))/100;
+    }
+
+    public void setAnimalPrice(int animalPrice) {
+        this.animalPrice = animalPrice;
+    }
+
+    public boolean getAliveStatus() {
+        return aliveStatus;
+    }
+
+    public int getCurrentAge(){
+        return this. currentAge;
+    }
+
+    public void setCurrentAge(int currentAge) {
+        this.currentAge += currentAge;
     }
 
     public Gender getGender(){
         return this.gender;
+    }
+
+    public int getHealth(){
+        return this.health;
+    }
+
+    public void setHealth(int health){
+        this.health = health;
     }
 
     public int getMaxAge(){
@@ -99,34 +121,7 @@ public abstract class Animal implements Serializable {
         this.maxAge = maxAge;
     }
 
-    public void setCurrentAge(int currentAge) {
-        this.currentAge += currentAge;
-    }
-
-    public void setHealth(int health){
-        this.health = health;
-    }
-
-    public int getCurrentAge(){
-        return this. currentAge;}
-
-    public int getHealth(){
-        return this.health;
-    }
-
-    public int getAnimalPrice(){
-        return this.animalPrice;
-    }
-
-    public void setAnimalPrice(int animalPrice) {
-        this.animalPrice = animalPrice;
-    }
-
-    public int animalSellPrice(){
-        return animalPrice * ((health-currentAge))/100;
-    }
-
-    public boolean getAliveStatus() {
-        return aliveStatus;
+    public String getName(){
+        return this.name;
     }
 }

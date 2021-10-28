@@ -16,13 +16,6 @@ import animalgame.utilities.ProgramUtils;
 public class Store {
     private Player customer;
 
-   public void setCustomer(Player customer){
-       this.customer = customer;
-   }
-
-    public Store(){
-    }
-
     public boolean animalToBuy(String animal, Gender gender, int price){
        if(this.customer.getMoney() < price){
            System.out.println("Not enough money! The animal costs "+price+" And you have "+customer.getMoney());
@@ -73,5 +66,9 @@ public class Store {
         this.customer.addMoney(animalPrice);
         this.customer.getPlayerAnimal().remove(animal);
    }
+
+    public void setCustomer(Player customer){
+        this.customer = customer;
+    }
 }
 

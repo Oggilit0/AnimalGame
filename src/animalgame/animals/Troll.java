@@ -22,6 +22,4 @@ public class Troll extends Animal {
             return true;
         }
     }
-
-
 }

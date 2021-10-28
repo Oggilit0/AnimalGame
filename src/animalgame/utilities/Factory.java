@@ -41,7 +41,6 @@ public class Factory {
         return animal;
     }
 
-
     /**
      * Takes two animals and checks if they are the same class and different gender.
      * If comparison is successful a random number will be given to how many new animals

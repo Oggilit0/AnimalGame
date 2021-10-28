@@ -17,47 +17,6 @@ public class ProgramUtils {
     public static final String RED = "\u001B[31m";
 
     /**
-     * Load object from file and return that object
-     * @return object from file
-     */
-    public static Object readFile(String fileName){
-        ObjectInputStream o = null;
-        Object object = null;
-        try{
-            FileInputStream f = new FileInputStream("src/animalgame/programfiles/"+fileName+".txt");
-            o = new ObjectInputStream(f);
-            object = o.readObject();
-            System.out.println("Sucess!");
-            o.close();
-
-
-        }catch(Exception e){
-            //e.printStackTrace();
-            return null;
-        }
-        return object;
-    }
-
-    /**
-     * Save input object to file
-     * @param object input object to save
-     */
-    public static void writeToFile(Object object,String fileName){
-        ObjectOutputStream o = null;
-        FileOutputStream f = null;
-
-        try{
-            f = new FileOutputStream("src/animalgame/programfiles/"+fileName+".txt",false);
-            o = new ObjectOutputStream(f);
-            o.writeObject(object);
-            o.close();
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Method to create a menu out of input parameters and return it as a string
      * @param menuName name of the desired menu
      * @param options each menu choice
@@ -91,11 +50,11 @@ public class ProgramUtils {
         int newInput = -1;
             try{
                 newInput = Integer.parseInt(userInput());
+
             }catch(Exception e){
                 //e.printStackTrace();
                 System.out.println("Write a number you goof!");
             }
-
         return newInput;
     }
 
@@ -103,16 +62,13 @@ public class ProgramUtils {
         int newInput = -1;
         do{
             try{
-
-                    newInput = Integer.parseInt(userInput());
-                    if(maxvMenuValue < newInput || newInput < minMenuValue){
-                        System.out.println("Invalid input");
-                    }
-
+                newInput = Integer.parseInt(userInput());
+                if(maxvMenuValue < newInput || newInput < minMenuValue){
+                    System.out.println("Invalid input");
+                }
 
             }catch(Exception e){
-                //e.printStackTrace();
-                System.out.println("Write a number you goof!");
+                System.out.println("Invalid input");
             }
         }while(maxvMenuValue < newInput || newInput < minMenuValue);
         return newInput;
@@ -135,7 +91,6 @@ public class ProgramUtils {
 
         switch(index){
             case 1:
-
                 if(oldSave.size() > 0){
                     oldSave.remove(0);
                 }
@@ -154,7 +109,6 @@ public class ProgramUtils {
                     return oldSave;
 
             case 2:
-
                 if(oldSave.size() > 0){
                     temp.add(oldSave.get(0));
                 }
@@ -179,6 +133,46 @@ public class ProgramUtils {
         }
 
         return null;
+    }
+
+    /**
+     * Load object from file and return that object
+     * @return object from file
+     */
+    public static Object readFile(String fileName){
+        ObjectInputStream o;
+        Object object;
+        try{
+            FileInputStream f = new FileInputStream("src/animalgame/programfiles/"+fileName+".txt");
+            o = new ObjectInputStream(f);
+            object = o.readObject();
+            System.out.println("Sucess!");
+            o.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return object;
+    }
+
+    /**
+     * Save input object to file
+     * @param object input object to save
+     */
+    public static void writeToFile(Object object,String fileName){
+        ObjectOutputStream o = null;
+        FileOutputStream f = null;
+
+        try{
+            f = new FileOutputStream("src/animalgame/programfiles/"+fileName+".txt",false);
+            o = new ObjectOutputStream(f);
+            o.writeObject(object);
+            o.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void writeFromSaveFile(String saveName, int oldSaveIndex){
