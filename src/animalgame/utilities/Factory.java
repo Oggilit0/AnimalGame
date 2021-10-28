@@ -63,7 +63,7 @@ public class Factory {
                         } else {
                             gender = Gender.MALE;
                         }
-                        currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().getSimpleName(), gender));
+                        currentPlayer.addPlayerAnimal(createAnimal(animal1.getClass().getSimpleName(), gender));
 
                     }return true;
 
