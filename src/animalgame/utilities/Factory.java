@@ -52,8 +52,7 @@ public class Factory {
             if (animal1.getGender() != animal2.getGender()) {
                 int startMating = (int) (Math.random() * 2); //random if mating is successful
                 if (startMating == 0) {
-                    int makeBabies = (int) (Math.random() * 3) + 1; //random how many babies
-                    for (int i = 0; i < makeBabies; i++) {
+                    for (int i = 0; i < animal1.howManyBabies(animal1.getClass().toString().substring(25)); i++) {
                         int getGender = (int) (Math.random() * 2); //random gender of baby
                         if (getGender == 0) {
                             currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().toString().substring(25), Gender.FEMALE));

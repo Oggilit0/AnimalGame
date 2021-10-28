@@ -1,10 +1,14 @@
 package animalgame.utilities;
 
 import animalgame.Game;
+import animalgame.animals.Ferret;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
+import animalgame.food.Sausage;
+import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
 
+import javax.swing.text.TabableView;
 import java.util.ArrayList;
 
 public class Menu {
@@ -34,6 +38,28 @@ public class Menu {
         }
     }
 
+    /**
+     * Takes an animal as a string and checks what kind of food that animal eats.
+     * @param animal
+     * @return what animal eats as a String
+     */
+    public String whatAnimalEats(String animal){
+        switch (animal){
+            case "Ferret":
+                return "Taco and Sausage";
+            case "Giraffe":
+                return "Waffles";
+            case "Mexican_Alligator_Lizard":
+                return "Taco";
+            case "PolarBear":
+                return "Sausage";
+            case "Troll":
+                return "Waffles and Taco";
+            default:
+                return"";
+        }
+
+    }
 
 
     public void roundMenu(){
@@ -53,11 +79,11 @@ public class Menu {
             case 5:
 
                 for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
-                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + ". Name:"+animal.getName() + " " + animal.getHealth());
+                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + " Name:"+animal.getName() + " " + animal.getHealth());
                 }
 
                 for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
-                    System.out.println("Food: " + food.getClass().getName().substring(16) + ". Amount:"+food.getWeight() + " kg");
+                    System.out.println("Food: " + food.getClass().getName().substring(16) + " Amount:"+food.getWeight() + " kg");
                 }
                 roundMenu();
             default:
@@ -279,12 +305,13 @@ public class Menu {
         } else {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
-            int animalChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            int animalChoice = ProgramUtils.tryCatch();
+            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().toString().substring(25)));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
-            int foodChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            int foodChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getFoods().size());
             System.out.println("How many kg do you want to feed your animal: ");
-            int kgChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+            int kgChoice = ProgramUtils.tryCatch();
             currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1), kgChoice);
         }
     }
@@ -301,10 +328,10 @@ public class Menu {
             do {
                 ArrayList<Animal> newAnimalList = new ArrayList<>();
                 System.out.print("First animal to breed: ");
-                menuChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+                menuChoice = ProgramUtils.tryCatch();
                 newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
                 System.out.print("Write the second animal to breed: ");
-                otherChoice = ProgramUtils.tryCatch(ProgramUtils.userInput());
+                otherChoice = ProgramUtils.tryCatch();
                 if(otherChoice == menuChoice){
                     System.out.println("\nCan't choose the same animal!\n");
                 }else{

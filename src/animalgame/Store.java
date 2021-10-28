@@ -34,8 +34,8 @@ public class Store {
     }
 
     public void foodToBuy(String food, int foodPrice){
-        System.out.println("How many do you want to buy?");
-        int amountToBuy = ProgramUtils.tryCatch(ProgramUtils.userInput());
+        System.out.println("How many kg do you want to buy?");
+        int amountToBuy = ProgramUtils.tryCatch();
         int sum = foodPrice * amountToBuy;
 
         if(this.customer.getMoney() >= sum){

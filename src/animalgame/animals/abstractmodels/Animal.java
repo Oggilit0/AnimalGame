@@ -49,6 +49,33 @@ public abstract class Animal implements Serializable {
 
     }
 
+    /**
+     * Takes an animal as a String and checks the art of the animal.
+     * The method will randomize the amount of babies the animal will have
+     * depending on the art.
+     * @param animal
+     * @return the amount of babies the animals will have
+     */
+    public int howManyBabies(String animal){
+        switch(animal){
+            case "Ferret":
+                int makeFerretBabies = (int) (Math.random() * 6) + 1;
+                return makeFerretBabies;
+            case "Giraffe":
+                int makeGiraffeBabies = (int) (Math.random() * 3) + 1;
+                return makeGiraffeBabies;
+            case "Mexican_Alligator_Lizard":
+                int makeLizardBabies = (int) (Math.random() * 8) + 1;
+                return makeLizardBabies;
+            case "PolarBear":
+                int makePolarBearBabies = (int) (Math.random() * 4) + 1;
+                return makePolarBearBabies;
+            case "Troll":
+                int makeTrollBabies = (int) (Math.random() * 2) + 1;
+                return makeTrollBabies;
+        }return 0;
+    }
+
     public String getName(){
         return this.name;
     }

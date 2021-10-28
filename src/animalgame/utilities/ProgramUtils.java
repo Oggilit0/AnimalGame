@@ -26,7 +26,7 @@ public class ProgramUtils {
         ObjectInputStream o = null;
         Object object = null;
         try{
-            FileInputStream f = new FileInputStream("src/animalgame/"+fileName+".txt");
+            FileInputStream f = new FileInputStream("src/animalgame/programfiles/"+fileName+".txt");
             o = new ObjectInputStream(f);
             object = o.readObject();
             System.out.println("Sucess!");
@@ -49,7 +49,7 @@ public class ProgramUtils {
         FileOutputStream f = null;
 
         try{
-            f = new FileOutputStream("src/animalgame/"+fileName+".txt",false);
+            f = new FileOutputStream("src/animalgame/programfiles/"+fileName+".txt",false);
             o = new ObjectOutputStream(f);
             o.writeObject(object);
             o.close();
@@ -74,7 +74,7 @@ public class ProgramUtils {
             menuCounter += 1;
         }
         System.out.print("\nUser input: ");
-        return tryCatch(userInput());
+        return tryCatch();
     }
 
     /**
@@ -90,16 +90,34 @@ public class ProgramUtils {
         return userInput;
     }
 
-    public static int tryCatch(String numberInput){
-        int newInput;
+    public static int tryCatch(){
+        int newInput = -1;
             try{
-                newInput = Integer.parseInt(numberInput);
+                newInput = Integer.parseInt(userInput());
             }catch(Exception e){
                 //e.printStackTrace();
                 System.out.println("Write a number you goof!");
-                newInput = tryCatch(userInput());
             }
 
+        return newInput;
+    }
+
+    public static int tryCatch(int minMenuValue, int maxvMenuValue){
+        int newInput = -1;
+        do{
+            try{
+
+                    newInput = Integer.parseInt(userInput());
+                    if(maxvMenuValue < newInput || newInput < minMenuValue){
+                        System.out.println("Invalid input");
+                    }
+
+
+            }catch(Exception e){
+                //e.printStackTrace();
+                System.out.println("Write a number you goof!");
+            }
+        }while(maxvMenuValue < newInput || newInput < minMenuValue);
         return newInput;
     }
 
@@ -107,7 +125,7 @@ public class ProgramUtils {
         List<String> lines = null;
         try {
             lines = new ArrayList<>();
-            lines = Files.readAllLines(Paths.get("src/animalgame/storedSaveName.txt"));
+            lines = Files.readAllLines(Paths.get("src/animalgame/programfiles/storedSaveName.txt"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,7 +189,7 @@ public class ProgramUtils {
         ArrayList<String> oldSave = saveFileHandler(saveName, oldSaveIndex);
 
         try {
-            Path path = Paths.get("src/animalgame/storedSaveName.txt");
+            Path path = Paths.get("src/animalgame/programfiles/storedSaveName.txt");
             Files.write(path, oldSave, StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,7 +197,7 @@ public class ProgramUtils {
     }
 
     public static void DeleteFile(String fileName) {
-            File myObj = new File("src/animalgame/"+fileName+".txt");
+            File myObj = new File("src/animalgame/programfiles/"+fileName+".txt");
             if (myObj.delete()) {
                 System.out.println("Deleted the file: " + myObj.getName());
             } else {
