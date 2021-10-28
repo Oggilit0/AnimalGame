@@ -109,19 +109,12 @@ public abstract class Animal implements Serializable {
         return this.animalPrice;
     }
 
-//    public void setOwner(Player owner){
-//        this.owner = owner;
-//    }
-
-
     public void setAnimalPrice(int animalPrice) {
         this.animalPrice = animalPrice;
     }
 
     public int animalSellPrice(){
-       return animalPrice * ((health-currentAge)/100);
-
-
+        return animalPrice * ((health-currentAge))/100;
     }
 
 }
