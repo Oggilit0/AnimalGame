@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author
+ * Player class
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Player implements Serializable {
     private String name;
@@ -48,7 +49,6 @@ public class Player implements Serializable {
             }else{
                 System.out.println("You don't have " +weight + "kg " +food.getName().toLowerCase() + " to give " +animal.getName());
             }
-
         }
     }
 

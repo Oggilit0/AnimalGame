@@ -9,6 +9,10 @@ import animalgame.food.Sausage;
 import animalgame.utilities.Factory;
 import animalgame.utilities.ProgramUtils;
 
+/**
+ * This is the Store Class where we have a customer who can buy food and also buy and sell animals.
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
+ */
 public class Store {
     private Player customer;
 
@@ -17,7 +21,6 @@ public class Store {
    }
 
     public Store(){
-
     }
 
     public boolean animalToBuy(String animal, Gender gender, int price){
@@ -32,11 +35,9 @@ public class Store {
     }
 
     public void foodToBuy(String food, int foodPrice){
-
         System.out.println("How many kg do you want to buy?");
         int amountToBuy = ProgramUtils.tryCatch();
         int sum = foodPrice * amountToBuy;
-
         if(this.customer.getMoney() >= sum){
             boolean containFoodType = false;
             for(Food foodType : this.customer.getFoods()){
@@ -45,17 +46,14 @@ public class Store {
                     containFoodType = true;
                 }
             }
-
             Food newFood = null;
             if (!containFoodType){
                 switch(food){
                     case "Sausage":
                         newFood = new Sausage("Sausage", amountToBuy);
-
                         break;
                     case "Taco":
                         newFood = new Taco("Taco", amountToBuy);
-
                         break;
                     case "Waffles":
                         newFood = new Waffles("Waffles", amountToBuy);
@@ -65,12 +63,10 @@ public class Store {
                 this.customer.setFoods(newFood);
                 this.customer.removeMoney(sum);
             }
-
         }else{
             System.out.println("Can't afford $" + sum + " with your $"+this.customer.getMoney());
         }
     }
-
 
     public void animalToSell(Animal animal){
         int animalPrice = animal.animalSellPrice();

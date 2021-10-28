@@ -62,7 +62,7 @@ public class ProgramUtils {
     /**
      * Method to create a menu out of input parameters and return it as a string
      * @param menuName name of the desired menu
-     * @param options each menu choise
+     * @param options each menu choice
      * @return return output string
      */
     public static int menuBuilder(String menuName, String ...options){
@@ -79,7 +79,6 @@ public class ProgramUtils {
 
     /**
      * Takes a user input value and return it as a string
-     *
      * @return Return user input
      */
     public static String userInput(){

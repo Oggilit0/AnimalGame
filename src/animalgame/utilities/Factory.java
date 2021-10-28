@@ -4,10 +4,13 @@ import animalgame.Player;
 import animalgame.animals.*;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
-
 import java.awt.datatransfer.ClipboardOwner;
 import java.util.ArrayList;
 
+/**
+ * This is the factory class where we create and mate our animals.
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
+ */
 public class Factory {
 
     /**
@@ -37,9 +40,9 @@ public class Factory {
                 break;
             default:
         }
-
         return animal;
     }
+
 
     /**
      * Takes two animals and checks if they are the same class and different gender.
@@ -64,17 +67,13 @@ public class Factory {
                             gender = Gender.MALE;
                         }
                         currentPlayer.addPlayerAnimal(createAnimal(animal1.getClass().getSimpleName(), gender));
-
                     }return true;
-
                 } else {
                     System.out.println("No babies this time!");
                 }return false;
-
             } else {
                 System.out.println("Animals needs to be different gender!");
             }return false;
-
         } else {
             System.out.println("Animals needs to be the same species!");
         }return false;
