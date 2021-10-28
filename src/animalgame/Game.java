@@ -114,7 +114,7 @@ public class Game {
 
         for(Player players : allPlayers){
             for(Animal animal : players.getPlayerAnimal()){
-             //will sell animal here later!
+             getStore().animalToSell(animal);
             }
             list.put(players.getName(), players.getMoney());
         }
@@ -190,7 +190,10 @@ public class Game {
                 animal.death();
             }
         }
-        System.out.println("\nEvery animal you have aged with 1 year!");
+        if(currentPlayer.getPlayerAnimal().size() != 0){
+            System.out.println("\nEvery animal you have aged with 1 year!");
+        }
+
     }
 
 
