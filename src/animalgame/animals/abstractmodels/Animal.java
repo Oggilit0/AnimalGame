@@ -120,5 +120,10 @@ public abstract class Animal implements Serializable {
         this.animalPrice = animalPrice;
     }
 
+    public int animalSellPrice(){
+       return animalPrice * ((health-currentAge)/100);
+
+
+    }
 
 }
