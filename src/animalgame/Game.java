@@ -129,11 +129,15 @@ public class Game {
                 resultList.add(entry.getKey());
             }
         }
-        for(String winner : resultList){
-            System.out.println(ProgramUtils.GREEN+"\nThe winner is "+winner+ProgramUtils.RESET+" \uD83D\uDC51");
-        }
 
-        System.out.println(ProgramUtils.RED + "\nGood Game!" + ProgramUtils.RESET);
+        if(resultList.size() == 1) {
+            System.out.println(ProgramUtils.GREEN + "\nThe winner is " + resultList.get(0) + ProgramUtils.RESET + " \uD83D\uDC51");
+        }else{
+            System.out.println(ProgramUtils.YELLOW+"\nIts a tie"+ProgramUtils.RESET);
+            for(String winner : resultList)
+            System.out.print(winner+" \uD83D\uDC51 ");
+        }
+        System.out.println("\n\n"+ProgramUtils.RED + "Good Game!" + ProgramUtils.RESET);
     }
 
     public void newRoundGetPlayer() {
@@ -192,6 +196,10 @@ public class Game {
 
 
     public void createPlayer(String newPlayer){
+        if(newPlayer.equals("")){
+            System.out.println("\nYou need a name!\n");
+            startGame();
+        }
         Player player = new Player(newPlayer);
         this.allPlayers.add(player);
     }
