@@ -52,28 +52,16 @@ public class Player implements Serializable {
         }
     }
 
-
-    public boolean gameOverCheck(){
-        if (this.money == 0 && (this.playerAnimal.size() == 0)) {
-            //this.allPlayers.remove(this);
-            System.out.println("\n".repeat(10));
-            try {
-                System.out.println(ProgramUtils.RED + "GAME OVER " + this.name + "!" + ProgramUtils.RESET);
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return true;
-        }
-        return false;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setPlayerAnimal(Animal animal) {
+    public void addPlayerAnimal(Animal animal) {
         this.playerAnimal.add(animal);
+    }
+
+    public void setPlayerAnimal(ArrayList<Animal> animalList) {
+        this.playerAnimal = animalList;
     }
 
     public ArrayList<Animal> getPlayerAnimal() {
