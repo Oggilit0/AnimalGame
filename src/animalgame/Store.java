@@ -10,7 +10,6 @@ import animalgame.utilities.Factory;
 import animalgame.utilities.ProgramUtils;
 
 public class Store {
-    // private AnimalFactory factory;
     private Player customer;
 
    public void setCustomer(Player customer){
@@ -18,7 +17,6 @@ public class Store {
    }
 
     public Store(){
-        //this.player= player;
 
     }
 
@@ -71,12 +69,9 @@ public class Store {
 
 
     public void animalToSell(Animal animal){
-       int animalPrice = animal.getAnimalPrice()* (animal.getHealth()/100);
+       int animalPrice = animal.animalSellPrice();
        this.customer.addMoney(animalPrice);
        this.customer.getPlayerAnimal().remove(animal);
    }
+}
 
-   //välja vilket djur man vill sälja, vilket djur han sålt och hur mycket pengar.
-}       //häst,ta djuret och ta bort från spellistan
-        //djur remove från player list
-        //spelarens pengar ska plussas på djurets värde

@@ -6,6 +6,7 @@ import animalgame.utilities.Menu;
 import animalgame.utilities.ProgramUtils;
 
 import java.util.ArrayList;
+import java.util.*;
 
 public class Game {
     private ArrayList<Player> allPlayers;
@@ -109,24 +110,29 @@ public class Game {
     }
 
     public void endGame() {
-        ArrayList<Integer> money = new ArrayList<>();
-        ArrayList<Player> player = new ArrayList<>();
-        int max = 0;
+        Map<String,Integer> list = new HashMap<>();
+
         for(Player players : allPlayers){
+            list.put(players.getName(), players.getMoney());
             for(Animal animal : players.getPlayerAnimal()){
              //will sell animal here later!
-                money.add(players.getMoney());
-                player.add(players);
-                max = money.get(0);
             }
         }
-        int n = money.size();
-        for(int i = 1; i < n; i++){
-            if(money.get(i) > max){
-                max = money.get(i);
-                System.out.println("\nThe winner is "+ player.get(i).getName()+" with "+max+ProgramUtils.YELLOW+"Gold"+ProgramUtils.YELLOW);
+        List<String> resultList = new ArrayList<>();
+        int currentMaxValue = Integer.MIN_VALUE;
+        for (Map.Entry<String, Integer> entry : list.entrySet()){
+            if (entry.getValue() > currentMaxValue){
+                resultList.clear();
+                resultList.add(entry.getKey());
+                currentMaxValue = entry.getValue();
+            } else if (entry.getValue() == currentMaxValue){
+                resultList.add(entry.getKey());
             }
         }
+        for(String winner : resultList){
+            System.out.println(ProgramUtils.GREEN+"\nThe winner is "+winner+ProgramUtils.RESET+" \uD83D\uDC51");
+        }
+
         System.out.println(ProgramUtils.RED + "\nGood Game!" + ProgramUtils.RESET);
     }
 
@@ -154,7 +160,7 @@ public class Game {
             System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
             System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold" + ProgramUtils.RESET);
             for(Food food : currentPlayer.getFoods()){
-                System.out.println(food.getName()+": "+food.getWeight()+" kg");
+                System.out.print(food.getName()+": "+food.getWeight()+" kg ");
             }
             for (Animal animal : currentPlayer.getPlayerAnimal()) {
                 animal.healthOverTime();
@@ -181,6 +187,7 @@ public class Game {
                 animal.death();
             }
         }
+        System.out.println("\nEvery animal you have aged with 1 year!");
     }
 
 

@@ -10,6 +10,7 @@ public class Troll extends Animal {
 
     public Troll(String name, Gender gender) {
         super(name, gender);
+        super.setAnimalPrice(800);
         super.setMaxAge(7);
     }
 

@@ -22,7 +22,7 @@ public class Menu {
 
         int i = 1;
         for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
-            System.out.println(i + ".\t" + animal.getClass().getName().substring(19) + " :  namn: " + animal.getName()+ " Gender: "+animal.getGender().toString().toLowerCase());
+            System.out.println(i + ".\t" + animal.getClass().getSimpleName() + " :  namn: " + animal.getName()+ " Gender: "+animal.getGender().toString().toLowerCase());
             i++;
         }
     }
@@ -178,11 +178,11 @@ public class Menu {
 
                 break;
             case 3:
-
-                do{
+                animalSellMenu();
+             //   do{
                     // this.currentGame.getStore().animalToSell();
 
-                }while(continueMenu("animal","sell"));
+               // }while(continueMenu("animal","sell"));
 
                 break;
             default:
@@ -293,6 +293,36 @@ public class Menu {
             default:
                 loadGameMenu();
         }
+
+    }
+    public void animalSellMenu() {
+        ArrayList<Animal>animalList = this.currentGame.getCurrentPlayer().getPlayerAnimal();
+        boolean sellCheck = false;
+        do {
+            if (animalList.size() == 0) {
+
+                if(!sellCheck){
+                    System.out.println("You don´t have any animal to sell");
+                    shopMenu();
+                } else {
+                    break;
+                }
+            }
+
+            System.out.println("Choose with animal to sell");
+            playerAnimalsAsMenu();
+            int menuChoice = ProgramUtils.tryCatch(1,animalList.size());
+            this.currentGame.getStore().animalToSell(animalList.get(menuChoice-1));
+
+            if(!(animalList.size() == 0)){
+                System.out.println("Do you want to sell another animal? y/n");
+                if(ProgramUtils.userInput().equalsIgnoreCase("y")){
+                    sellCheck = true;
+                } else {
+                    sellCheck = false;
+                }
+            }
+            } while (sellCheck);
     }
 
     public void feedAnimalsMenu() {
@@ -306,7 +336,7 @@ public class Menu {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
             int animalChoice = ProgramUtils.tryCatch();
-            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().toString().substring(25)));
+            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().getSimpleName()));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
             int foodChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getFoods().size());
@@ -340,5 +370,10 @@ public class Menu {
                 }
             }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size() || menuChoice == otherChoice);
         }
+
+            playerAnimalsAsMenu();
+            ProgramUtils.userInput();
+
+        }
+
     }
-}
