@@ -91,14 +91,13 @@ public class Game {
             if (currentRound != maxRound) {
                 System.out.println(ProgramUtils.RED + "\nRound " + (r + 1) + ProgramUtils.RESET);
                 ageAnimal();
+                removeDeadAnimals();
                 newRoundGetPlayer();
             } else {
                 endGame();
             }
         }
     }
-
-
 
 
 
@@ -166,10 +165,12 @@ public class Game {
             for(Food food : currentPlayer.getFoods()){
                 System.out.print(food.getName()+": "+food.getWeight()+" kg ");
             }
+
             for (Animal animal : currentPlayer.getPlayerAnimal()) {
-                animal.healthOverTime();
-                System.out.println(animal.getClass().getName().substring(19)+": "+animal.getName()+", Health: "+ProgramUtils.RED+animal.getHealth()+ProgramUtils.RESET+", Age: "+ProgramUtils.PURPLE+animal.getCurrentAge()+ProgramUtils.RESET);
+
+                System.out.println(animal.getClass().getSimpleName()+": "+animal.getName()+", Health: "+ProgramUtils.RED+animal.getHealth()+ProgramUtils.RESET+", Age: "+ProgramUtils.PURPLE+animal.getCurrentAge()+ProgramUtils.RESET);
             }
+
             gameMenu.roundMenu();
 
             if (i != playerAmount - 1) {
@@ -177,9 +178,21 @@ public class Game {
             }else{
                 this.currentPlayer = this.allPlayers.get(0);
             }
-
         }
+    }
 
+    public void removeDeadAnimals(){
+
+        for(Player player : allPlayers){
+            ArrayList<Animal> tempAnimals= new ArrayList<>();
+            for(Animal animal : player.getPlayerAnimal()){
+                animal.healthOverTime();
+                if(animal.getAliveStatus()){
+                    tempAnimals.add(animal);
+                }
+            }
+            player.setPlayerAnimal(tempAnimals);
+        }
     }
 
     public void ageAnimal() {
