@@ -4,10 +4,13 @@ import animalgame.animals.abstractmodels.Animal;
 import animalgame.food.abstractmodels.Food;
 import animalgame.utilities.Menu;
 import animalgame.utilities.ProgramUtils;
-
 import java.util.ArrayList;
 import java.util.*;
 
+/**
+ * This is the Game class where we store our game logic.
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
+ */
 public class Game {
     private ArrayList<Player> allPlayers;
     private int maxRound;
@@ -22,16 +25,13 @@ public class Game {
         this.allPlayers = new ArrayList<>();
         this.gameMenu = new Menu(this);
         this.currentRound = 0;
-        //Animal testKo = new Cow("TestKo",1000,10,Gender.FEMALE, currentPlayer);
-        //Animal testKatt = new Horse( "Katten", 500, 5, Gender.MALE);
-       //Animal testKatten = new Horse( "Katt", 55,5,  Gender.FEMALE);
-       // Factory.tryMating(testKatt, testKatten, currentPlayer);
-        //Factory.createAnimal("Cat", Gender.MALE);
         this.gameMenu.newGameMenu();
-        //this is A COMMENT
-        //hello
     }
 
+    /**
+     * Starts the whole game where the player chooses how many players and rounds.
+     * Starts the first round.
+     */
     public void startGame() {
         choosePlayers();
         chooseRounds();
@@ -47,12 +47,10 @@ public class Game {
     public void choosePlayers(){
         System.out.print("\nWrite in how many players (Min 2 Max 4): ");
         this.playerAmount = ProgramUtils.tryCatch(1,4);
-
         for (int i = 0; i < playerAmount; i++) {
             System.out.print("Write player " + (i + 1) + ": ");
             createPlayer(ProgramUtils.userInput());
         }
-
         this.currentPlayer = this.allPlayers.get(0);
     }
 
@@ -99,8 +97,6 @@ public class Game {
         }
     }
 
-
-
     public void gameOver() {
         for (Player winner : allPlayers) {
             System.out.println(ProgramUtils.GREEN + "The winner is " + winner.getName() + "!" + ProgramUtils.RESET + "\uD83D\uDC51");
@@ -110,7 +106,6 @@ public class Game {
 
     public void endGame() {
         Map<String,Integer> list = new HashMap<>();
-
         for(Player players : allPlayers){
             for(Animal animal : players.getPlayerAnimal()){
              getStore().animalToSell(animal);
@@ -128,7 +123,6 @@ public class Game {
                 resultList.add(entry.getKey());
             }
         }
-
         if(resultList.size() == 1) {
             System.out.println(ProgramUtils.GREEN + "\nThe winner is " + resultList.get(0) + ProgramUtils.RESET + " \uD83D\uDC51");
         }else{
@@ -141,10 +135,6 @@ public class Game {
 
     public void newRoundGetPlayer() {
         for (int i = this.allPlayers.indexOf(this.currentPlayer); i < playerAmount; i++) {
-            //TEST
-            //createAnimal("Cat", Animal.Gender.MALE);
-            //createAnimal("Cat", Animal.Gender.FEMALE);
-            //TEST
             if (this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)) {
                 this.allPlayers.remove(currentPlayer);
                 System.out.println("\n".repeat(10));
@@ -162,17 +152,15 @@ public class Game {
             }
             System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
             System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold" + ProgramUtils.RESET);
+            //test
+            ageAnimal();
             for(Food food : currentPlayer.getFoods()){
-                System.out.print(food.getName()+": "+food.getWeight()+" kg ");
+                System.out.println(food.getName()+": "+food.getWeight()+" kg ");
             }
-
             for (Animal animal : currentPlayer.getPlayerAnimal()) {
-
                 System.out.println(animal.getClass().getSimpleName()+": "+animal.getName()+", Health: "+ProgramUtils.RED+animal.getHealth()+ProgramUtils.RESET+", Age: "+ProgramUtils.PURPLE+animal.getCurrentAge()+ProgramUtils.RESET);
             }
-
             gameMenu.roundMenu();
-
             if (i != playerAmount - 1) {
                 this.currentPlayer = allPlayers.get(1 + i);
             }else{
@@ -181,8 +169,8 @@ public class Game {
         }
     }
 
-    public void removeDeadAnimals(){
 
+    public void removeDeadAnimals(){
         for(Player player : allPlayers){
             ArrayList<Animal> tempAnimals= new ArrayList<>();
             for(Animal animal : player.getPlayerAnimal()){
@@ -195,6 +183,7 @@ public class Game {
         }
     }
 
+
     public void ageAnimal() {
         for (Animal animal : currentPlayer.getPlayerAnimal()) {
             if (!(animal.getCurrentAge() == animal.getMaxAge())) {
@@ -206,9 +195,7 @@ public class Game {
         if(currentPlayer.getPlayerAnimal().size() != 0){
             System.out.println("\nEvery animal you have aged with 1 year!");
         }
-
     }
-
 
     public void createPlayer(String newPlayer){
         if(newPlayer.equals("")){
