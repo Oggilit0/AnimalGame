@@ -18,17 +18,19 @@ public class Menu {
         this.currentGame = currentGame;
     }
 
+    /**
+     * Prints out a summary of the current players animals to the console.
+     */
     public void playerAnimalsAsMenu(){
-
         int i = 1;
         for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
-            System.out.println(i + ".\t" + animal.getClass().getSimpleName() + " :  namn: " + animal.getName()+ " Gender: "+animal.getGender().toString().toLowerCase());
+            System.out.println(i + ".\t" + animal.getClass().getName().substring(19) + " :     Name: " + ProgramUtils.PURPLE+animal.getName()+ProgramUtils.RESET+ "     Gender: "+animal.getGender().toString().toLowerCase());
             i++;
         }
     }
 
     /**
-     * Prints out the players amount and type of food they have bought.
+     * Prints out the current players amount and type of food they have bought to the console.
      */
     public void playerFoodAsMenu(){
         int i = 1;
@@ -40,7 +42,7 @@ public class Menu {
 
     /**
      * Takes an animal as a string and checks what kind of food that animal eats.
-     * @param animal
+     * @param animal as a String
      * @return what animal eats as a String
      */
     public String whatAnimalEats(String animal){
@@ -330,6 +332,12 @@ public class Menu {
 
     }
 
+    /**
+     * Checks so the player at least have one animal and one item of food to feed the animal with.
+     * Then asks the player to choose which of their animal to feed, what food and how many kilos
+     * of that food to feed the animal with. Calls the feedAnimal method...
+     *
+     */
     public void feedAnimalsMenu() {
         if (currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0) {
             System.out.println("You must have one animal to feed!");
