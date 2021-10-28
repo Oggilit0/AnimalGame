@@ -12,14 +12,14 @@ public abstract class Animal implements Serializable {
     private int maxAge;
     private int currentAge;
     private int animalPrice;
-    //private Player owner;
     private final Gender gender;
-    private Boolean aliveStatus = true;
+    private boolean aliveStatus;
 
     public Animal(String name, Gender gender){
         this.name = name;
         this.health = 100;
         this.gender = gender;
+        this.aliveStatus = true;
         //this.owner = owner;
 
     }
@@ -37,7 +37,6 @@ public abstract class Animal implements Serializable {
      * Kills the animal and removes it from owners list of animals
      */
     public void death(){
-        //this.owner.removePlayerAnimal(this);
         this.aliveStatus = false;
     }
 
@@ -46,10 +45,11 @@ public abstract class Animal implements Serializable {
      * checks if health is over 0, if not the animal dies
      */
     public void healthOverTime(){
-        if (this.health > 0){
-            int randNr = (int) (Math.random()*21)+10;
+        int randNr = (int) (Math.random()*21)+10;
+        if (randNr < health){
             this.health = this.health-randNr;
-        }else {
+        }else{
+            this.health = 0;
             death();
         }
     }
@@ -124,4 +124,7 @@ public abstract class Animal implements Serializable {
         return animalPrice * ((health-currentAge))/100;
     }
 
+    public boolean getAliveStatus() {
+        return aliveStatus;
+    }
 }
