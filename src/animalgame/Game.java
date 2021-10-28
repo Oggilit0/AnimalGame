@@ -45,7 +45,7 @@ public class Game {
      * loops if input is wrong
      */
     public void choosePlayers(){
-        System.out.print("Write in how many players (Min 2 Max 4): ");
+        System.out.print("\nWrite in how many players (Min 2 Max 4): ");
         this.playerAmount = ProgramUtils.tryCatch(1,4);
 
         for (int i = 0; i < playerAmount; i++) {
@@ -113,10 +113,10 @@ public class Game {
         Map<String,Integer> list = new HashMap<>();
 
         for(Player players : allPlayers){
-            list.put(players.getName(), players.getMoney());
             for(Animal animal : players.getPlayerAnimal()){
              //will sell animal here later!
             }
+            list.put(players.getName(), players.getMoney());
         }
         List<String> resultList = new ArrayList<>();
         int currentMaxValue = Integer.MIN_VALUE;
@@ -129,11 +129,15 @@ public class Game {
                 resultList.add(entry.getKey());
             }
         }
-        for(String winner : resultList){
-            System.out.println(ProgramUtils.GREEN+"\nThe winner is "+winner+ProgramUtils.RESET+" \uD83D\uDC51");
-        }
 
-        System.out.println(ProgramUtils.RED + "\nGood Game!" + ProgramUtils.RESET);
+        if(resultList.size() == 1) {
+            System.out.println(ProgramUtils.GREEN + "\nThe winner is " + resultList.get(0) + ProgramUtils.RESET + " \uD83D\uDC51");
+        }else{
+            System.out.println(ProgramUtils.YELLOW+"\nIts a tie Between "+ProgramUtils.RESET);
+            for(String winner : resultList)
+            System.out.print(winner+" \uD83D\uDC51 ");
+        }
+        System.out.println("\n\n"+ProgramUtils.RED + "Good Game!" + ProgramUtils.RESET);
     }
 
     public void newRoundGetPlayer() {
@@ -182,7 +186,6 @@ public class Game {
         for (Animal animal : currentPlayer.getPlayerAnimal()) {
             if (!(animal.getCurrentAge() == animal.getMaxAge())) {
                 animal.setCurrentAge(1);
-                System.out.println("\nEvery animal you have aged with 1 year!");
             } else {
                 animal.death();
             }
@@ -192,6 +195,10 @@ public class Game {
 
 
     public void createPlayer(String newPlayer){
+        if(newPlayer.equals("")){
+            System.out.println("\nYou need a name!\n");
+            startGame();
+        }
         Player player = new Player(newPlayer);
         this.allPlayers.add(player);
     }

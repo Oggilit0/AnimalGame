@@ -28,8 +28,9 @@ public class Player implements Serializable {
      * Then checks if the player has the amount of food that they try to give the animal.
      * Add 10% health per kilo food and remove food from players
      * foodslist if the animal eats the food.
-     * @param animal
-     * @param food
+     * @param animal as an animal object.
+     * @param food as an food object.
+     * @param weight as an int.
      */
     public void feedAnimal(Animal animal, Food food, int weight) {
         if(animal.eat(food)){
