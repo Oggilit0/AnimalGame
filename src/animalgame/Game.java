@@ -45,7 +45,7 @@ public class Game {
      * loops if input is wrong
      */
     public void choosePlayers(){
-        System.out.print("Write in how many players (Min 2 Max 4): ");
+        System.out.print("\nWrite in how many players (Min 2 Max 4): ");
         this.playerAmount = ProgramUtils.tryCatch(1,4);
 
         for (int i = 0; i < playerAmount; i++) {
@@ -113,10 +113,10 @@ public class Game {
         Map<String,Integer> list = new HashMap<>();
 
         for(Player players : allPlayers){
-            list.put(players.getName(), players.getMoney());
             for(Animal animal : players.getPlayerAnimal()){
              //will sell animal here later!
             }
+            list.put(players.getName(), players.getMoney());
         }
         List<String> resultList = new ArrayList<>();
         int currentMaxValue = Integer.MIN_VALUE;
@@ -133,7 +133,7 @@ public class Game {
         if(resultList.size() == 1) {
             System.out.println(ProgramUtils.GREEN + "\nThe winner is " + resultList.get(0) + ProgramUtils.RESET + " \uD83D\uDC51");
         }else{
-            System.out.println(ProgramUtils.YELLOW+"\nIts a tie"+ProgramUtils.RESET);
+            System.out.println(ProgramUtils.YELLOW+"\nIts a tie Between "+ProgramUtils.RESET);
             for(String winner : resultList)
             System.out.print(winner+" \uD83D\uDC51 ");
         }
