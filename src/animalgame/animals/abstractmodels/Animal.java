@@ -3,9 +3,12 @@ package animalgame.animals.abstractmodels;
 import animalgame.Player;
 import animalgame.enums.Gender;
 import animalgame.food.abstractmodels.Food;
-
 import java.io.Serializable;
 
+/**
+ * Animal class
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
+ */
 public abstract class Animal implements Serializable {
     private String name;
     private int health;
@@ -21,7 +24,6 @@ public abstract class Animal implements Serializable {
         this.gender = gender;
         this.aliveStatus = true;
         //this.owner = owner;
-
     }
 
     /**
