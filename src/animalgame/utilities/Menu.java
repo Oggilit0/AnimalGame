@@ -22,7 +22,7 @@ public class Menu {
 
         int i = 1;
         for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
-            System.out.println(i + ".\t" + animal.getClass().getName().substring(19) + " :  namn: " + animal.getName()+ " Gender: "+animal.getGender().toString().toLowerCase());
+            System.out.println(i + ".\t" + animal.getClass().getSimpleName() + " :  namn: " + animal.getName()+ " Gender: "+animal.getGender().toString().toLowerCase());
             i++;
         }
     }
@@ -345,7 +345,7 @@ public class Menu {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
             int animalChoice = ProgramUtils.tryCatch();
-            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().toString().substring(25)));
+            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().getSimpleName()));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
             int foodChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getFoods().size());

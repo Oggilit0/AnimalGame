@@ -1,6 +1,9 @@
 package animalgame;
 
+import animalgame.animals.PolarBear;
+import animalgame.animals.Troll;
 import animalgame.animals.abstractmodels.Animal;
+import animalgame.enums.Gender;
 import animalgame.food.abstractmodels.Food;
 import animalgame.utilities.Menu;
 import animalgame.utilities.ProgramUtils;

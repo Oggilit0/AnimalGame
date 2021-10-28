@@ -19,7 +19,6 @@ public abstract class Animal implements Serializable {
     public Animal(String name, Gender gender){
         this.name = name;
         this.health = 100;
-        this.currentAge = 0;
         this.gender = gender;
         //this.owner = owner;
 
@@ -46,7 +45,6 @@ public abstract class Animal implements Serializable {
         }else {
             death();
         }
-
     }
 
     /**
