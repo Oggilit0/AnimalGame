@@ -71,7 +71,7 @@ public class Store {
 
 
     public void animalToSell(Animal animal){
-       int animalPrice = animal.getAnimalPrice()* (animal.getHealth()/100);
+       int animalPrice = animal.animalSellPrice();
        this.customer.addMoney(animalPrice);
        this.customer.getPlayerAnimal().remove(animal);
    }
