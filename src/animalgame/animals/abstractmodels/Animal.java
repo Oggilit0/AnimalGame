@@ -24,7 +24,14 @@ public abstract class Animal implements Serializable {
 
     }
 
+    /**
+     * If foodToEat instance of a food the animal doesn't eat returns false and an output to the console.
+     * If true the animal eats the food object it is given.
+     * @param foodToEat as food object
+     * @return if the animal eats the food or not
+     */
     public abstract boolean eat(Food foodToEat);
+
 
     /**
      * Kills the animal and removes it from owners list of animals
@@ -51,7 +58,7 @@ public abstract class Animal implements Serializable {
      * Takes an animal as a String and checks the art of the animal.
      * The method will randomize the amount of babies the animal will have
      * depending on the art.
-     * @param animal
+     * @param animal as a string
      * @return the amount of babies the animals will have
      */
     public int howManyBabies(String animal){
@@ -109,19 +116,12 @@ public abstract class Animal implements Serializable {
         return this.animalPrice;
     }
 
-//    public void setOwner(Player owner){
-//        this.owner = owner;
-//    }
-
-
     public void setAnimalPrice(int animalPrice) {
         this.animalPrice = animalPrice;
     }
 
     public int animalSellPrice(){
-       return animalPrice * ((health-currentAge)/100);
-
-
+        return animalPrice * ((health-currentAge))/100;
     }
 
 }

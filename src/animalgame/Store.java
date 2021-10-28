@@ -32,6 +32,7 @@ public class Store {
     }
 
     public void foodToBuy(String food, int foodPrice){
+
         System.out.println("How many kg do you want to buy?");
         int amountToBuy = ProgramUtils.tryCatch();
         int sum = foodPrice * amountToBuy;
@@ -44,34 +45,37 @@ public class Store {
                     containFoodType = true;
                 }
             }
-            if (!containFoodType && food.equals("Sausage")){
-                Food sausage = new Sausage("Sausage", amountToBuy);
-                this.customer.setFoods(sausage);
-            }else if (!containFoodType && food.equals("Taco")){
-                Food taco = new Taco("Taco", amountToBuy);
-                this.customer.setFoods(taco);
-            }else if (!containFoodType && food.equals("Waffles")){
-                Food waffles = new Waffles("Waffles", amountToBuy);
-                this.customer.setFoods(waffles);
+
+            Food newFood = null;
+            if (!containFoodType){
+                switch(food){
+                    case "Sausage":
+                        newFood = new Sausage("Sausage", amountToBuy);
+
+                        break;
+                    case "Taco":
+                        newFood = new Taco("Taco", amountToBuy);
+
+                        break;
+                    case "Waffles":
+                        newFood = new Waffles("Waffles", amountToBuy);
+                        break;
+                        default:
+                }
+                this.customer.setFoods(newFood);
+                this.customer.removeMoney(sum);
             }
-            this.customer.removeMoney(sum);
+
         }else{
             System.out.println("Can't afford $" + sum + " with your $"+this.customer.getMoney());
         }
-
-        //Debug
-        for(Food fooder : this.customer.getFoods()){
-
-            System.out.println(fooder.getName() + " : "+fooder.getWeight());
-        }
-        //Debug
     }
 
 
     public void animalToSell(Animal animal){
-       int animalPrice = animal.animalSellPrice();
-       this.customer.addMoney(animalPrice);
-       this.customer.getPlayerAnimal().remove(animal);
+        int animalPrice = animal.animalSellPrice();
+        this.customer.addMoney(animalPrice);
+        this.customer.getPlayerAnimal().remove(animal);
    }
 }
 

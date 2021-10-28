@@ -18,17 +18,19 @@ public class Menu {
         this.currentGame = currentGame;
     }
 
+    /**
+     * Prints out a summary of the current players animals to the console.
+     */
     public void playerAnimalsAsMenu(){
-
         int i = 1;
         for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
-            System.out.println(i + ".\t" + animal.getClass().getSimpleName() + " :  namn: " + animal.getName()+ " Gender: "+animal.getGender().toString().toLowerCase());
+            System.out.println(i + ".\t" + animal.getClass().getName().substring(19) + " :     Name: " + ProgramUtils.PURPLE+animal.getName()+ProgramUtils.RESET+ "     Gender: "+animal.getGender().toString().toLowerCase());
             i++;
         }
     }
 
     /**
-     * Prints out the players amount and type of food they have bought.
+     * Prints out the current players amount and type of food they have bought to the console.
      */
     public void playerFoodAsMenu(){
         int i = 1;
@@ -40,7 +42,7 @@ public class Menu {
 
     /**
      * Takes an animal as a string and checks what kind of food that animal eats.
-     * @param animal
+     * @param animal as a String
      * @return what animal eats as a String
      */
     public String whatAnimalEats(String animal){
@@ -165,25 +167,43 @@ public class Menu {
         switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
             case 1:
                 do{
+
+                    if(this.currentGame.getCurrentPlayer().getMoney() <= 0){
+                        break;
+                    }
                     animalChoice();
-
                 }while(continueMenu("animal","buy"));
-
                 break;
             case 2:
                 do{
+
+                    if(this.currentGame.getCurrentPlayer().getMoney() <= 0){
+                        break;
+                    }
                     shopFoodMenu();
 
                 }while(continueMenu("food","buy"));
 
                 break;
+
             case 3:
-                animalSellMenu();
-             //   do{
-                    // this.currentGame.getStore().animalToSell();
+                boolean test;
+                if(this.currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0){
+                    System.out.println("No animal to sell!");
+                    shopMenu();
+                }else{
+                    do{
+                        boolean test2 = animalSellMenu();
+                        if(test2){
+                            test = continueMenu("animal", "sell");
+                        }else{
+                            test = false;
+                        }
 
-               // }while(continueMenu("animal","sell"));
 
+                    }while(test);
+
+                }
                 break;
             default:
                 shopMenu();
@@ -297,36 +317,27 @@ public class Menu {
 
 
     }
-    public void animalSellMenu() {
-        ArrayList<Animal>animalList = this.currentGame.getCurrentPlayer().getPlayerAnimal();
-        boolean sellCheck = false;
-        do {
-            if (animalList.size() == 0) {
-
-                if(!sellCheck){
-                    System.out.println("You don´t have any animal to sell");
-                    shopMenu();
-                } else {
-                    break;
-                }
-            }
-
-            System.out.println("Choose with animal to sell");
+    public boolean animalSellMenu() {
+        if(this.currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0){
+            System.out.println("No animal to sell!");
+            return false;
+        }else{
+            ArrayList<Animal>animalList = this.currentGame.getCurrentPlayer().getPlayerAnimal();
+            System.out.println("Choose which animal to sell");
             playerAnimalsAsMenu();
             int menuChoice = ProgramUtils.tryCatch(1,animalList.size());
             this.currentGame.getStore().animalToSell(animalList.get(menuChoice-1));
+            return true;
+        }
 
-            if(!(animalList.size() == 0)){
-                System.out.println("Do you want to sell another animal? y/n");
-                if(ProgramUtils.userInput().equalsIgnoreCase("y")){
-                    sellCheck = true;
-                } else {
-                    sellCheck = false;
-                }
-            }
-            } while (sellCheck);
     }
 
+    /**
+     * Checks so the player at least have one animal and one item of food to feed the animal with.
+     * Then asks the player to choose which of their animal to feed, what food and how many kilos
+     * of that food to feed the animal with. Calls the feedAnimal method...
+     *
+     */
     public void feedAnimalsMenu() {
         if (currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0) {
             System.out.println("You must have one animal to feed!");
