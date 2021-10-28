@@ -104,19 +104,20 @@ public class ProgramUtils {
 
     public static int tryCatch(int minMenuValue, int maxvMenuValue){
         int newInput = -1;
-        try{
-            do{
-                newInput = Integer.parseInt(userInput());
-                if(maxvMenuValue < newInput || newInput < minMenuValue){
-                    System.out.println("Invalid input");
-                }
-            }while(maxvMenuValue < newInput || newInput < minMenuValue);
+        do{
+            try{
 
-        }catch(Exception e){
-            //e.printStackTrace();
-            System.out.println("Write a number you goof!");
-        }
+                    newInput = Integer.parseInt(userInput());
+                    if(maxvMenuValue < newInput || newInput < minMenuValue){
+                        System.out.println("Invalid input");
+                    }
 
+
+            }catch(Exception e){
+                //e.printStackTrace();
+                System.out.println("Write a number you goof!");
+            }
+        }while(maxvMenuValue < newInput || newInput < minMenuValue);
         return newInput;
     }
 

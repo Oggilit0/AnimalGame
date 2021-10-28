@@ -52,14 +52,17 @@ public class Factory {
             if (animal1.getGender() != animal2.getGender()) {
                 int startMating = (int) (Math.random() * 2); //random if mating is successful
                 if (startMating == 0) {
-                    for (int i = 0; i < animal1.howManyBabies(animal1.getClass().toString().substring(25)); i++) {
-                        int getGender = (int) (Math.random() * 2); //random gender of baby
-                        if (getGender == 0) {
-                            currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().toString().substring(25), Gender.FEMALE));
 
+                    for (int i = 0; i < animal1.howManyBabies(animal1.getClass().getSimpleName()); i++) {
+                        int getGender = (int) (Math.random() * 2); //random gender of baby
+                        Gender gender;
+                        if (getGender == 0) {
+                            gender = Gender.FEMALE;
                         } else {
-                            currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().toString().substring(25), Gender.MALE));
+                            gender = Gender.MALE;
                         }
+                        currentPlayer.setPlayerAnimal(createAnimal(animal1.getClass().getSimpleName(), gender));
+
                     }return true;
 
                 } else {

@@ -46,15 +46,13 @@ public class Game {
      */
     public void choosePlayers(){
         System.out.print("Write in how many players (Min 2 Max 4): ");
-
-        do {
-            this.playerAmount = ProgramUtils.tryCatch(1,4);
-        }while(this.playerAmount < 1);
+        this.playerAmount = ProgramUtils.tryCatch(1,4);
 
         for (int i = 0; i < playerAmount; i++) {
             System.out.print("Write player " + (i + 1) + ": ");
             createPlayer(ProgramUtils.userInput());
         }
+
         this.currentPlayer = this.allPlayers.get(0);
     }
 
@@ -64,10 +62,7 @@ public class Game {
      */
     public void chooseRounds(){
         System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
-
-        do {
-            this.maxRound = ProgramUtils.tryCatch(5,30);
-        }while(this.maxRound < 1);
+        this.maxRound = ProgramUtils.tryCatch(5,30);
         System.out.println("\n".repeat(30));
     }
 
@@ -187,6 +182,7 @@ public class Game {
         for (Animal animal : currentPlayer.getPlayerAnimal()) {
             if (!(animal.getCurrentAge() == animal.getMaxAge())) {
                 animal.setCurrentAge(1);
+                System.out.println("\nEvery animal you have aged with 1 year!");
             } else {
                 animal.death();
             }
