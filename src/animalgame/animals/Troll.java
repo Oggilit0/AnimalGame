@@ -3,7 +3,6 @@ package animalgame.animals;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
 import animalgame.food.Sausage;
-import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
 
 public class Troll extends Animal {

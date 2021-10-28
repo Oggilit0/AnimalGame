@@ -4,7 +4,6 @@ import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
 import animalgame.food.Sausage;
 import animalgame.food.Taco;
-import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
 public class Giraffe extends Animal {
