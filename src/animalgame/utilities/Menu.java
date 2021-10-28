@@ -275,12 +275,12 @@ public class Menu {
 
     public void loadGameMenu(){
 
-        String[] menuArray = {"","",""};
-        for(int i = 0; i < ProgramUtils.readAllLines().size() ; i++){
-            menuArray[i] = ProgramUtils.readAllLines().get(i);
+        if(ProgramUtils.readAllLines().size() == 0){
+            System.out.println("No files saved, starting game...");
+            currentGame.startGame();
         }
-
-        switch(ProgramUtils.menuBuilder("\nLoad game",menuArray[0],menuArray[1],menuArray[2], "Back")){
+        for(String files : ProgramUtils.readAllLines()){
+        switch(ProgramUtils.menuBuilder("\nLoad game",files, "Back")){
             case 1:
                 this.currentGame.loadGame(ProgramUtils.readAllLines().get(0));
             case 2:
@@ -293,6 +293,8 @@ public class Menu {
             default:
                 loadGameMenu();
         }
+        }
+
 
     }
     public void animalSellMenu() {
