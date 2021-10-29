@@ -14,15 +14,16 @@ public class Menu {
     private Game currentGame;
 
     /**
-     *
-     * @param currentGame
+     * Initialize currentgame for easy access from menus
+     * @param currentGame input the current game
      */
     public Menu(Game currentGame){
         this.currentGame = currentGame;
     }
 
     /**
-     *
+     * First menu of the game.
+     * Display and decide if player is starting a new game or loading from saved file
      */
     public void newGameMenu(){
         switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
@@ -38,7 +39,7 @@ public class Menu {
     }
 
     /**
-     *
+     * Menu that display saved files and load them if selected, or starts new game if there's none
      */
     public void loadGameMenu(){
         if(ProgramUtils.readAllLines().size() == 0){
@@ -63,7 +64,7 @@ public class Menu {
     }
 
     /**
-     *
+     * Decision menu for each player each round, gives the option to advance through other menus
      */
     public void roundMenu(){
         switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game")){
@@ -85,9 +86,10 @@ public class Menu {
     }
 
     /**
-     *
-     * @param type
-     * @param buySell
+     * Display options for player to choose from.
+     * return true or false depending on choice.
+     * @param type String that will display item in output
+     * @param buySell String that will change the wording of the output
      * @return
      */
     private boolean continueMenu(String type, String buySell){
@@ -102,7 +104,8 @@ public class Menu {
     }
 
     /**
-     *
+     * Shop decision menu for each player each round, gives the option to advance through other menus.
+     * Looping each time player choose to.
      */
     public void shopMenu(){
         switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
@@ -139,8 +142,8 @@ public class Menu {
     }
 
     /**
-     *
-     * @return
+     * Give the player choice to either buy an animal or continue without buying
+     * @return boolean for decision-making to break loop
      */
     public boolean animalChoice(){
         String animal ="";
@@ -282,7 +285,8 @@ public class Menu {
     }
 
     /**
-     *
+     * Menu that display all players animals to be bred,
+     * Checks players animal count and if the same animal is chosen.
      */
     public void mateAnimalsMenu(){
         ArrayList<Animal> playerAnimalList = currentGame.getCurrentPlayer().getPlayerAnimal();
@@ -312,8 +316,8 @@ public class Menu {
     }
 
     /**
-     *
-     * @return
+     * Menu that gives the player choice of gender and return it as a Gender
+     * @return gender as Gender
      */
     public Gender genderSelectionMenu(){
         switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
@@ -328,7 +332,7 @@ public class Menu {
     }
 
     /**
-     *
+     * Menu for displaying and give player option to store game to file
      */
     public void saveGameMenu(){
         String[] menuArray = {"","",""};
@@ -354,6 +358,29 @@ public class Menu {
     }
 
     /**
+     * Help method to the saveGameMenu.
+     * Checks if player is sure about overwriting already saved games.
+     * Gives the option to name the game file.
+     * @param menuOptionName input String for condition check
+     * @param menuIndex The index of the menu option
+     */
+    private void saveGameMenuHelper(String menuOptionName, int menuIndex){
+        if(!menuOptionName.equals("")){
+            System.out.println("Are you sure you want to delete your saved game? y/n");
+            String yesOrNo = ProgramUtils.userInput();
+            if(yesOrNo.equalsIgnoreCase("y") ){
+                ProgramUtils.DeleteFile(ProgramUtils.readAllLines().get(menuIndex-1));
+            }else{
+                saveGameMenu();
+            }
+        }
+        System.out.println("Write the name of your save file");
+        String fileName = ProgramUtils.userInput();
+        this.currentGame.saveGame(fileName);
+        ProgramUtils.writeFromSaveFile(fileName,menuIndex);
+    }
+
+    /**
      * Prints out a summary of the current players animals to the console.
      */
     public void playerAnimalsAsMenu(){
@@ -373,27 +400,6 @@ public class Menu {
             System.out.println(i + ".\t Amount of weight: " + food.getWeight() + "KG  :  Type of food: " + food.getName());
             i++;
         }
-    }
-
-    /**
-     *
-     * @param menuOptionName
-     * @param menuIndex
-     */
-    private void saveGameMenuHelper(String menuOptionName, int menuIndex){
-        if(!menuOptionName.equals("")){
-            System.out.println("Are you sure you want to delete your saved game? y/n");
-            String yesOrNo = ProgramUtils.userInput();
-            if(yesOrNo.equalsIgnoreCase("y") ){
-                ProgramUtils.DeleteFile(ProgramUtils.readAllLines().get(menuIndex-1));
-            }else{
-                saveGameMenu();
-            }
-        }
-        System.out.println("Write the name of your save file");
-        String fileName = ProgramUtils.userInput();
-        this.currentGame.saveGame(fileName);
-        ProgramUtils.writeFromSaveFile(fileName,menuIndex);
     }
 
 }
