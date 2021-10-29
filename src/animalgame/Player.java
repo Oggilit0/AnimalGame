@@ -131,8 +131,8 @@ public class Player implements Serializable {
     }
 
     /**
-     *
-     * @param deceasedAnimalList
+     * Replaces the deceased animal list
+     * @param deceasedAnimalList replace list with parameter list
      */
     public void setDeceasedAnimalList(ArrayList<Animal> deceasedAnimalList){
         this.deceasedAnimals = deceasedAnimalList;
@@ -147,8 +147,8 @@ public class Player implements Serializable {
     }
 
     /**
-     *
-     * @param animalList
+     *  Replaces the playerAnimal list
+     * @param animalList replace the pLayerAnimal list with parameter list
      */
     public void setPlayerAnimal(ArrayList<Animal> animalList) {
         this.playerAnimal = animalList;
