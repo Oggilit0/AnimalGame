@@ -1,6 +1,5 @@
 package animalgame.animals.abstractmodels;
 
-import animalgame.Player;
 import animalgame.enums.Gender;
 import animalgame.food.abstractmodels.Food;
 import java.io.Serializable;
@@ -18,12 +17,18 @@ public abstract class Animal implements Serializable {
     private final Gender gender;
     private boolean aliveStatus;
 
+    /**
+     * Constructor for the Animal class
+     * Initialize health of this animal to 100 and alivestatus to true when created.
+     * Initialize name and gender decided by parameters.
+     * @param name Name of this animal
+     * @param gender Gender of this animal
+     */
     public Animal(String name, Gender gender){
         this.name = name;
         this.health = 100;
         this.gender = gender;
         this.aliveStatus = true;
-        //this.owner = owner;
     }
 
     /**
@@ -33,7 +38,6 @@ public abstract class Animal implements Serializable {
      * @return if the animal eats the food or not
      */
     public abstract boolean eat(Food foodToEat);
-
 
     /**
      * Kills the animal and removes it from owners list of animals
@@ -83,50 +87,91 @@ public abstract class Animal implements Serializable {
         }return 0;
     }
 
-    public String getName(){
-        return this.name;
-    }
-
-    public Gender getGender(){
-        return this.gender;
-    }
-
-    public int getMaxAge(){
-        return this.maxAge;
-    }
-
-    public void setMaxAge(int maxAge){
-        this.maxAge = maxAge;
-    }
-
-    public void setCurrentAge(int currentAge) {
-        this.currentAge += currentAge;
-    }
-
-    public void setHealth(int health){
-        this.health = health;
-    }
-
-    public int getCurrentAge(){
-        return this. currentAge;}
-
-    public int getHealth(){
-        return this.health;
-    }
-
-    public int getAnimalPrice(){
-        return this.animalPrice;
-    }
-
-    public void setAnimalPrice(int animalPrice) {
-        this.animalPrice = animalPrice;
-    }
-
+    /**
+     * Calculates the sell price for this animal
+     * @return sellprice as an int
+     */
     public int animalSellPrice(){
         return animalPrice * ((health-currentAge))/100;
     }
 
+    /**
+     * Changes the sell price of this animal
+     * @param animalPrice int as new value
+     */
+    public void setAnimalPrice(int animalPrice) {
+        this.animalPrice = animalPrice;
+    }
+
+    /**
+     * Return if animal is dead or not
+     * @return alive status as a boolean
+     */
     public boolean getAliveStatus() {
         return aliveStatus;
+    }
+
+    /**
+     * Return the current age of this animal
+     * @return current age as int
+     */
+    public int getCurrentAge(){
+        return this. currentAge;
+    }
+
+    /**
+     * Changes the current age of this animal
+     * @param currentAge int as new value
+     */
+    public void setCurrentAge(int currentAge) {
+        this.currentAge += currentAge;
+    }
+
+    /**
+     * Return the gender of this animal
+     * @return gender as Gender
+     */
+    public Gender getGender(){
+        return this.gender;
+    }
+
+    /**
+     * Return the health of this animal
+     * @return health as int
+     */
+    public int getHealth(){
+        return this.health;
+    }
+
+    /**
+     * Changes the health of this animal
+     * @param health int as new value
+     */
+    public void setHealth(int health){
+        this.health = health;
+    }
+
+    /**
+     * Return the maximum age of this animal
+     * @return maximum age as int
+     */
+    public int getMaxAge(){
+        return this.maxAge;
+    }
+
+    /**
+     * Changes the maximum age of this animal
+     * @param maxAge int as new value
+     */
+    public void setMaxAge(int maxAge){
+        this.maxAge = maxAge;
+    }
+
+    /**
+     * Return the name of this animal
+     * @return name as String
+     */
+    public String getName(){
+        return this.name;
     }
 }

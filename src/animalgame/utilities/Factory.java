@@ -4,8 +4,6 @@ import animalgame.Player;
 import animalgame.animals.*;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
-import java.awt.datatransfer.ClipboardOwner;
-import java.util.ArrayList;
 
 /**
  * This is the factory class where we create and mate our animals.
@@ -42,7 +40,6 @@ public class Factory {
         }
         return animal;
     }
-
 
     /**
      * Takes two animals and checks if they are the same class and different gender.
