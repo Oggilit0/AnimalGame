@@ -14,8 +14,8 @@ public class Mexican_Alligator_Lizard extends Animal {
      * Constructor for the Mexican_Alligator_Lizard class.
      * Initialize this animal starting price and maximum age.
      * Initialize name and gender decided by parameters.
-     * @param name Name of the animal
-     * @param gender Gender of the animal
+     * @param name Name of this animal
+     * @param gender Gender of this animal
      */
     public Mexican_Alligator_Lizard(String name, Gender gender) {
         super(name, gender);

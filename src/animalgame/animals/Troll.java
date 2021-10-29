@@ -13,8 +13,8 @@ public class Troll extends Animal {
      * Constructor for the Troll class.
      * Initialize this animal starting price and maximum age.
      * Initialize name and gender decided by parameters.
-     * @param name Name of the animal
-     * @param gender Gender of the animal
+     * @param name Name of this animal
+     * @param gender Gender of this animal
      */
     public Troll(String name, Gender gender) {
         super(name, gender);

@@ -14,8 +14,8 @@ public class Giraffe extends Animal {
      * Constructor for the Giraffe class.
      * Initialize this animal starting price and maximum age.
      * Initialize name and gender decided by parameters.
-     * @param name Name of the animal
-     * @param gender Gender of the animal
+     * @param name Name of this animal
+     * @param gender Gender of this animal
      */
     public Giraffe(String name, Gender gender) {
         super(name, gender);
