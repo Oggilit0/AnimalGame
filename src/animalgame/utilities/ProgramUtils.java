@@ -48,13 +48,14 @@ public class ProgramUtils {
 
     public static int tryCatch(){
         int newInput = -1;
+        do {
             try{
                 newInput = Integer.parseInt(userInput());
 
             }catch(Exception e){
-                //e.printStackTrace();
-                System.out.println("Write a number you goof!");
+                System.out.println("Invalid input");
             }
+        }while(newInput == -1);
         return newInput;
     }
 
