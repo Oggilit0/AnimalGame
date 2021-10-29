@@ -86,9 +86,6 @@ public class Menu {
         switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
             case 1:
                 do{
-                    if(this.currentGame.getCurrentPlayer().getMoney() <= 0){
-                        break;
-                    }
                     if(animalChoice()){
                         break;
                     }
@@ -96,9 +93,6 @@ public class Menu {
                 break;
             case 2:
                 do{
-                    if(this.currentGame.getCurrentPlayer().getMoney() <= 0){
-                        break;
-                    }
                     if(shopFoodMenu()){
                         break;
                     }
