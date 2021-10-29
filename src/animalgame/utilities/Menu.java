@@ -89,7 +89,9 @@ public class Menu {
                     if(this.currentGame.getCurrentPlayer().getMoney() <= 0){
                         break;
                     }
-                    animalChoice();
+                    if(animalChoice()){
+                        break;
+                    }
                 }while(continueMenu("animal","buy"));
                 break;
             case 2:
@@ -97,23 +99,22 @@ public class Menu {
                     if(this.currentGame.getCurrentPlayer().getMoney() <= 0){
                         break;
                     }
-                    shopFoodMenu();
+                    if(shopFoodMenu()){
+                        break;
+                    }
                 }while(continueMenu("food","buy"));
                 break;
             case 3:
-                boolean test;
+
                 if(this.currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0){
                     System.out.println("No animal to sell!");
                     shopMenu();
                 }else{
                     do{
-                        boolean test2 = animalSellMenu();
-                        if(test2){
-                            test = continueMenu("animal", "sell");
-                        }else{
-                            test = false;
+                        if(animalSellMenu()){
+                            break;
                         }
-                    }while(test);
+                    }while(continueMenu("animal", "sell"));
                 }
                 break;
             default:
@@ -121,11 +122,11 @@ public class Menu {
         }
     }
 
-    public void animalChoice(){
+    public boolean animalChoice(){
         String animal ="";
         Gender gender = null;
         int price = 0;
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Mexican Alligator Lizard"+":\t4000 Gold")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Mexican Alligator Lizard"+":\t4000 Gold", "Continue")){
             case 1:
                 animal = "Troll";
                 price = 800;
@@ -151,12 +152,15 @@ public class Menu {
                 price = 4000;
                 gender = genderSelectionMenu();
                 break;
+            case 6:
+                return true;
             default:
                 animalChoice();
         }
         if(!currentGame.getStore().animalToBuy(animal,gender,price)){
             animalChoice();
         }
+        return false;
     }
 
     /**
@@ -164,10 +168,10 @@ public class Menu {
      * chooses what food to buy and the food will be added in to the player food list and remove
      * money from the player.
      */
-    public void shopFoodMenu(){
+    public boolean shopFoodMenu(){
         String food ="";
         int price = 0;
-        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage" + ": 20 Gold/kg", "Waffles" + ": 50 Gold/kg","Taco" + ":    100 Gold/kg")){
+        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage" + ": 20 Gold/kg", "Waffles" + ": 50 Gold/kg","Taco" + ":    100 Gold/kg", "Continue")){
             case 1:
                 food = "Sausage";
                 price = 20;
@@ -180,10 +184,13 @@ public class Menu {
                 food = "Taco";
                 price = 100;
                 break;
+            case 4:
+                return true;
             default:
                 shopFoodMenu();
         }
         this.currentGame.getStore().foodToBuy(food,price);
+        return false;
     }
 
     /**
@@ -194,14 +201,14 @@ public class Menu {
     public boolean animalSellMenu() {
         if(this.currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0){
             System.out.println("No animal to sell!");
-            return false;
+            return true;
         }else{
             ArrayList<Animal>animalList = this.currentGame.getCurrentPlayer().getPlayerAnimal();
             System.out.println("Choose which animal to sell");
             playerAnimalsAsMenu();
             int menuChoice = ProgramUtils.tryCatch(1,animalList.size());
             this.currentGame.getStore().animalToSell(animalList.get(menuChoice-1));
-            return true;
+            return false;
         }
     }
 
@@ -263,7 +270,7 @@ public class Menu {
             do {
                 ArrayList<Animal> newAnimalList = new ArrayList<>();
                 System.out.print("First animal to breed: ");
-                menuChoice = ProgramUtils.tryCatch();
+                menuChoice = ProgramUtils.tryCatch(1,currentGame.getCurrentPlayer().getPlayerAnimal().size());
                 newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
                 System.out.print("Write the second animal to breed: ");
                 otherChoice = ProgramUtils.tryCatch();
