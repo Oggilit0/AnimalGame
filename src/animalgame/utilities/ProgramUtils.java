@@ -51,8 +51,9 @@ public class ProgramUtils {
     }
 
     /**
-     *
-     * @return
+     * check if user input is correctly a number, returns number.
+     * If user inputs a wrong number, or other symbol, the function loops
+     * @return user input as an int
      */
     public static int tryCatch(){
         int newInput = -1;
@@ -68,10 +69,11 @@ public class ProgramUtils {
     }
 
     /**
-     *
-     * @param minMenuValue
-     * @param maxvMenuValue
-     * @return
+     * Overloaded method to input min and max value of a menu to create
+     * conditions for the loop
+     * @param minMenuValue the menus lowest int value
+     * @param maxvMenuValue the menus highest int value
+     * @return user input as an int
      */
     public static int tryCatch(int minMenuValue, int maxvMenuValue){
         int newInput = -1;
@@ -90,8 +92,8 @@ public class ProgramUtils {
     }
 
     /**
-     *
-     * @return
+     * Reads all the lines in storedSaveName.txt and put it in a list
+     * @return List of lines read from file storedSaveName.txt
      */
     public static List<String> readAllLines() {
         List<String> lines = null;
@@ -105,10 +107,11 @@ public class ProgramUtils {
     }
 
     /**
-     *
-     * @param saveName
-     * @param index
-     * @return
+     * Reads the line from file storedSaveName.txt and store it in a list
+     * replace the lines on the current row with the new lines taken from parameter
+     * @param saveName name of the save file
+     * @param index index of which it's stored
+     * @return the new list
      */
     public static ArrayList<String> saveFileHandler(String saveName, int index){
         ArrayList<String> oldSave = (ArrayList<String>) readAllLines();
@@ -186,8 +189,8 @@ public class ProgramUtils {
      * @param object input object to save
      */
     public static void writeToFile(Object object,String fileName){
-        ObjectOutputStream o = null;
-        FileOutputStream f = null;
+        ObjectOutputStream o;
+        FileOutputStream f;
 
         try{
             f = new FileOutputStream("src/animalgame/programfiles/"+fileName+".txt",false);
@@ -201,11 +204,11 @@ public class ProgramUtils {
     }
 
     /**
-     *
-     * @param saveName
-     * @param oldSaveIndex
+     * Write saved file names to store in a .txt file for display purpose
+     * @param saveName Save file name as string
+     * @param oldSaveIndex index of where the old save was stored as int
      */
-    public static void writeFromSaveFile(String saveName, int oldSaveIndex){
+    public static void writeToSaveFile(String saveName, int oldSaveIndex){
 
         ArrayList<String> oldSave = saveFileHandler(saveName, oldSaveIndex);
 
@@ -218,8 +221,8 @@ public class ProgramUtils {
     }
 
     /**
-     *
-     * @param fileName
+     * Delete file corresponding to the incoming parameter
+     * @param fileName name of file which will be deleted
      */
     public static void DeleteFile(String fileName) {
             File myObj = new File("src/animalgame/programfiles/"+fileName+".txt");
