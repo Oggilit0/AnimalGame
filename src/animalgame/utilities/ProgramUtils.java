@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class ProgramUtils {
     public static final String RESET = "\u001B[0m";
     public static final String GREEN = "\u001B[32m";
@@ -46,6 +49,10 @@ public class ProgramUtils {
         return userInput;
     }
 
+    /**
+     *
+     * @return
+     */
     public static int tryCatch(){
         int newInput = -1;
         do {
@@ -59,6 +66,12 @@ public class ProgramUtils {
         return newInput;
     }
 
+    /**
+     *
+     * @param minMenuValue
+     * @param maxvMenuValue
+     * @return
+     */
     public static int tryCatch(int minMenuValue, int maxvMenuValue){
         int newInput = -1;
         do{
@@ -75,6 +88,10 @@ public class ProgramUtils {
         return newInput;
     }
 
+    /**
+     *
+     * @return
+     */
     public static List<String> readAllLines() {
         List<String> lines = null;
         try {
@@ -86,6 +103,12 @@ public class ProgramUtils {
         return lines;
     }
 
+    /**
+     *
+     * @param saveName
+     * @param index
+     * @return
+     */
     public static ArrayList<String> saveFileHandler(String saveName, int index){
         ArrayList<String> oldSave = (ArrayList<String>) readAllLines();
         ArrayList<String> temp = new ArrayList<>();
@@ -176,6 +199,11 @@ public class ProgramUtils {
         }
     }
 
+    /**
+     *
+     * @param saveName
+     * @param oldSaveIndex
+     */
     public static void writeFromSaveFile(String saveName, int oldSaveIndex){
 
         ArrayList<String> oldSave = saveFileHandler(saveName, oldSaveIndex);
@@ -188,6 +216,10 @@ public class ProgramUtils {
         }
     }
 
+    /**
+     *
+     * @param fileName
+     */
     public static void DeleteFile(String fileName) {
             File myObj = new File("src/animalgame/programfiles/"+fileName+".txt");
             if (myObj.delete()) {
