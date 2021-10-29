@@ -24,8 +24,8 @@ public class Factory {
             case "Ferret":
                 animal = new Ferret(ProgramUtils.userInput(), gender);
                 break;
-            case "Mexican_Alligator_Lizard":
-                animal = new Mexican_Alligator_Lizard(ProgramUtils.userInput(), gender);
+            case "Dragon":
+                animal = new Dragon(ProgramUtils.userInput(), gender);
                 break;
             case "Giraffe":
                 animal = new Giraffe(ProgramUtils.userInput(),gender);
