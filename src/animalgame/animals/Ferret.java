@@ -6,7 +6,7 @@ import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
 /**
- * Ferret class is a subclass and inherit from Animal.
+ * Ferret class is a subclass that inherit from Animal.
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Ferret extends Animal {

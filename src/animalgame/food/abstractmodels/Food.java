@@ -14,7 +14,7 @@ public abstract class Food implements Serializable {
      * Constructor for the Food class
      * Initialize name and weight decided by parameters.
      * @param name Name of this food
-     * @param weight Gender of this food
+     * @param weight Weight of this food
      */
     public Food(String name, int weight) {
         this.name = name;

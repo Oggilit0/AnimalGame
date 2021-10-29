@@ -7,7 +7,7 @@ import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
 
 /**
- * Giraffe class is a subclass and inherit from Animal.
+ * Giraffe class is a subclass that inherit from Animal.
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Giraffe extends Animal {

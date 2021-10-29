@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Player class....
+ * Player class ---  ADD TEXT
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Player implements Serializable {
@@ -16,7 +16,12 @@ public class Player implements Serializable {
     private ArrayList<Animal> playerAnimal;
     private ArrayList<Food> foods;
     private ArrayList<Animal> deceasedAnimals;
-  
+
+    /**
+     * Constructor for the Player Class
+     * Initialize ---- ADD TEXT
+     * @param name Name of this player
+     */
     public Player(String name) {
         this.name = name;
         this.money = 5000;
@@ -53,50 +58,98 @@ public class Player implements Serializable {
         }
     }
 
+    /**
+     * Returns the food in this player food list
+     * @return the list of food
+     */
     public ArrayList<Food> getFoods(){
         return this.foods;
     }
 
+    /**
+     * Add food to this player food list
+     * @param food the food object to add
+     */
     public void setFoods(Food food){
         this.foods.add(food);
     }
 
+    /**
+     * Return the name of this player
+     * @return name as string
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Changes the current money of this player
+     * @param money int to add to value
+     */
     public void addMoney(int money){
         this.money += money;
     }
 
+    /**
+     * Return the money of this player
+     * @return money as int
+     */
     public int getMoney() {
         return money;
     }
 
+    /**
+     * Changes the current money of this player
+     * @param money int to remove from value
+     */
     public void removeMoney(int money){
         this.money -= money;
     }
 
+    /**
+     * Add animal to this player animal list
+     * @param animal the animal object to add
+     */
     public void addPlayerAnimal(Animal animal) {
         this.playerAnimal.add(animal);
     }
 
+    /**
+     * Returns the animals in this player dead animals list
+     * @return a list of dead animals
+     */
     public ArrayList<Animal> getDeceasedAnimals() {
         return deceasedAnimals;
     }
 
+    /**
+     * Add dead animal to this player dead animal list
+     * @param deceasedAnimal animal object to add
+     */
     public void setDeceasedAnimals(Animal deceasedAnimal) {
         this.deceasedAnimals.add(deceasedAnimal);
     }
 
+    /**
+     *
+     * @param deceasedAnimalList
+     */
     public void setDeceasedAnimalList(ArrayList<Animal> deceasedAnimalList){
         this.deceasedAnimals = deceasedAnimalList;
     }
 
+    /**
+     * Return all the animals in this player animal list
+     * @return list of animals
+     */
     public ArrayList<Animal> getPlayerAnimal() {
         return this.playerAnimal;
     }
 
+    /**
+     *
+     * @param animalList
+     */
     public void setPlayerAnimal(ArrayList<Animal> animalList) {
         this.playerAnimal = animalList;
     }

@@ -7,13 +7,14 @@ import animalgame.food.abstractmodels.Food;
 import java.util.ArrayList;
 
 /**
- * Menu Class
+ * This is the Menu class where we store all of our game menus.
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Menu {
     private Game currentGame;
 
     /**
+     * Constructor for the Menu class
      * Initialize currentgame for easy access from menus
      * @param currentGame input the current game
      */
@@ -67,7 +68,7 @@ public class Menu {
      * Decision menu for each player each round, gives the option to advance through other menus
      */
     public void roundMenu(){
-        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game")){
+        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game", "Exit game")){
             case 1:
                 this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
                 shopMenu();
@@ -80,10 +81,38 @@ public class Menu {
                 break;
             case 4:
                 saveGameMenu();
+            case 5:
+                exitMenu();
+                break;
             default:
                 roundMenu();
         }
     }
+
+    /**
+     * Menu to display and execute alternative to shut down the game
+     */
+    private void exitMenu(){
+        switch(ProgramUtils.menuBuilder("\nExit game?","Exit game","Back")){
+            case 1:
+                exitGame();
+                break;
+            case 2:
+                roundMenu();
+                break;
+            default:
+                exitMenu();
+        }
+    }
+
+    /**
+     * Turn off the program on method call
+     */
+    private void exitGame(){
+        System.out.println("Shutting down...");
+        System.exit(1);
+    }
+
 
     /**
      * Display options for player to choose from.
@@ -99,6 +128,7 @@ public class Menu {
             case 2:
                 return false;
             default:
+                continueMenu(type,buySell);
         }
         return true;
     }
@@ -377,7 +407,7 @@ public class Menu {
         System.out.println("Write the name of your save file");
         String fileName = ProgramUtils.userInput();
         this.currentGame.saveGame(fileName);
-        ProgramUtils.writeFromSaveFile(fileName,menuIndex);
+        ProgramUtils.writeToSaveFile(fileName,menuIndex);
     }
 
     /**
