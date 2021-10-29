@@ -13,10 +13,17 @@ import java.util.ArrayList;
 public class Menu {
     private Game currentGame;
 
+    /**
+     *
+     * @param currentGame
+     */
     public Menu(Game currentGame){
         this.currentGame = currentGame;
     }
 
+    /**
+     *
+     */
     public void newGameMenu(){
         switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
             case 1:
@@ -30,6 +37,9 @@ public class Menu {
         }
     }
 
+    /**
+     *
+     */
     public void loadGameMenu(){
         if(ProgramUtils.readAllLines().size() == 0){
             System.out.println("No files saved, starting game...");
@@ -52,6 +62,9 @@ public class Menu {
         }
     }
 
+    /**
+     *
+     */
     public void roundMenu(){
         switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game")){
             case 1:
@@ -71,6 +84,12 @@ public class Menu {
         }
     }
 
+    /**
+     *
+     * @param type
+     * @param buySell
+     * @return
+     */
     private boolean continueMenu(String type, String buySell){
         switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " " + type +" ?","Yes","No")){
             case 1:
@@ -82,6 +101,9 @@ public class Menu {
         return true;
     }
 
+    /**
+     *
+     */
     public void shopMenu(){
         switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
             case 1:
@@ -116,6 +138,10 @@ public class Menu {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean animalChoice(){
         String animal ="";
         Gender gender = null;
@@ -255,6 +281,9 @@ public class Menu {
         }
     }
 
+    /**
+     *
+     */
     public void mateAnimalsMenu(){
         ArrayList<Animal> playerAnimalList = currentGame.getCurrentPlayer().getPlayerAnimal();
         if (playerAnimalList.size() < 2) {
@@ -282,6 +311,10 @@ public class Menu {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Gender genderSelectionMenu(){
         switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
             case 1:
@@ -294,6 +327,9 @@ public class Menu {
         return null;
     }
 
+    /**
+     *
+     */
     public void saveGameMenu(){
         String[] menuArray = {"","",""};
         for(int i = 0; i < ProgramUtils.readAllLines().size() ; i++){
@@ -339,6 +375,11 @@ public class Menu {
         }
     }
 
+    /**
+     *
+     * @param menuOptionName
+     * @param menuIndex
+     */
     private void saveGameMenuHelper(String menuOptionName, int menuIndex){
         if(!menuOptionName.equals("")){
             System.out.println("Are you sure you want to delete your saved game? y/n");
