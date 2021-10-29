@@ -1,14 +1,9 @@
 package animalgame.utilities;
 
 import animalgame.Game;
-import animalgame.animals.Ferret;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
-import animalgame.food.Sausage;
-import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
-
-import javax.swing.text.TabableView;
 import java.util.ArrayList;
 
 /**
@@ -18,121 +13,18 @@ import java.util.ArrayList;
 public class Menu {
     private Game currentGame;
 
+    /**
+     * Initialize currentgame for easy access from menus
+     * @param currentGame input the current game
+     */
     public Menu(Game currentGame){
         this.currentGame = currentGame;
     }
 
     /**
-     * Prints out a summary of the current players animals to the console.
+     * First menu of the game.
+     * Display and decide if player is starting a new game or loading from saved file
      */
-    public void playerAnimalsAsMenu(){
-        int i = 1;
-        for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
-            System.out.println(i + ".\t" + animal.getClass().getName().substring(19) + " :     Name: " + ProgramUtils.PURPLE+animal.getName()+ProgramUtils.RESET+ "     Gender: "+animal.getGender().toString().toLowerCase());
-            i++;
-        }
-    }
-
-    /**
-     * Prints out the current players amount and type of food they have bought to the console.
-     */
-    public void playerFoodAsMenu(){
-        int i = 1;
-        for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
-            System.out.println(i + ".\t Amount of weight: " + food.getWeight() + "KG  :  Type of food: " + food.getName());
-            i++;
-        }
-    }
-
-    /**
-     * Takes an animal as a string and checks what kind of food that animal eats.
-     * @param animal as a String
-     * @return what animal eats as a String
-     */
-    public String whatAnimalEats(String animal){
-        switch (animal){
-            case "Ferret":
-                return "Taco and Sausage";
-            case "Giraffe":
-                return "Waffles";
-            case "Mexican_Alligator_Lizard":
-                return "Taco";
-            case "PolarBear":
-                return "Sausage";
-            case "Troll":
-                return "Waffles and Taco";
-            default:
-                return"";
-        }
-    }
-
-    public void roundMenu(){
-        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game","Debug")){
-            case 1:
-                this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
-                shopMenu();
-                break;
-            case 2:
-                feedAnimalsMenu();
-                break;
-            case 3:
-                mateAnimalsMenu();
-                break;
-            case 4:
-                saveGameMenu();
-            case 5:
-                for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()){
-                    System.out.println("Animal: " + animal.getClass().getName().substring(19) + " Name:"+animal.getName() + " " + animal.getHealth());
-                }
-                for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
-                    System.out.println("Food: " + food.getClass().getName().substring(16) + " Amount:"+food.getWeight() + " kg");
-                }
-                roundMenu();
-            default:
-                roundMenu();
-        }
-    }
-
-    public void saveGameMenuHelper(String menuOptionName, int menuIndex){
-        if(!menuOptionName.equals("")){
-            System.out.println("Are you sure you want to delete your saved game? y/n");
-            String yesOrNo = ProgramUtils.userInput();
-            if(yesOrNo.equalsIgnoreCase("y") ){
-                ProgramUtils.DeleteFile(ProgramUtils.readAllLines().get(menuIndex-1));
-            }else{
-                saveGameMenu();
-            }
-        }
-        System.out.println("Write the name of your save file");
-        String fileName = ProgramUtils.userInput();
-        this.currentGame.saveGame(fileName);
-        ProgramUtils.writeFromSaveFile(fileName,menuIndex);
-    }
-
-
-    public void saveGameMenu(){
-        String[] menuArray = {"","",""};
-        for(int i = 0; i < ProgramUtils.readAllLines().size() ; i++){
-            menuArray[i] = ProgramUtils.readAllLines().get(i);
-        }
-        switch (ProgramUtils.menuBuilder("\nSave game)",menuArray[0],menuArray[1],menuArray[2], "Back")){
-            case 1:
-                saveGameMenuHelper(menuArray[0],1);
-                break;
-            case 2:
-                saveGameMenuHelper(menuArray[1],2);
-                break;
-            case 3:
-                saveGameMenuHelper(menuArray[2],3);
-                break;
-            case 4:
-                roundMenu();
-                break;
-            default:
-                break;
-        }
-    }
-
     public void newGameMenu(){
         switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
             case 1:
@@ -146,7 +38,61 @@ public class Menu {
         }
     }
 
-    public boolean continueMenu(String type, String buySell){
+    /**
+     * Menu that display saved files and load them if selected, or starts new game if there's none
+     */
+    public void loadGameMenu(){
+        if(ProgramUtils.readAllLines().size() == 0){
+            System.out.println("No files saved, starting game...");
+            currentGame.startGame();
+        }
+        for(String files : ProgramUtils.readAllLines()){
+            switch(ProgramUtils.menuBuilder("\nLoad game",files, "Back")){
+                case 1:
+                    this.currentGame.loadGame(ProgramUtils.readAllLines().get(0));
+                case 2:
+                    this.currentGame.loadGame(ProgramUtils.readAllLines().get(1));
+                case 3:
+                    this.currentGame.loadGame(ProgramUtils.readAllLines().get(2));
+                case 4:
+                    newGameMenu();
+                    break;
+                default:
+                    loadGameMenu();
+            }
+        }
+    }
+
+    /**
+     * Decision menu for each player each round, gives the option to advance through other menus
+     */
+    public void roundMenu(){
+        switch(ProgramUtils.menuBuilder("\nChoose one","Shop","Feed animals","Mate animals", "Save game")){
+            case 1:
+                this.currentGame.getStore().setCustomer(this.currentGame.getCurrentPlayer());
+                shopMenu();
+                break;
+            case 2:
+                feedAnimalsMenu();
+                break;
+            case 3:
+                mateAnimalsMenu();
+                break;
+            case 4:
+                saveGameMenu();
+            default:
+                roundMenu();
+        }
+    }
+
+    /**
+     * Display options for player to choose from.
+     * return true or false depending on choice.
+     * @param type String that will display item in output
+     * @param buySell String that will change the wording of the output
+     * @return
+     */
+    private boolean continueMenu(String type, String buySell){
         switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " " + type +" ?","Yes","No")){
             case 1:
                 return true;
@@ -157,39 +103,37 @@ public class Menu {
         return true;
     }
 
-
+    /**
+     * Shop decision menu for each player each round, gives the option to advance through other menus.
+     * Looping each time player choose to.
+     */
     public void shopMenu(){
         switch(ProgramUtils.menuBuilder("\nShop","Buy animals","Buy Food","Sell animals")){
             case 1:
                 do{
-                    if(this.currentGame.getCurrentPlayer().getMoney() <= 0){
+                    if(animalChoice()){
                         break;
                     }
-                    animalChoice();
                 }while(continueMenu("animal","buy"));
                 break;
             case 2:
                 do{
-                    if(this.currentGame.getCurrentPlayer().getMoney() <= 0){
+                    if(shopFoodMenu()){
                         break;
                     }
-                    shopFoodMenu();
                 }while(continueMenu("food","buy"));
                 break;
             case 3:
-                boolean test;
+
                 if(this.currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0){
                     System.out.println("No animal to sell!");
                     shopMenu();
                 }else{
                     do{
-                        boolean test2 = animalSellMenu();
-                        if(test2){
-                            test = continueMenu("animal", "sell");
-                        }else{
-                            test = false;
+                        if(animalSellMenu()){
+                            break;
                         }
-                    }while(test);
+                    }while(continueMenu("animal", "sell"));
                 }
                 break;
             default:
@@ -198,48 +142,14 @@ public class Menu {
     }
 
     /**
-     * Prints out a menu to show the player what food they can buy and the price. The player
-     * chooses what food to buy and the food will be added in to the player food list and remove
-     * money from the player.
+     * Give the player choice to either buy an animal or continue without buying
+     * @return boolean for decision-making to break loop
      */
-    public void shopFoodMenu(){
-        String food ="";
-        int price = 0;
-        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage" + ": 20 Gold/kg", "Waffles" + ": 50 Gold/kg","Taco" + ":    100 Gold/kg")){
-            case 1:
-                food = "Sausage";
-                price = 20;
-                break;
-            case 2:
-                food = "Waffles";
-                price = 50;
-                break;
-            case 3:
-                food = "Taco";
-                price = 100;
-                break;
-            default:
-                shopFoodMenu();
-        }
-        this.currentGame.getStore().foodToBuy(food,price);
-    }
-
-    public Gender genderSelectionMenu(){
-        switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
-            case 1:
-                return Gender.MALE;
-            case 2:
-                return Gender.FEMALE;
-            default:
-                return null;
-        }
-    }
-
-    public void animalChoice(){
+    public boolean animalChoice(){
         String animal ="";
         Gender gender = null;
         int price = 0;
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":   800 Gold","Giraffe"+": 1000 Gold","Polar bear"+": 1500 Gold","Ferret"+":     2250 Gold","Mexican Alligator Lizard"+": 4000 Gold")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Mexican Alligator Lizard"+":\t4000 Gold", "Continue")){
             case 1:
                 animal = "Troll";
                 price = 800;
@@ -265,35 +175,45 @@ public class Menu {
                 price = 4000;
                 gender = genderSelectionMenu();
                 break;
+            case 6:
+                return true;
             default:
                 animalChoice();
         }
         if(!currentGame.getStore().animalToBuy(animal,gender,price)){
             animalChoice();
         }
+        return false;
     }
 
-    public void loadGameMenu(){
-        if(ProgramUtils.readAllLines().size() == 0){
-            System.out.println("No files saved, starting game...");
-            currentGame.startGame();
-        }
-        for(String files : ProgramUtils.readAllLines()){
-        switch(ProgramUtils.menuBuilder("\nLoad game",files, "Back")){
+    /**
+     * Prints out a menu to show the player what food they can buy and the price. The player
+     * chooses what food to buy and the food will be added in to the player food list and remove
+     * money from the player.
+     */
+    public boolean shopFoodMenu(){
+        String food ="";
+        int price = 0;
+        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage" + ": 20 Gold/kg", "Waffles" + ": 50 Gold/kg","Taco" + ":    100 Gold/kg", "Continue")){
             case 1:
-                this.currentGame.loadGame(ProgramUtils.readAllLines().get(0));
-            case 2:
-                this.currentGame.loadGame(ProgramUtils.readAllLines().get(1));
-            case 3:
-                this.currentGame.loadGame(ProgramUtils.readAllLines().get(2));
-            case 4:
-                newGameMenu();
+                food = "Sausage";
+                price = 20;
                 break;
+            case 2:
+                food = "Waffles";
+                price = 50;
+                break;
+            case 3:
+                food = "Taco";
+                price = 100;
+                break;
+            case 4:
+                return true;
             default:
-                loadGameMenu();
+                shopFoodMenu();
         }
-        }
-
+        this.currentGame.getStore().foodToBuy(food,price);
+        return false;
     }
 
     /**
@@ -304,16 +224,37 @@ public class Menu {
     public boolean animalSellMenu() {
         if(this.currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0){
             System.out.println("No animal to sell!");
-            return false;
+            return true;
         }else{
             ArrayList<Animal>animalList = this.currentGame.getCurrentPlayer().getPlayerAnimal();
             System.out.println("Choose which animal to sell");
             playerAnimalsAsMenu();
             int menuChoice = ProgramUtils.tryCatch(1,animalList.size());
             this.currentGame.getStore().animalToSell(animalList.get(menuChoice-1));
-            return true;
+            return false;
         }
+    }
 
+    /**
+     * Takes an animal as a string and checks what kind of food that animal eats.
+     * @param animal as a String
+     * @return what animal eats as a String
+     */
+    private String whatAnimalEats(String animal){
+        switch (animal){
+            case "Ferret":
+                return "Taco and Sausage";
+            case "Giraffe":
+                return "Waffles";
+            case "Mexican_Alligator_Lizard":
+                return "Taco";
+            case "PolarBear":
+                return "Sausage";
+            case "Troll":
+                return "Waffles and Taco";
+            default:
+                return"";
+        }
     }
 
     /**
@@ -322,27 +263,35 @@ public class Menu {
      * of that food to feed the animal with. Calls the feedAnimal method...
      */
     public void feedAnimalsMenu() {
-        if (currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0) {
+        ArrayList<Animal> playerAnimalList = currentGame.getCurrentPlayer().getPlayerAnimal();
+        ArrayList<Food> playerFoodList = currentGame.getCurrentPlayer().getFoods();
+
+        if (playerAnimalList.size() == 0) {
             System.out.println("You must have one animal to feed!");
-        } else if (currentGame.getCurrentPlayer().getFoods().size() == 0) {
+        } else if (playerFoodList.size() == 0) {
             System.out.println("You must buy food to feed your animal with!");
         } else {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
-            int animalChoice = ProgramUtils.tryCatch();
-            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().getSimpleName()));
+            int animalChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
+            System.out.println(playerAnimalList.get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(playerAnimalList.get(animalChoice-1).getClass().getSimpleName()));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
-            int foodChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getFoods().size());
+            int foodChoice = ProgramUtils.tryCatch(1,playerFoodList.size());
             System.out.println("How many kg do you want to feed your animal: ");
             int kgChoice = ProgramUtils.tryCatch();
-            currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1), kgChoice);
+            currentGame.getCurrentPlayer().feedAnimal(playerAnimalList.get(animalChoice-1),playerFoodList.get(foodChoice-1), kgChoice);
         }
     }
 
+    /**
+     * Menu that display all players animals to be bred,
+     * Checks players animal count and if the same animal is chosen.
+     */
     public void mateAnimalsMenu(){
-        if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
-            System.out.println(ProgramUtils.RED+"You currently have "+currentGame.getCurrentPlayer().getPlayerAnimal().size()+" animal, you need 2 or more animals!"+ProgramUtils.RESET);
+        ArrayList<Animal> playerAnimalList = currentGame.getCurrentPlayer().getPlayerAnimal();
+        if (playerAnimalList.size() < 2) {
+            System.out.println(ProgramUtils.RED+"You currently have "+playerAnimalList.size()+" animal, you need 2 or more animals!"+ProgramUtils.RESET);
             System.out.println(" ");
             roundMenu();
         }else{
@@ -352,19 +301,105 @@ public class Menu {
             do {
                 ArrayList<Animal> newAnimalList = new ArrayList<>();
                 System.out.print("First animal to breed: ");
-                menuChoice = ProgramUtils.tryCatch();
-                newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
+                menuChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
+                newAnimalList.add(playerAnimalList.get(menuChoice-1));
                 System.out.print("Write the second animal to breed: ");
-                otherChoice = ProgramUtils.tryCatch();
+                otherChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
                 if(otherChoice == menuChoice){
                     System.out.println("\nCan't choose the same animal!\n");
                 }else{
-                    newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(otherChoice-1));
+                    newAnimalList.add(playerAnimalList.get(otherChoice-1));
                     Factory.tryMating(newAnimalList.get(0),newAnimalList.get(1),currentGame.getCurrentPlayer());
                 }
-            }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size() || menuChoice == otherChoice);
+            }while (menuChoice < 1 || menuChoice > playerAnimalList.size() || menuChoice == otherChoice);
         }
-
-        }
-
     }
+
+    /**
+     * Menu that gives the player choice of gender and return it as a Gender
+     * @return gender as Gender
+     */
+    public Gender genderSelectionMenu(){
+        switch (ProgramUtils.menuBuilder("\nGenderChoice", "MALE","FEMALE")){
+            case 1:
+                return Gender.MALE;
+            case 2:
+                return Gender.FEMALE;
+            default:
+                genderSelectionMenu();
+        }
+        return null;
+    }
+
+    /**
+     * Menu for displaying and give player option to store game to file
+     */
+    public void saveGameMenu(){
+        String[] menuArray = {"","",""};
+        for(int i = 0; i < ProgramUtils.readAllLines().size() ; i++){
+            menuArray[i] = ProgramUtils.readAllLines().get(i);
+        }
+        switch (ProgramUtils.menuBuilder("\nSave game)",menuArray[0],menuArray[1],menuArray[2], "Back")){
+            case 1:
+                saveGameMenuHelper(menuArray[0],1);
+                break;
+            case 2:
+                saveGameMenuHelper(menuArray[1],2);
+                break;
+            case 3:
+                saveGameMenuHelper(menuArray[2],3);
+                break;
+            case 4:
+                roundMenu();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Help method to the saveGameMenu.
+     * Checks if player is sure about overwriting already saved games.
+     * Gives the option to name the game file.
+     * @param menuOptionName input String for condition check
+     * @param menuIndex The index of the menu option
+     */
+    private void saveGameMenuHelper(String menuOptionName, int menuIndex){
+        if(!menuOptionName.equals("")){
+            System.out.println("Are you sure you want to delete your saved game? y/n");
+            String yesOrNo = ProgramUtils.userInput();
+            if(yesOrNo.equalsIgnoreCase("y") ){
+                ProgramUtils.DeleteFile(ProgramUtils.readAllLines().get(menuIndex-1));
+            }else{
+                saveGameMenu();
+            }
+        }
+        System.out.println("Write the name of your save file");
+        String fileName = ProgramUtils.userInput();
+        this.currentGame.saveGame(fileName);
+        ProgramUtils.writeFromSaveFile(fileName,menuIndex);
+    }
+
+    /**
+     * Prints out a summary of the current players animals to the console.
+     */
+    public void playerAnimalsAsMenu(){
+        int i = 1;
+        for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
+            System.out.println(i + ".\t" + animal.getClass().getSimpleName() + " :     Name: " + ProgramUtils.PURPLE+animal.getName()+ProgramUtils.RESET+ "     Gender: "+animal.getGender().toString().toLowerCase());
+            i++;
+        }
+    }
+
+    /**
+     * Prints out the current players amount and type of food they have bought to the console.
+     */
+    public void playerFoodAsMenu(){
+        int i = 1;
+        for(Food food : this.currentGame.getCurrentPlayer().getFoods()){
+            System.out.println(i + ".\t Amount of weight: " + food.getWeight() + "KG  :  Type of food: " + food.getName());
+            i++;
+        }
+    }
+
+}

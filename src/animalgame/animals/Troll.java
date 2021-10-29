@@ -3,17 +3,29 @@ package animalgame.animals;
 import animalgame.animals.abstractmodels.Animal;
 import animalgame.enums.Gender;
 import animalgame.food.Sausage;
-import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
 
+/**
+ *
+ */
 public class Troll extends Animal {
-
+    /**
+     * Constructor for the Troll class.
+     * Initialize this animal starting price and maximum age.
+     * Initialize name and gender decided by parameters.
+     * @param name Name of this animal
+     * @param gender Gender of this animal
+     */
     public Troll(String name, Gender gender) {
         super(name, gender);
         super.setAnimalPrice(800);
         super.setMaxAge(7);
     }
 
+    /**
+     * @param foodToEat as food object
+     * @return food preference as a boolean
+     */
     @Override
     public boolean eat(Food foodToEat) {
         if(foodToEat instanceof Sausage){
@@ -23,6 +35,4 @@ public class Troll extends Animal {
             return true;
         }
     }
-
-
 }

@@ -16,13 +16,13 @@ import animalgame.utilities.ProgramUtils;
 public class Store {
     private Player customer;
 
-   public void setCustomer(Player customer){
-       this.customer = customer;
-   }
-
-    public Store(){
-    }
-
+    /**
+     *
+     * @param animal
+     * @param gender
+     * @param price
+     * @return
+     */
     public boolean animalToBuy(String animal, Gender gender, int price){
        if(this.customer.getMoney() < price){
            System.out.println("Not enough money! The animal costs "+price+" And you have "+customer.getMoney());
@@ -34,6 +34,29 @@ public class Store {
        }
     }
 
+    /**
+     *
+     * @param animal
+     */
+    public void animalToSell(Animal animal){
+        int animalPrice = animal.animalSellPrice();
+        this.customer.addMoney(animalPrice);
+        this.customer.getPlayerAnimal().remove(animal);
+    }
+
+    /**
+     *
+     * @param customer
+     */
+    public void setCustomer(Player customer){
+        this.customer = customer;
+    }
+
+    /**
+     *
+     * @param food
+     * @param foodPrice
+     */
     public void foodToBuy(String food, int foodPrice){
         System.out.println("How many kg do you want to buy?");
         int amountToBuy = ProgramUtils.tryCatch();
@@ -67,11 +90,5 @@ public class Store {
             System.out.println("Can't afford $" + sum + " with your $"+this.customer.getMoney());
         }
     }
-
-    public void animalToSell(Animal animal){
-        int animalPrice = animal.animalSellPrice();
-        this.customer.addMoney(animalPrice);
-        this.customer.getPlayerAnimal().remove(animal);
-   }
 }
 

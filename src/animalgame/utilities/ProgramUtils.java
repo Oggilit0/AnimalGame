@@ -5,59 +5,19 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class ProgramUtils {
     public static final String RESET = "\u001B[0m";
     public static final String GREEN = "\u001B[32m";
     public static final String PURPLE = "\u001B[35m";
     public static final String YELLOW = "\u001B[33m";
     public static final String RED = "\u001B[31m";
-
-    /**
-     * Load object from file and return that object
-     * @return object from file
-     */
-    public static Object readFile(String fileName){
-        ObjectInputStream o = null;
-        Object object = null;
-        try{
-            FileInputStream f = new FileInputStream("src/animalgame/programfiles/"+fileName+".txt");
-            o = new ObjectInputStream(f);
-            object = o.readObject();
-            System.out.println("Sucess!");
-            o.close();
-
-
-        }catch(Exception e){
-            //e.printStackTrace();
-            return null;
-        }
-        return object;
-    }
-
-    /**
-     * Save input object to file
-     * @param object input object to save
-     */
-    public static void writeToFile(Object object,String fileName){
-        ObjectOutputStream o = null;
-        FileOutputStream f = null;
-
-        try{
-            f = new FileOutputStream("src/animalgame/programfiles/"+fileName+".txt",false);
-            o = new ObjectOutputStream(f);
-            o.writeObject(object);
-            o.close();
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Method to create a menu out of input parameters and return it as a string
@@ -89,37 +49,49 @@ public class ProgramUtils {
         return userInput;
     }
 
+    /**
+     *
+     * @return
+     */
     public static int tryCatch(){
         int newInput = -1;
+        do {
             try{
                 newInput = Integer.parseInt(userInput());
-            }catch(Exception e){
-                //e.printStackTrace();
-                System.out.println("Write a number you goof!");
-            }
 
+            }catch(Exception e){
+                System.out.println("Invalid input");
+            }
+        }while(newInput == -1);
         return newInput;
     }
 
+    /**
+     *
+     * @param minMenuValue
+     * @param maxvMenuValue
+     * @return
+     */
     public static int tryCatch(int minMenuValue, int maxvMenuValue){
         int newInput = -1;
         do{
             try{
-
-                    newInput = Integer.parseInt(userInput());
-                    if(maxvMenuValue < newInput || newInput < minMenuValue){
-                        System.out.println("Invalid input");
-                    }
-
+                newInput = Integer.parseInt(userInput());
+                if(maxvMenuValue < newInput || newInput < minMenuValue){
+                    System.out.println("Invalid input");
+                }
 
             }catch(Exception e){
-                //e.printStackTrace();
-                System.out.println("Write a number you goof!");
+                System.out.println("Invalid input");
             }
         }while(maxvMenuValue < newInput || newInput < minMenuValue);
         return newInput;
     }
 
+    /**
+     *
+     * @return
+     */
     public static List<String> readAllLines() {
         List<String> lines = null;
         try {
@@ -131,13 +103,18 @@ public class ProgramUtils {
         return lines;
     }
 
+    /**
+     *
+     * @param saveName
+     * @param index
+     * @return
+     */
     public static ArrayList<String> saveFileHandler(String saveName, int index){
         ArrayList<String> oldSave = (ArrayList<String>) readAllLines();
         ArrayList<String> temp = new ArrayList<>();
 
         switch(index){
             case 1:
-
                 if(oldSave.size() > 0){
                     oldSave.remove(0);
                 }
@@ -156,7 +133,6 @@ public class ProgramUtils {
                     return oldSave;
 
             case 2:
-
                 if(oldSave.size() > 0){
                     temp.add(oldSave.get(0));
                 }
@@ -183,6 +159,51 @@ public class ProgramUtils {
         return null;
     }
 
+    /**
+     * Load object from file and return that object
+     * @return object from file
+     */
+    public static Object readFile(String fileName){
+        ObjectInputStream o;
+        Object object;
+        try{
+            FileInputStream f = new FileInputStream("src/animalgame/programfiles/"+fileName+".txt");
+            o = new ObjectInputStream(f);
+            object = o.readObject();
+            System.out.println("Sucess!");
+            o.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return object;
+    }
+
+    /**
+     * Save input object to file
+     * @param object input object to save
+     */
+    public static void writeToFile(Object object,String fileName){
+        ObjectOutputStream o = null;
+        FileOutputStream f = null;
+
+        try{
+            f = new FileOutputStream("src/animalgame/programfiles/"+fileName+".txt",false);
+            o = new ObjectOutputStream(f);
+            o.writeObject(object);
+            o.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * @param saveName
+     * @param oldSaveIndex
+     */
     public static void writeFromSaveFile(String saveName, int oldSaveIndex){
 
         ArrayList<String> oldSave = saveFileHandler(saveName, oldSaveIndex);
@@ -195,6 +216,10 @@ public class ProgramUtils {
         }
     }
 
+    /**
+     *
+     * @param fileName
+     */
     public static void DeleteFile(String fileName) {
             File myObj = new File("src/animalgame/programfiles/"+fileName+".txt");
             if (myObj.delete()) {

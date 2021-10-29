@@ -6,14 +6,27 @@ import animalgame.food.Taco;
 import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
+/**
+ *
+ */
 public class PolarBear extends Animal {
-
+    /**
+     * Constructor for the PolarBear class.
+     * Initialize this animal starting price and maximum age.
+     * Initialize name and gender decided by parameters.
+     * @param name Name of this animal
+     * @param gender Gender of this animal
+     */
     public PolarBear(String name, Gender gender) {
         super(name, gender);
         super.setAnimalPrice(1500);
         super.setMaxAge(20);
     }
 
+    /**
+     * @param foodToEat as food object
+     * @return food preference as a boolean
+     */
     @Override
     public boolean eat(Food foodToEat) {
         if(foodToEat instanceof Taco || foodToEat instanceof Waffles){
@@ -22,8 +35,5 @@ public class PolarBear extends Animal {
         }else{
             return true;
         }
-
     }
-
-
 }
