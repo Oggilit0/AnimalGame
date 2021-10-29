@@ -5,15 +5,27 @@ import animalgame.enums.Gender;
 import animalgame.food.Sausage;
 import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
-/** */
+
+/**
+ *
+ */
 public class Giraffe extends Animal {
-    /** */
+    /**
+     *
+     * @param name
+     * @param gender
+     */
     public Giraffe(String name, Gender gender) {
         super(name, gender);
         super.setAnimalPrice(1000);
         super.setMaxAge(15);
     }
-    /** */
+
+    /**
+     *
+     * @param foodToEat as food object
+     * @return
+     */
     @Override
     public boolean eat(Food foodToEat) {
         if (foodToEat instanceof Sausage || foodToEat instanceof Taco) {
