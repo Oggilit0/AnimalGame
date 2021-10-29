@@ -122,11 +122,15 @@ public class Game {
      */
     public void endGame() {
         Map<String,Integer> list = new HashMap<>();
-        for(Player players : allPlayers){
-            for(Animal animal : players.getPlayerAnimal()){
-             getStore().animalToSell(animal);
+        for(Player player : allPlayers){
+            currentPlayer = player;
+            getStore().setCustomer(currentPlayer);
+            for(int i =0; i <= currentPlayer.getPlayerAnimal().size()+1; i++){
+                getStore().animalToSell(currentPlayer.getPlayerAnimal().get(0));
             }
-            list.put(players.getName(), players.getMoney());
+            list.put(player.getName(), player.getMoney());
+            System.out.println(player.getPlayerAnimal());
+            System.out.println(player.getMoney());
         }
         List<String> resultList = new ArrayList<>();
         int currentMaxValue = Integer.MIN_VALUE;
@@ -206,13 +210,16 @@ public class Game {
      *
      */
     public void ageAnimal() {
-        for (Animal animal : currentPlayer.getPlayerAnimal()) {
-            if (!(animal.getCurrentAge() == animal.getMaxAge())) {
-                animal.setCurrentAge(1);
-            } else {
-                animal.death();
+        for(Player player : allPlayers){
+            for (Animal animal : player.getPlayerAnimal()) {
+                if (!(animal.getCurrentAge() == animal.getMaxAge())) {
+                    animal.setCurrentAge(1);
+                } else {
+                    animal.death();
+                }
             }
         }
+
         if(currentPlayer.getPlayerAnimal().size() != 0){
             System.out.println("\nEvery animal you have aged with 1 year!");
         }
