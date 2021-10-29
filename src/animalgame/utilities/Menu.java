@@ -234,21 +234,24 @@ public class Menu {
      * of that food to feed the animal with. Calls the feedAnimal method...
      */
     public void feedAnimalsMenu() {
-        if (currentGame.getCurrentPlayer().getPlayerAnimal().size() == 0) {
+        ArrayList<Animal> playerAnimalList = currentGame.getCurrentPlayer().getPlayerAnimal();
+        ArrayList<Food> playerFoodList = currentGame.getCurrentPlayer().getFoods();
+
+        if (playerAnimalList.size() == 0) {
             System.out.println("You must have one animal to feed!");
-        } else if (currentGame.getCurrentPlayer().getFoods().size() == 0) {
+        } else if (playerFoodList.size() == 0) {
             System.out.println("You must buy food to feed your animal with!");
         } else {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
-            int animalChoice = ProgramUtils.tryCatch(1,currentGame.getCurrentPlayer().getPlayerAnimal().size());
-            System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().getSimpleName()));
+            int animalChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
+            System.out.println(playerAnimalList.get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(playerAnimalList.get(animalChoice-1).getClass().getSimpleName()));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
-            int foodChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getFoods().size());
+            int foodChoice = ProgramUtils.tryCatch(1,playerFoodList.size());
             System.out.println("How many kg do you want to feed your animal: ");
             int kgChoice = ProgramUtils.tryCatch();
-            currentGame.getCurrentPlayer().feedAnimal(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1),currentGame.getCurrentPlayer().getFoods().get(foodChoice-1), kgChoice);
+            currentGame.getCurrentPlayer().feedAnimal(playerAnimalList.get(animalChoice-1),playerFoodList.get(foodChoice-1), kgChoice);
         }
     }
 
@@ -319,7 +322,7 @@ public class Menu {
     public void playerAnimalsAsMenu(){
         int i = 1;
         for(Animal animal : this.currentGame.getCurrentPlayer().getPlayerAnimal()) {
-            System.out.println(i + ".\t" + animal.getClass().getName().substring(19) + " :     Name: " + ProgramUtils.PURPLE+animal.getName()+ProgramUtils.RESET+ "     Gender: "+animal.getGender().toString().toLowerCase());
+            System.out.println(i + ".\t" + animal.getClass().getSimpleName() + " :     Name: " + ProgramUtils.PURPLE+animal.getName()+ProgramUtils.RESET+ "     Gender: "+animal.getGender().toString().toLowerCase());
             i++;
         }
     }
