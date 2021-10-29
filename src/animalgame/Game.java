@@ -108,7 +108,8 @@ public class Game {
     }
 
     /**
-     *
+     * gameOver prints a winner screen to the player who won the game by not getting removed,
+     * this only happens if all player besides the winner gets eliminated before the last round.
      */
     private void gameOver() {
         for (Player winner : allPlayers) {
@@ -219,8 +220,9 @@ public class Game {
         }
     }
 
-    /**
-     *
+    /** ages the animal
+     * ageAnimal takes all the players and players animals and sets the value age higher
+     * after every round, then prints it so the player knows that their animals aged.
      */
     private void ageAnimal() {
         for(Player player : allPlayers){
@@ -238,9 +240,10 @@ public class Game {
         }
     }
 
-    /**
-     *
-     * @param newPlayer
+    /** creates players
+     * createPlayer makes a player and adds them into the player list,
+     * if they got no name then they will have to write player name again.
+     * @param newPlayer is the input name they chose for their player.
      */
     private void createPlayer(String newPlayer){
         if(newPlayer.equals("")){
