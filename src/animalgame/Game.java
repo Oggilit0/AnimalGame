@@ -108,7 +108,8 @@ public class Game {
     }
 
     /**
-     *
+     * gameOver prints a winner screen to the player who won the game by not getting removed,
+     * this only happens if all player besides the winner gets eliminated before the last round.
      */
     private void gameOver() {
         for (Player winner : allPlayers) {
@@ -118,9 +119,9 @@ public class Game {
     }
 
     /**
-     *endGame takes every player and sells their animal, then checks that money to see which player wins.
-     *Hashmap is used to set player and money to key/value and later use that value to check id that player has the most amount of money.
-     *Map.entry is used to return a collection-view of the map (used it to check for the "maxValue") and then put the player with the most value to another arraylist,
+     * endGame takes every player and sells their animal, then checks that money to see which player wins.
+     * Hashmap is used to set player and money to key/value and later use that value to check id that player has the most amount of money.
+     * Map.entry is used to return a collection-view of the map (used it to check for the "maxValue") and then put the player with the most value to another arraylist,
      * that then checks if its 1 player who won or if more than it becomes a tie.
      */
     private void endGame() {
@@ -129,11 +130,12 @@ public class Game {
             currentPlayer = player;
             getStore().setCustomer(currentPlayer);
             for(int i =0; i <= currentPlayer.getPlayerAnimal().size()+1; i++){
+                if(currentPlayer.getPlayerAnimal().size() == 0){
+                    break;
+                }
                 getStore().animalToSell(currentPlayer.getPlayerAnimal().get(0));
             }
             list.put(player.getName(), player.getMoney());
-            System.out.println(player.getPlayerAnimal());
-            System.out.println(player.getMoney());
         }
         List<String> resultList = new ArrayList<>();
         int currentMaxValue = Integer.MIN_VALUE;
@@ -219,8 +221,9 @@ public class Game {
         }
     }
 
-    /**
-     *
+    /** ages the animal
+     * ageAnimal takes all the players and players animals and sets the value age higher
+     * after every round, then prints it so the player knows that their animals aged.
      */
     private void ageAnimal() {
         for(Player player : allPlayers){
@@ -238,9 +241,10 @@ public class Game {
         }
     }
 
-    /**
-     *
-     * @param newPlayer
+    /** creates players
+     * createPlayer makes a player and adds them into the player list,
+     * if they got no name then they will have to write player name again.
+     * @param newPlayer is the input name they chose for their player.
      */
     private void createPlayer(String newPlayer){
         if(newPlayer.equals("")){
