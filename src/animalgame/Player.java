@@ -89,6 +89,10 @@ public class Player implements Serializable {
         this.deceasedAnimals.add(deceasedAnimal);
     }
 
+    public void setDeceasedAnimalList(ArrayList<Animal> deceasedAnimalList){
+        this.deceasedAnimals = deceasedAnimalList;
+    }
+
     public ArrayList<Animal> getPlayerAnimal() {
         return this.playerAnimal;
     }

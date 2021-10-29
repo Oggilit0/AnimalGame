@@ -203,6 +203,7 @@ public class Game {
     public void removeDeadAnimals(){
         for(Player player : allPlayers){
             ArrayList<Animal> tempAnimals= new ArrayList<>();
+            player.setDeceasedAnimalList(new ArrayList<>());
             for(Animal animal : player.getPlayerAnimal()){
                 animal.healthOverTime();
                 if(animal.getAliveStatus()){
