@@ -118,7 +118,10 @@ public class Game {
     }
 
     /**
-     *
+     *endGame takes every player and sells their animal, then checks that money to see which player wins.
+     *Hashmap is used to set player and money to key/value and later use that value to check id that player has the most amount of money.
+     *Map.entry is used to return a collection-view of the map (used it to check for the "maxValue") and then put the player with the most value to another arraylist,
+     * that then checks if its 1 player who won or if more than it becomes a tie.
      */
     private void endGame() {
         Map<String,Integer> list = new HashMap<>();
