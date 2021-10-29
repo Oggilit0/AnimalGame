@@ -11,9 +11,11 @@ import animalgame.food.abstractmodels.Food;
  */
 public class PolarBear extends Animal {
     /**
-     *
-     * @param name
-     * @param gender
+     * Constructor for the PolarBear class.
+     * Initialize this animal starting price and maximum age.
+     * Initialize name and gender decided by parameters.
+     * @param name Name of the animal
+     * @param gender Gender of the animal
      */
     public PolarBear(String name, Gender gender) {
         super(name, gender);
@@ -22,9 +24,8 @@ public class PolarBear extends Animal {
     }
 
     /**
-     *
      * @param foodToEat as food object
-     * @return
+     * @return food preference as a boolean
      */
     @Override
     public boolean eat(Food foodToEat) {

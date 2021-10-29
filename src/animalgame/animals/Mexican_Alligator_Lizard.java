@@ -11,9 +11,11 @@ import animalgame.food.abstractmodels.Food;
  */
 public class Mexican_Alligator_Lizard extends Animal {
     /**
-     *
-     * @param name
-     * @param gender
+     * Constructor for the Mexican_Alligator_Lizard class.
+     * Initialize this animal starting price and maximum age.
+     * Initialize name and gender decided by parameters.
+     * @param name Name of the animal
+     * @param gender Gender of the animal
      */
     public Mexican_Alligator_Lizard(String name, Gender gender) {
         super(name, gender);
@@ -22,9 +24,8 @@ public class Mexican_Alligator_Lizard extends Animal {
     }
 
     /**
-     *
      * @param foodToEat as food object
-     * @return
+     * @return food preference as a boolean
      */
     @Override
     public boolean eat(Food foodToEat) {

@@ -19,7 +19,7 @@ public abstract class Animal implements Serializable {
 
     /**
      * Constructor for the Animal class
-     * set health of this animal to 100 and alivestatus to true when created.
+     * Initialize health of this animal to 100 and alivestatus to true when created.
      * Initialize name and gender decided by parameters.
      * @param name Name of the animal
      * @param gender Gender of the animal
