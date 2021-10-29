@@ -7,7 +7,7 @@ import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
 /**
- * PolarBear class is a subclass and inherit from Animal.
+ * PolarBear class is a subclass that inherit from Animal.
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class PolarBear extends Animal {

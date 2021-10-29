@@ -7,12 +7,12 @@ import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
 /**
- * Dragon class is a subclass and inherit from Animal.
+ * Dragon class is a subclass that inherit from Animal.
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Dragon extends Animal {
     /**
-     * Constructor for the Mexican_Alligator_Lizard class.
+     * Constructor for the Dragon class.
      * Initialize this animal starting price and maximum age.
      * Initialize name and gender decided by parameters.
      * @param name Name of this animal

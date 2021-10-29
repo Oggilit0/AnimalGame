@@ -7,13 +7,14 @@ import animalgame.food.abstractmodels.Food;
 import java.util.ArrayList;
 
 /**
- * Menu Class
+ * This is the Menu class where we store all of our game menus.
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Menu {
     private Game currentGame;
 
     /**
+     * Constructor for the Menu class
      * Initialize currentgame for easy access from menus
      * @param currentGame input the current game
      */

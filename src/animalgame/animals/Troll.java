@@ -6,7 +6,7 @@ import animalgame.food.Sausage;
 import animalgame.food.abstractmodels.Food;
 
 /**
- * Troll class is a subclass and inherit from Animal.
+ * Troll class is a subclass that inherit from Animal.
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Troll extends Animal {

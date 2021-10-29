@@ -21,6 +21,9 @@ public class Game {
     private Store store;
 
     /**
+     * Constructor for the Game class
+     * Initialize a store for access from menus.
+     * Initialize ...
      *
      */
     public Game() {
