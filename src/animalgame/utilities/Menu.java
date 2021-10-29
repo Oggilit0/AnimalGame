@@ -149,7 +149,7 @@ public class Menu {
         String animal ="";
         Gender gender = null;
         int price = 0;
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Mexican Alligator Lizard"+":\t4000 Gold", "Continue")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Dragon"+":\t4000 Gold", "Continue")){
             case 1:
                 animal = "Troll";
                 price = 800;
@@ -171,7 +171,7 @@ public class Menu {
                 gender = genderSelectionMenu();
                 break;
             case 5:
-                animal = "Mexican_Alligator_Lizard";
+                animal = "Dragon";
                 price = 4000;
                 gender = genderSelectionMenu();
                 break;
@@ -246,7 +246,7 @@ public class Menu {
                 return "Taco and Sausage";
             case "Giraffe":
                 return "Waffles";
-            case "Mexican_Alligator_Lizard":
+            case "Dragon":
                 return "Taco";
             case "PolarBear":
                 return "Sausage";
