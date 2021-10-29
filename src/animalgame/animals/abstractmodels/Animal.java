@@ -80,47 +80,47 @@ public abstract class Animal implements Serializable {
                 return makeTrollBabies;
         }return 0;
     }
-
+    /** */
     public int animalSellPrice(){
         return animalPrice * ((health-currentAge))/100;
     }
-
+    /** */
     public void setAnimalPrice(int animalPrice) {
         this.animalPrice = animalPrice;
     }
-
+    /** */
     public boolean getAliveStatus() {
         return aliveStatus;
     }
-
+    /** */
     public int getCurrentAge(){
         return this. currentAge;
     }
-
+    /** */
     public void setCurrentAge(int currentAge) {
         this.currentAge += currentAge;
     }
-
+    /** */
     public Gender getGender(){
         return this.gender;
     }
-
+    /** */
     public int getHealth(){
         return this.health;
     }
-
+    /** */
     public void setHealth(int health){
         this.health = health;
     }
-
+    /** */
     public int getMaxAge(){
         return this.maxAge;
     }
-
+    /** */
     public void setMaxAge(int maxAge){
         this.maxAge = maxAge;
     }
-
+    /** */
     public String getName(){
         return this.name;
     }
