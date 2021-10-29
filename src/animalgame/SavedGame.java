@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
+ * This Class is where all the variables, that is needed to continue a game, is stored
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class SavedGame implements Serializable {
@@ -13,11 +14,12 @@ public class SavedGame implements Serializable {
     private final int savedMaxRounds;
 
     /**
-     *
-     * @param playerList
-     * @param currentPlayer
-     * @param currentRound
-     * @param maxRounds
+     * Constructor of the SavedGame class.
+     * Initialize variables to be stored
+     * @param playerList ArrayList of all active players
+     * @param currentPlayer The current player who is playing
+     * @param currentRound The current round which is played
+     * @param maxRounds The maximal amount of rounds decided in the beginning
      */
     public SavedGame(ArrayList<Player> playerList, Player currentPlayer, int currentRound, int maxRounds){
         this.savedPlayerList = playerList;
@@ -27,32 +29,32 @@ public class SavedGame implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * returns the stored Player
+     * @return savedCurrentPlayer as a Player
      */
     public Player getSavedCurrentPlayer() {
         return savedCurrentPlayer;
     }
 
     /**
-     *
-     * @return
+     * returns the stored currentRound
+     * @return savedCurrentRound as an int
      */
     public int getSavedCurrentRound() {
         return savedCurrentRound;
     }
 
     /**
-     *
-     * @return
+     * returns the stored maxRounds
+     * @return savedMaxRounds as an int
      */
     public int getSavedMaxRounds() {
         return savedMaxRounds;
     }
 
     /**
-     *
-     * @return
+     * returns The stores list of Players
+     * @return SavePlayerList as an Arraylist
      */
     public ArrayList<Player> getSavedPlayerList() {
         return savedPlayerList;
