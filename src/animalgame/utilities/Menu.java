@@ -377,7 +377,7 @@ public class Menu {
         System.out.println("Write the name of your save file");
         String fileName = ProgramUtils.userInput();
         this.currentGame.saveGame(fileName);
-        ProgramUtils.writeFromSaveFile(fileName,menuIndex);
+        ProgramUtils.writeToSaveFile(fileName,menuIndex);
     }
 
     /**
