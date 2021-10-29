@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Player class
+ * Player class....
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Player implements Serializable {
@@ -15,12 +15,14 @@ public class Player implements Serializable {
     private int money;
     private ArrayList<Animal> playerAnimal;
     private ArrayList<Food> foods;
+    private ArrayList<Animal> deceasedAnimals;
   
     public Player(String name) {
         this.name = name;
         this.money = 5000;
         this.playerAnimal = new ArrayList<>();
         this.foods = new ArrayList<>();
+        this.deceasedAnimals = new ArrayList<>();
     }
 
     /**
@@ -77,6 +79,18 @@ public class Player implements Serializable {
 
     public void addPlayerAnimal(Animal animal) {
         this.playerAnimal.add(animal);
+    }
+
+    public ArrayList<Animal> getDeceasedAnimals() {
+        return deceasedAnimals;
+    }
+
+    public void setDeceasedAnimals(Animal deceasedAnimal) {
+        this.deceasedAnimals.add(deceasedAnimal);
+    }
+
+    public void setDeceasedAnimalList(ArrayList<Animal> deceasedAnimalList){
+        this.deceasedAnimals = deceasedAnimalList;
     }
 
     public ArrayList<Animal> getPlayerAnimal() {

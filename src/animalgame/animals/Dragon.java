@@ -7,9 +7,10 @@ import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
 /**
- *
+ * Dragon class is a subclass and inherit from Animal.
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
-public class Mexican_Alligator_Lizard extends Animal {
+public class Dragon extends Animal {
     /**
      * Constructor for the Mexican_Alligator_Lizard class.
      * Initialize this animal starting price and maximum age.
@@ -17,20 +18,22 @@ public class Mexican_Alligator_Lizard extends Animal {
      * @param name Name of this animal
      * @param gender Gender of this animal
      */
-    public Mexican_Alligator_Lizard(String name, Gender gender) {
+    public Dragon(String name, Gender gender) {
         super(name, gender);
         super.setAnimalPrice(4000);
         super.setMaxAge(10);
     }
 
     /**
+     * If foodToEat instance of a food the animal doesn't eat returns false and an output to the console.
+     * If true the animal eats the food object it is given.
      * @param foodToEat as food object
      * @return food preference as a boolean
      */
     @Override
     public boolean eat(Food foodToEat) {
         if(foodToEat instanceof Sausage || foodToEat instanceof Waffles){
-            System.out.println("Your mexican alligator lizard doesn´t eat " + foodToEat.getName());
+            System.out.println("Your Dragon doesn't eat " + foodToEat.getName());
             return false;
         }else{
             return true;

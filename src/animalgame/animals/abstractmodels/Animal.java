@@ -5,7 +5,7 @@ import animalgame.food.abstractmodels.Food;
 import java.io.Serializable;
 
 /**
- * Animal class
+ * Animal class is the abstract superclass to all animal subclasses
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public abstract class Animal implements Serializable {
@@ -75,7 +75,7 @@ public abstract class Animal implements Serializable {
             case "Giraffe":
                 int makeGiraffeBabies = (int) (Math.random() * 3) + 1;
                 return makeGiraffeBabies;
-            case "Mexican_Alligator_Lizard":
+            case "Dragon":
                 int makeLizardBabies = (int) (Math.random() * 8) + 1;
                 return makeLizardBabies;
             case "PolarBear":
