@@ -125,7 +125,7 @@ public class Menu {
         String animal ="";
         Gender gender = null;
         int price = 0;
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":   800 Gold","Giraffe"+": 1000 Gold","Polar bear"+": 1500 Gold","Ferret"+":     2250 Gold","Mexican Alligator Lizard"+": 4000 Gold")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Mexican Alligator Lizard"+":\t4000 Gold")){
             case 1:
                 animal = "Troll";
                 price = 800;
@@ -284,8 +284,9 @@ public class Menu {
             case 2:
                 return Gender.FEMALE;
             default:
-                return null;
+                genderSelectionMenu();
         }
+        return null;
     }
 
     public void saveGameMenu(){
