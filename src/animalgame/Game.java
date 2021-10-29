@@ -210,13 +210,16 @@ public class Game {
      *
      */
     public void ageAnimal() {
-        for (Animal animal : currentPlayer.getPlayerAnimal()) {
-            if (!(animal.getCurrentAge() == animal.getMaxAge())) {
-                animal.setCurrentAge(1);
-            } else {
-                animal.death();
+        for(Player player : allPlayers){
+            for (Animal animal : player.getPlayerAnimal()) {
+                if (!(animal.getCurrentAge() == animal.getMaxAge())) {
+                    animal.setCurrentAge(1);
+                } else {
+                    animal.death();
+                }
             }
         }
+
         if(currentPlayer.getPlayerAnimal().size() != 0){
             System.out.println("\nEvery animal you have aged with 1 year!");
         }
