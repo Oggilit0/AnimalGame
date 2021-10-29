@@ -20,6 +20,9 @@ public class Game {
     private Menu gameMenu;
     private Store store;
 
+    /**
+     *
+     */
     public Game() {
         this.store = new Store();
         this.allPlayers = new ArrayList<>();
@@ -77,11 +80,18 @@ public class Game {
         newRound();
     }
 
+    /**
+     *
+     * @param fileName
+     */
     public void saveGame(String fileName){
         SavedGame saveGame = new SavedGame(this.allPlayers,this.currentPlayer,this.currentRound,this.maxRound);
         ProgramUtils.writeToFile(saveGame,fileName);
     }
 
+    /**
+     *
+     */
     public void newRound() {
         //this.allPlayers.get(2).setMoney(0); a test to check that the player gets kicked when broke
         for (int r = currentRound; r <= this.maxRound; r++) {
@@ -97,6 +107,9 @@ public class Game {
         }
     }
 
+    /**
+     *
+     */
     public void gameOver() {
         for (Player winner : allPlayers) {
             System.out.println(ProgramUtils.GREEN + "The winner is " + winner.getName() + "!" + ProgramUtils.RESET + "\uD83D\uDC51");
@@ -104,6 +117,9 @@ public class Game {
         }
     }
 
+    /**
+     *
+     */
     public void endGame() {
         Map<String,Integer> list = new HashMap<>();
         for(Player players : allPlayers){
@@ -133,6 +149,9 @@ public class Game {
         System.out.println("\n\n"+ProgramUtils.RED + "Good Game!" + ProgramUtils.RESET);
     }
 
+    /**
+     *
+     */
     public void newRoundGetPlayer() {
         for (int i = this.allPlayers.indexOf(this.currentPlayer); i < playerAmount; i++) {
             if (this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)) {
@@ -167,7 +186,9 @@ public class Game {
         }
     }
 
-
+    /**
+     *
+     */
     public void removeDeadAnimals(){
         for(Player player : allPlayers){
             ArrayList<Animal> tempAnimals= new ArrayList<>();
@@ -181,7 +202,9 @@ public class Game {
         }
     }
 
-
+    /**
+     *
+     */
     public void ageAnimal() {
         for (Animal animal : currentPlayer.getPlayerAnimal()) {
             if (!(animal.getCurrentAge() == animal.getMaxAge())) {
@@ -195,6 +218,10 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @param newPlayer
+     */
     public void createPlayer(String newPlayer){
         if(newPlayer.equals("")){
             System.out.println("\nYou need a name!\n");
@@ -204,9 +231,18 @@ public class Game {
         this.allPlayers.add(player);
     }
 
+    /**
+     *
+     * @return
+     */
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
+
+    /**
+     *
+     * @return
+     */
     public Store getStore(){
         return store;
     }
