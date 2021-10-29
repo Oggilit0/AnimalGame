@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class SavedGame implements Serializable {
     private final ArrayList<Player> savedPlayerList;

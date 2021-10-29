@@ -5,7 +5,7 @@ import animalgame.food.abstractmodels.Food;
 import java.io.Serializable;
 
 /**
- * Animal class
+ * Animal class is the abstract superclass to all animal subclasses
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public abstract class Animal implements Serializable {

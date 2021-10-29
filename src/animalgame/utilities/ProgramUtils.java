@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
+ * ProgramUtils ...
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class ProgramUtils {
     public static final String RESET = "\u001B[0m";

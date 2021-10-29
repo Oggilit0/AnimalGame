@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Player class
+ * Player class....
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Player implements Serializable {
@@ -87,6 +87,10 @@ public class Player implements Serializable {
 
     public void setDeceasedAnimals(Animal deceasedAnimal) {
         this.deceasedAnimals.add(deceasedAnimal);
+    }
+
+    public void setDeceasedAnimalList(ArrayList<Animal> deceasedAnimalList){
+        this.deceasedAnimals = deceasedAnimalList;
     }
 
     public ArrayList<Animal> getPlayerAnimal() {

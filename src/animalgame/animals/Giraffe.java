@@ -7,7 +7,8 @@ import animalgame.food.Taco;
 import animalgame.food.abstractmodels.Food;
 
 /**
- *
+ * Giraffe class is a subclass and inherit from Animal.
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Giraffe extends Animal {
     /**
@@ -24,6 +25,8 @@ public class Giraffe extends Animal {
     }
 
     /**
+     * If foodToEat instance of a food the animal doesn't eat returns false and an output to the console.
+     * If true the animal eats the food object it is given.
      * @param foodToEat as food object
      * @return food preference as a boolean
      */

@@ -47,7 +47,7 @@ public class Game {
      * Calls on method to create each player if condition is true.
      * loops if input is wrong
      */
-    public void choosePlayers(){
+    private void choosePlayers(){
         System.out.print("\nWrite in how many players (Min 2 Max 4): ");
         this.playerAmount = ProgramUtils.tryCatch(1,4);
         for (int i = 0; i < playerAmount; i++) {
@@ -61,7 +61,7 @@ public class Game {
      * User choose how many rounds he or she wants to play
      * aslong as its between 5 and 30.
      */
-    public void chooseRounds(){
+    private void chooseRounds(){
         System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
         this.maxRound = ProgramUtils.tryCatch(5,30);
         System.out.println("\n".repeat(30));
@@ -92,7 +92,7 @@ public class Game {
     /**
      *
      */
-    public void newRound() {
+    private void newRound() {
         //this.allPlayers.get(2).setMoney(0); a test to check that the player gets kicked when broke
         for (int r = currentRound; r <= this.maxRound; r++) {
             this.currentRound = r;
@@ -110,7 +110,7 @@ public class Game {
     /**
      *
      */
-    public void gameOver() {
+    private void gameOver() {
         for (Player winner : allPlayers) {
             System.out.println(ProgramUtils.GREEN + "The winner is " + winner.getName() + "!" + ProgramUtils.RESET + "\uD83D\uDC51");
             System.exit(1);
@@ -123,7 +123,7 @@ public class Game {
      *Map.entry is used to return a collection-view of the map (used it to check for the "maxValue") and then put the player with the most value to another arraylist,
      * that then checks if its 1 player who won or if more than it becomes a tie.
      */
-    public void endGame() {
+    private void endGame() {
         Map<String,Integer> list = new HashMap<>();
         for(Player player : allPlayers){
             currentPlayer = player;
@@ -159,7 +159,7 @@ public class Game {
     /**
      *
      */
-    public void newRoundGetPlayer() {
+    private void newRoundGetPlayer() {
         for (int i = this.allPlayers.indexOf(this.currentPlayer); i < playerAmount; i++) {
             if (this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)) {
                 this.allPlayers.remove(currentPlayer);
@@ -203,9 +203,10 @@ public class Game {
     /**
      *
      */
-    public void removeDeadAnimals(){
+    private void removeDeadAnimals(){
         for(Player player : allPlayers){
             ArrayList<Animal> tempAnimals= new ArrayList<>();
+            player.setDeceasedAnimalList(new ArrayList<>());
             for(Animal animal : player.getPlayerAnimal()){
                 animal.healthOverTime();
                 if(animal.getAliveStatus()){
@@ -221,7 +222,7 @@ public class Game {
     /**
      *
      */
-    public void ageAnimal() {
+    private void ageAnimal() {
         for(Player player : allPlayers){
             for (Animal animal : player.getPlayerAnimal()) {
                 if (!(animal.getCurrentAge() == animal.getMaxAge())) {
@@ -241,7 +242,7 @@ public class Game {
      *
      * @param newPlayer
      */
-    public void createPlayer(String newPlayer){
+    private void createPlayer(String newPlayer){
         if(newPlayer.equals("")){
             System.out.println("\nYou need a name!\n");
             startGame();
