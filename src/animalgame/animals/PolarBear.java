@@ -7,7 +7,8 @@ import animalgame.food.Waffles;
 import animalgame.food.abstractmodels.Food;
 
 /**
- *
+ * PolarBear class is a subclass and inherit from Animal.
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class PolarBear extends Animal {
     /**
@@ -24,6 +25,8 @@ public class PolarBear extends Animal {
     }
 
     /**
+     * If foodToEat instance of a food the animal doesn't eat returns false and an output to the console.
+     * If true the animal eats the food object it is given.
      * @param foodToEat as food object
      * @return food preference as a boolean
      */

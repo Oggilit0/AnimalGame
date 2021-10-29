@@ -3,7 +3,8 @@ package animalgame.food;
 import animalgame.food.abstractmodels.Food;
 
 /**
- *
+ * Waffles class is a subclass and inherit from Food.
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Waffles extends Food {
     /**

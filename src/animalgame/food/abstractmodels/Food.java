@@ -3,7 +3,8 @@ package animalgame.food.abstractmodels;
 import java.io.Serializable;
 
 /**
- *
+ * Food is the abstract superclass to all food subclasses.
+ * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public abstract class Food implements Serializable {
     private String name;
