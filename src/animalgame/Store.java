@@ -27,6 +27,16 @@ public class Store {
        }
     }
 
+    public void animalToSell(Animal animal){
+        int animalPrice = animal.animalSellPrice();
+        this.customer.addMoney(animalPrice);
+        this.customer.getPlayerAnimal().remove(animal);
+    }
+
+    public void setCustomer(Player customer){
+        this.customer = customer;
+    }
+
     public void foodToBuy(String food, int foodPrice){
         System.out.println("How many kg do you want to buy?");
         int amountToBuy = ProgramUtils.tryCatch();
@@ -59,16 +69,6 @@ public class Store {
         }else{
             System.out.println("Can't afford $" + sum + " with your $"+this.customer.getMoney());
         }
-    }
-
-    public void animalToSell(Animal animal){
-        int animalPrice = animal.animalSellPrice();
-        this.customer.addMoney(animalPrice);
-        this.customer.getPlayerAnimal().remove(animal);
-   }
-
-    public void setCustomer(Player customer){
-        this.customer = customer;
     }
 }
 
