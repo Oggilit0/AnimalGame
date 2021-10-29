@@ -256,8 +256,9 @@ public class Menu {
     }
 
     public void mateAnimalsMenu(){
-        if (currentGame.getCurrentPlayer().getPlayerAnimal().size() < 2) {
-            System.out.println(ProgramUtils.RED+"You currently have "+currentGame.getCurrentPlayer().getPlayerAnimal().size()+" animal, you need 2 or more animals!"+ProgramUtils.RESET);
+        ArrayList<Animal> playerAnimalList = currentGame.getCurrentPlayer().getPlayerAnimal();
+        if (playerAnimalList.size() < 2) {
+            System.out.println(ProgramUtils.RED+"You currently have "+playerAnimalList.size()+" animal, you need 2 or more animals!"+ProgramUtils.RESET);
             System.out.println(" ");
             roundMenu();
         }else{
@@ -267,17 +268,17 @@ public class Menu {
             do {
                 ArrayList<Animal> newAnimalList = new ArrayList<>();
                 System.out.print("First animal to breed: ");
-                menuChoice = ProgramUtils.tryCatch(1,currentGame.getCurrentPlayer().getPlayerAnimal().size());
-                newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
+                menuChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
+                newAnimalList.add(playerAnimalList.get(menuChoice-1));
                 System.out.print("Write the second animal to breed: ");
-                otherChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getPlayerAnimal().size());
+                otherChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
                 if(otherChoice == menuChoice){
                     System.out.println("\nCan't choose the same animal!\n");
                 }else{
-                    newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(otherChoice-1));
+                    newAnimalList.add(playerAnimalList.get(otherChoice-1));
                     Factory.tryMating(newAnimalList.get(0),newAnimalList.get(1),currentGame.getCurrentPlayer());
                 }
-            }while (menuChoice < 1 || menuChoice > currentGame.getCurrentPlayer().getPlayerAnimal().size() || menuChoice == otherChoice);
+            }while (menuChoice < 1 || menuChoice > playerAnimalList.size() || menuChoice == otherChoice);
         }
     }
 
