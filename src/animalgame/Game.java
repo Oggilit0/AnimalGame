@@ -181,6 +181,13 @@ public class Game {
             for (Animal animal : currentPlayer.getPlayerAnimal()) {
                 System.out.println(animal.getClass().getSimpleName()+": "+animal.getName()+", Health: "+ProgramUtils.RED+animal.getHealth()+ProgramUtils.RESET+", Age: "+ProgramUtils.PURPLE+animal.getCurrentAge()+ProgramUtils.RESET);
             }
+            if(currentPlayer.getDeceasedAnimals() != null && currentPlayer.getDeceasedAnimals().size() != 0){
+                System.out.println("\nDeceased animals since last turn: ");
+                for(Animal animal : currentPlayer.getDeceasedAnimals()){
+                    System.out.println(animal.getClass().getSimpleName()+": "+animal.getName());
+                }
+            }
+
             gameMenu.roundMenu();
             if (i != playerAmount - 1) {
                 this.currentPlayer = allPlayers.get(1 + i);
@@ -200,6 +207,8 @@ public class Game {
                 animal.healthOverTime();
                 if(animal.getAliveStatus()){
                     tempAnimals.add(animal);
+                }else{
+                    player.setDeceasedAnimals(animal);
                 }
             }
             player.setPlayerAnimal(tempAnimals);
