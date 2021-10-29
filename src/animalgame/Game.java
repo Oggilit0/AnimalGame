@@ -152,8 +152,6 @@ public class Game {
             }
             System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
             System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold" + ProgramUtils.RESET);
-            //test
-            ageAnimal();
             for(Food food : currentPlayer.getFoods()){
                 System.out.println(food.getName()+": "+food.getWeight()+" kg ");
             }
