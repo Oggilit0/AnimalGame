@@ -241,7 +241,7 @@ public class Menu {
         } else {
             System.out.println("Choose which animals to feed: ");
             playerAnimalsAsMenu();
-            int animalChoice = ProgramUtils.tryCatch();
+            int animalChoice = ProgramUtils.tryCatch(1,currentGame.getCurrentPlayer().getPlayerAnimal().size());
             System.out.println(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(currentGame.getCurrentPlayer().getPlayerAnimal().get(animalChoice-1).getClass().getSimpleName()));
             System.out.println("Choose which food to feed your animal with: ");
             playerFoodAsMenu();
@@ -267,7 +267,7 @@ public class Menu {
                 menuChoice = ProgramUtils.tryCatch(1,currentGame.getCurrentPlayer().getPlayerAnimal().size());
                 newAnimalList.add(currentGame.getCurrentPlayer().getPlayerAnimal().get(menuChoice-1));
                 System.out.print("Write the second animal to breed: ");
-                otherChoice = ProgramUtils.tryCatch();
+                otherChoice = ProgramUtils.tryCatch(1,this.currentGame.getCurrentPlayer().getPlayerAnimal().size());
                 if(otherChoice == menuChoice){
                     System.out.println("\nCan't choose the same animal!\n");
                 }else{
