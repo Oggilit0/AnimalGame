@@ -23,8 +23,10 @@ public class Game {
     /**
      * Constructor for the Game class
      * Initialize a store for access from menus.
-     * Initialize ...
-     *
+     * Initialize allPlayers as a new ArrayList
+     * initialize a menu accessed from most classes
+     * initialize currentRound as int 0 because it rises.
+     * Initialize {@link Menu#newGameMenu}
      */
     public Game() {
         this.store = new Store();
@@ -35,8 +37,8 @@ public class Game {
     }
 
     /**
-     * Starts the whole game where the player chooses how many players and rounds.
-     * Starts the first round.
+     * StartGame starts the program in the Game.
+     * it starts {@link #choosePlayers}, {@link #chooseRounds} and {@link #newRound}.
      */
     public void startGame() {
         choosePlayers();
@@ -46,8 +48,8 @@ public class Game {
 
     /**
      * User choose how many players he or she wants to play with
-     * aslong as its between 2 and 4.
-     * Calls on method to create each player if condition is true.
+     * as long as it's between 2 and 4.
+     * Calls on {@link #createPlayer} if condition is true.
      * loops if input is wrong
      */
     private void choosePlayers(){
@@ -62,7 +64,7 @@ public class Game {
 
     /**
      * User choose how many rounds he or she wants to play
-     * aslong as its between 5 and 30.
+     * as long as it's between 5 and 30.
      */
     private void chooseRounds(){
         System.out.print("\nWrite in how many rounds (Min 5 Max 30): ");
@@ -84,26 +86,27 @@ public class Game {
     }
 
     /**
-     *
-     * @param fileName
+     * Saves the game using files and can later be accessed from {@link #loadGame}
+     * @param fileName is the String name for the file to be saved as.
      */
     public void saveGame(String fileName){
         SavedGame saveGame = new SavedGame(this.allPlayers,this.currentPlayer,this.currentRound,this.maxRound);
         ProgramUtils.writeToFile(saveGame,fileName);
     }
 
-    /**
-     *
+    /** Gives round depending on how many rounds they selected before in choseRounds.
+     * Loops trough rounds after {@link #playerTurn}, {@link #ageAnimal} and {@link #removeDeadAnimals}.
+     * currentRound is set to the round that the player plays on, if the currentRound has reached the last
+     * round it then goes to {@link #endGame} to check the winner.
      */
     private void newRound() {
-        //this.allPlayers.get(2).setMoney(0); a test to check that the player gets kicked when broke
         for (int r = currentRound; r <= this.maxRound; r++) {
             this.currentRound = r;
             if (currentRound != maxRound) {
                 System.out.println(ProgramUtils.RED + "\nRound " + (r + 1) + ProgramUtils.RESET);
                 ageAnimal();
                 removeDeadAnimals();
-                newRoundGetPlayer();
+                playerTurn();
             } else {
                 endGame();
             }
@@ -123,9 +126,9 @@ public class Game {
 
     /**
      * endGame takes every player and sells their animal, then checks that money to see which player wins.
-     * Hashmap is used to set player and money to key/value and later use that value to check id that player has the most amount of money.
+     * Hashmap is used to set player and money to key/value and later use that value to check if that player has the most amount of money.
      * Map.entry is used to return a collection-view of the map (used it to check for the "maxValue") and then put the player with the most value to another arraylist,
-     * that then checks if its 1 player who won or if more than it becomes a tie.
+     * that then checks if its 1 player who won or if more than one it becomes a tie.
      */
     private void endGame() {
         Map<String,Integer> list = new HashMap<>();
@@ -161,10 +164,13 @@ public class Game {
         System.out.println("\n\n"+ProgramUtils.RED + "Good Game!" + ProgramUtils.RESET);
     }
 
-    /**
-     *
+    /** Loops trough every player inputted in chosePlayer.
+     * playerTurn makes/sets every player and current player, so the amount of players has turns inside rounds.
+     * Within every player turn they get information about their player like money, animals, animals health, animal age and players bought food.
+     * playerTurn sets the first player in the turn to currentPlayer and then when their turn is over it sets the next player to currentPlayer.
+     * If currentPlayer has no animals or money they get {@link #gameOver}, and also prints out all the dead animals they got after turns.
      */
-    private void newRoundGetPlayer() {
+    private void playerTurn() {
         for (int i = this.allPlayers.indexOf(this.currentPlayer); i < playerAmount; i++) {
             if (this.currentPlayer.getMoney() == 0 && (this.currentPlayer.getPlayerAnimal().size() == 0)) {
                 this.allPlayers.remove(currentPlayer);
@@ -206,7 +212,10 @@ public class Game {
     }
 
     /**
-     *
+     * Calls on the method {@link Animal#healthOverTime}.
+     * removeDeadAnimals checks if the animal is dead, if the animal is dead it gets
+     * put in {@link Player#setDeceasedAnimalList} else if the animal is still alive
+     * it gets put in a tempAnimal ArrayList.
      */
     private void removeDeadAnimals(){
         for(Player player : allPlayers){
@@ -227,6 +236,7 @@ public class Game {
     /** ages the animal
      * ageAnimal takes all the players and players animals and sets the value age higher
      * after every round, then prints it so the player knows that their animals aged.
+     * If the animal aged to maxAge we call on {@link Animal#death}
      */
     private void ageAnimal() {
         for(Player player : allPlayers){
@@ -247,7 +257,7 @@ public class Game {
     /** creates players
      * createPlayer makes a player and adds them into the player list,
      * if they got no name then they will have to write player name again.
-     * @param newPlayer is the input name they chose for their player.
+     * @param newPlayer is the inputted name they chose for their player.
      */
     private void createPlayer(String newPlayer){
         if(newPlayer.equals("")){
@@ -259,16 +269,16 @@ public class Game {
     }
 
     /**
-     *
-     * @return
+     * Gets the current player playing the game.
+     * @return currentPlayer as currentPlayer
      */
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
 
     /**
-     *
-     * @return
+     * Gets the Store class made from Game
+     * @return store as class store
      */
     public Store getStore(){
         return store;

@@ -179,7 +179,7 @@ public class Menu {
         String animal ="";
         Gender gender = null;
         int price = 0;
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Dragon"+":\t4000 Gold", "Continue")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Dragon"+":\t\t4000 Gold", "Continue")){
             case 1:
                 animal = "Troll";
                 price = 800;
