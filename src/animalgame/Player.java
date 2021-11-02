@@ -36,7 +36,7 @@ public class Player implements Serializable {
      * Add 10% health per kilo food and remove food from players
      * foodslist if the animal eats the food.
      * @param animal as an animal object.
-     * @param food as an food object.
+     * @param food as a food object.
      * @param weight as an int.
      */
     public void feedAnimal(Animal animal, Food food, int weight) {
