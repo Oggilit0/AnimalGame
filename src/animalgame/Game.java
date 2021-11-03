@@ -73,7 +73,9 @@ public class Game {
     }
 
     /**
-     * Load saved game from file and set variables to 
+     * Creates and object from loaded save file
+     * Set values of variables from object
+     * Calls method newRound() to continue from saved moment
      */
     public void loadGame(String fileName){
         SavedGame loadedGameObj = (SavedGame) ProgramUtils.readFile(fileName);

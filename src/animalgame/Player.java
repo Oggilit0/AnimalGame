@@ -24,7 +24,7 @@ public class Player implements Serializable {
      */
     public Player(String name) {
         this.name = name;
-        this.money = 5000;
+        this.money = 20000;
         this.playerAnimal = new ArrayList<>();
         this.foods = new ArrayList<>();
         this.deceasedAnimals = new ArrayList<>();
