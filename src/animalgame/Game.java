@@ -161,10 +161,10 @@ public class Game {
         }else{
             System.out.println(ProgramUtils.YELLOW+"\nIts a tie Between "+ProgramUtils.RESET);
             for(String winner : resultList)
-            System.out.print(winner+" \uD83D\uDC51 ");
+            System.out.print(winner+" \uD83D\uDC51 "+"\n");
         }
         for(Player players : allPlayers){
-            System.out.println("\n"+players.getName() +" had "+ players.getMoney()+ProgramUtils.YELLOW+"Gold"+ProgramUtils.RESET);
+            System.out.println(players.getName() +" had "+ players.getMoney()+ProgramUtils.YELLOW+" Gold"+ProgramUtils.RESET);
         }
         System.out.println("\n\n"+ProgramUtils.RED + "Good Game!" + ProgramUtils.RESET);
     }

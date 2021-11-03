@@ -179,7 +179,7 @@ public class Menu {
         String animal ="";
         Gender gender = null;
         int price = 0;
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Dragon"+":\t\t4000 Gold", "Continue")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold"+"\tEats taco and waffles","Giraffe"+":\t1000 Gold"+"\tEats waffles","Polar bear"+":\t1500 Gold"+"\tEats sausages","Ferret"+":\t\t2250 Gold"+"\tEats sausages and taco","Dragon"+":\t\t4000 Gold"+"\tEats taco", "Continue")){
             case 1:
                 animal = "Troll";
                 price = 800;
@@ -224,7 +224,7 @@ public class Menu {
     private boolean shopFoodMenu(){
         String food ="";
         int price = 0;
-        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage" + ": 20 Gold/kg", "Waffles" + ": 50 Gold/kg","Taco" + ":    100 Gold/kg", "Continue")){
+        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage \tpreferred by: Polar bear and Ferret" + ": \t20 Gold/kg", "Waffles \tpreferred by: Giraffe and Troll" + ": \t\t50 Gold/kg","Taco \t\tpreferred by: Dragon,Ferret and Troll" + ": \t100 Gold/kg", "Continue")){
             case 1:
                 food = "Sausage";
                 price = 20;
