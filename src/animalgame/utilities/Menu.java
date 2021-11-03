@@ -227,7 +227,7 @@ public class Menu {
     private boolean shopFoodMenu(){
         String food ="";
         int price = 0;
-        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage \tPreferred by: Polar bear and Ferret" + ": \t20 Gold/kg", "Waffles \tPreferred by: Giraffe and Troll" + ": \t\t50 Gold/kg","Taco \t\tPreferred by: Dragon,Ferret and Troll" + ": \t100 Gold/kg", "Continue")){
+        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage \tPreferred by: Polar bear and Ferret" + ": \t20 "+ProgramUtils.YELLOW+"Gold"+ProgramUtils.RESET+"/kg", "Waffles \tPreferred by: Giraffe and Troll" + ": \t\t50 "+ProgramUtils.YELLOW+"Gold"+ProgramUtils.RESET+"/kg","Taco \t\tPreferred by: Dragon,Ferret and Troll" + ": \t100 "+ProgramUtils.YELLOW+"Gold"+ProgramUtils.RESET+"/kg", "Continue")){
             case 1:
                 food = "Sausage";
                 price = 20;
