@@ -27,6 +27,9 @@ public class Menu {
      * Display and decide if player is starting a new game or loading from saved file
      */
     public void newGameMenu(){
+        System.out.println(ProgramUtils.YELLOW+" *".repeat(29)+"\n"+" *".repeat(9)+" WELCOME TO ANIMAL GAME"+" *".repeat(9)+"\n"+" *".repeat(30)+"\n In this game, you " +
+                "and your opponents compete to make as much \n money as possible by buying, feeding and " +
+                "selling animals.\n The one who has the most money in the end wins.  " + ProgramUtils.RESET + "\uD83D\uDC51");
         switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
             case 1:
                 this.currentGame.startGame();
