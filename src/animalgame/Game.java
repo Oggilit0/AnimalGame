@@ -54,7 +54,7 @@ public class Game {
      */
     private void choosePlayers(){
         System.out.print("\nWrite in how many players (Min 2 Max 4): ");
-        this.playerAmount = ProgramUtils.tryCatch(1,4);
+        this.playerAmount = ProgramUtils.tryCatch(2,4);
         for (int i = 0; i < playerAmount; i++) {
             System.out.print("Write player " + (i + 1) + ": ");
             createPlayer(ProgramUtils.userInput());

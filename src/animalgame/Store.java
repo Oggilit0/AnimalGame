@@ -42,6 +42,7 @@ public class Store {
     public void animalToSell(Animal animal){
         int animalPrice = animal.animalSellPrice();
         this.customer.addMoney(animalPrice);
+        System.out.println("\n"+animalPrice + ProgramUtils.YELLOW + " gold" + ProgramUtils.RESET+" added to treasury!");
         this.customer.getPlayerAnimal().remove(animal);
     }
 

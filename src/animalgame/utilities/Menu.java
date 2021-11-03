@@ -122,7 +122,7 @@ public class Menu {
      * @return
      */
     private boolean continueMenu(String type, String buySell){
-        switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " " + type +" ?","Yes","No")){
+        switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " more " + type +" ?","Yes","No")){
             case 1:
                 return true;
             case 2:
@@ -144,7 +144,7 @@ public class Menu {
                     if(animalChoice()){
                         break;
                     }
-                }while(continueMenu("animal","buy"));
+                }while(continueMenu("animals","buy"));
                 break;
             case 2:
                 do{
@@ -163,7 +163,7 @@ public class Menu {
                         if(animalSellMenu()){
                             break;
                         }
-                    }while(continueMenu("animal", "sell"));
+                    }while(continueMenu("animals", "sell"));
                 }
                 break;
             default:
@@ -295,22 +295,38 @@ public class Menu {
     private void feedAnimalsMenu() {
         ArrayList<Animal> playerAnimalList = currentGame.getCurrentPlayer().getPlayerAnimal();
         ArrayList<Food> playerFoodList = currentGame.getCurrentPlayer().getFoods();
+        boolean buyMoreFood = false;
 
         if (playerAnimalList.size() == 0) {
             System.out.println("You must have one animal to feed!");
         } else if (playerFoodList.size() == 0) {
             System.out.println("You must buy food to feed your animal with!");
         } else {
-            System.out.println("Choose which animals to feed: ");
-            playerAnimalsAsMenu();
-            int animalChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
-            System.out.println(playerAnimalList.get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(playerAnimalList.get(animalChoice-1).getClass().getSimpleName()));
-            System.out.println("Choose which food to feed your animal with: ");
-            playerFoodAsMenu();
-            int foodChoice = ProgramUtils.tryCatch(1,playerFoodList.size());
-            System.out.println("How many kg do you want to feed your animal: ");
-            int kgChoice = ProgramUtils.tryCatch();
-            currentGame.getCurrentPlayer().feedAnimal(playerAnimalList.get(animalChoice-1),playerFoodList.get(foodChoice-1), kgChoice);
+            do{
+                System.out.println("Choose which animals to feed: ");
+                playerAnimalsAsMenu();
+                int animalChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
+                System.out.println(playerAnimalList.get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(playerAnimalList.get(animalChoice-1).getClass().getSimpleName()));
+                System.out.println("Choose which food to feed your animal with: ");
+                playerFoodAsMenu();
+                int foodChoice = ProgramUtils.tryCatch(1,playerFoodList.size());
+                System.out.println("How many kg do you want to feed your animal: ");
+                int kgChoice = ProgramUtils.tryCatch();
+                currentGame.getCurrentPlayer().feedAnimal(playerAnimalList.get(animalChoice-1),playerFoodList.get(foodChoice-1), kgChoice);
+                System.out.println("Feed another animal?");
+                System.out.println("1.\tYes");
+                System.out.println("1.\tNo");
+                switch(ProgramUtils.tryCatch(1,2)){
+                    case 1:
+                        buyMoreFood = true;
+                        break;
+                    case 2:
+                        buyMoreFood = false;
+                        break;
+                }
+
+            }while(buyMoreFood);
+
         }
     }
 
