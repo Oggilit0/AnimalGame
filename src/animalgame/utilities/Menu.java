@@ -122,7 +122,7 @@ public class Menu {
      * @return
      */
     private boolean continueMenu(String type, String buySell){
-        switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " " + type +" ?","Yes","No")){
+        switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " more " + type +" ?","Yes","No")){
             case 1:
                 return true;
             case 2:
@@ -144,7 +144,7 @@ public class Menu {
                     if(animalChoice()){
                         break;
                     }
-                }while(continueMenu("animal","buy"));
+                }while(continueMenu("animals","buy"));
                 break;
             case 2:
                 do{
@@ -163,7 +163,7 @@ public class Menu {
                         if(animalSellMenu()){
                             break;
                         }
-                    }while(continueMenu("animal", "sell"));
+                    }while(continueMenu("animals", "sell"));
                 }
                 break;
             default:
