@@ -27,6 +27,9 @@ public class Menu {
      * Display and decide if player is starting a new game or loading from saved file
      */
     public void newGameMenu(){
+        System.out.println(ProgramUtils.YELLOW+" *".repeat(29)+"\n"+" *".repeat(9)+" WELCOME TO ANIMAL GAME"+" *".repeat(9)+"\n"+" *".repeat(30)+"\n In this game, you " +
+                "and your opponents compete to make as much \n money as possible by buying, feeding and " +
+                "selling animals.\n The one who has the most money in the end wins.  " + ProgramUtils.RESET + "\uD83D\uDC51");
         switch (ProgramUtils.menuBuilder("\nStart menu","New game","Load game")){
             case 1:
                 this.currentGame.startGame();
@@ -122,7 +125,7 @@ public class Menu {
      * @return
      */
     private boolean continueMenu(String type, String buySell){
-        switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " " + type +" ?","Yes","No")){
+        switch(ProgramUtils.menuBuilder("\nContinue to "+buySell+ " more " + type +" ?","Yes","No")){
             case 1:
                 return true;
             case 2:
@@ -144,7 +147,7 @@ public class Menu {
                     if(animalChoice()){
                         break;
                     }
-                }while(continueMenu("animal","buy"));
+                }while(continueMenu("animals","buy"));
                 break;
             case 2:
                 do{
@@ -163,7 +166,7 @@ public class Menu {
                         if(animalSellMenu()){
                             break;
                         }
-                    }while(continueMenu("animal", "sell"));
+                    }while(continueMenu("animals", "sell"));
                 }
                 break;
             default:
@@ -179,7 +182,7 @@ public class Menu {
         String animal ="";
         Gender gender = null;
         int price = 0;
-        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold","Giraffe"+":\t1000 Gold","Polar bear"+":\t1500 Gold","Ferret"+":\t\t2250 Gold","Dragon"+":\t4000 Gold", "Continue")){
+        switch(ProgramUtils.menuBuilder("\nBuyAnimal","Troll"+":\t\t800 Gold"+"\tEats taco and waffles","Giraffe"+":\t1000 Gold"+"\tEats waffles","Polar bear"+":\t1500 Gold"+"\tEats sausages","Ferret"+":\t\t2250 Gold"+"\tEats sausages and taco","Dragon"+":\t\t4000 Gold"+"\tEats taco", "Continue")){
             case 1:
                 animal = "Troll";
                 price = 800;
@@ -224,7 +227,7 @@ public class Menu {
     private boolean shopFoodMenu(){
         String food ="";
         int price = 0;
-        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage" + ": 20 Gold/kg", "Waffles" + ": 50 Gold/kg","Taco" + ":    100 Gold/kg", "Continue")){
+        switch( ProgramUtils.menuBuilder("\nAvailable food","Sausage \tpreferred by: Polar bear and Ferret" + ": \t20 Gold/kg", "Waffles \tpreferred by: Giraffe and Troll" + ": \t\t50 Gold/kg","Taco \t\tpreferred by: Dragon,Ferret and Troll" + ": \t100 Gold/kg", "Continue")){
             case 1:
                 food = "Sausage";
                 price = 20;
@@ -295,22 +298,38 @@ public class Menu {
     private void feedAnimalsMenu() {
         ArrayList<Animal> playerAnimalList = currentGame.getCurrentPlayer().getPlayerAnimal();
         ArrayList<Food> playerFoodList = currentGame.getCurrentPlayer().getFoods();
+        boolean buyMoreFood = false;
 
         if (playerAnimalList.size() == 0) {
             System.out.println("You must have one animal to feed!");
         } else if (playerFoodList.size() == 0) {
             System.out.println("You must buy food to feed your animal with!");
         } else {
-            System.out.println("Choose which animals to feed: ");
-            playerAnimalsAsMenu();
-            int animalChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
-            System.out.println(playerAnimalList.get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(playerAnimalList.get(animalChoice-1).getClass().getSimpleName()));
-            System.out.println("Choose which food to feed your animal with: ");
-            playerFoodAsMenu();
-            int foodChoice = ProgramUtils.tryCatch(1,playerFoodList.size());
-            System.out.println("How many kg do you want to feed your animal: ");
-            int kgChoice = ProgramUtils.tryCatch();
-            currentGame.getCurrentPlayer().feedAnimal(playerAnimalList.get(animalChoice-1),playerFoodList.get(foodChoice-1), kgChoice);
+            do{
+                System.out.println("Choose which animals to feed: ");
+                playerAnimalsAsMenu();
+                int animalChoice = ProgramUtils.tryCatch(1,playerAnimalList.size());
+                System.out.println(playerAnimalList.get(animalChoice-1).getName() + " likes to eat: " + whatAnimalEats(playerAnimalList.get(animalChoice-1).getClass().getSimpleName()));
+                System.out.println("Choose which food to feed your animal with: ");
+                playerFoodAsMenu();
+                int foodChoice = ProgramUtils.tryCatch(1,playerFoodList.size());
+                System.out.println("How many kg do you want to feed your animal: ");
+                int kgChoice = ProgramUtils.tryCatch();
+                currentGame.getCurrentPlayer().feedAnimal(playerAnimalList.get(animalChoice-1),playerFoodList.get(foodChoice-1), kgChoice);
+                System.out.println("Feed another animal?");
+                System.out.println("1.\tYes");
+                System.out.println("1.\tNo");
+                switch(ProgramUtils.tryCatch(1,2)){
+                    case 1:
+                        buyMoreFood = true;
+                        break;
+                    case 2:
+                        buyMoreFood = false;
+                        break;
+                }
+
+            }while(buyMoreFood);
+
         }
     }
 

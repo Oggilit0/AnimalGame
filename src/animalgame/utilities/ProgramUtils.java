@@ -72,22 +72,22 @@ public class ProgramUtils {
      * Overloaded method to input min and max value of a menu to create
      * conditions for the loop
      * @param minMenuValue the menus lowest int value
-     * @param maxvMenuValue the menus highest int value
+     * @param maxMenuValue the menus highest int value
      * @return user input as an int
      */
-    public static int tryCatch(int minMenuValue, int maxvMenuValue){
+    public static int tryCatch(int minMenuValue, int maxMenuValue){
         int newInput = -1;
         do{
             try{
                 newInput = Integer.parseInt(userInput());
-                if(maxvMenuValue < newInput || newInput < minMenuValue){
+                if(maxMenuValue < newInput || newInput < minMenuValue){
                     System.out.println("Invalid input");
                 }
 
             }catch(Exception e){
                 System.out.println("Invalid input");
             }
-        }while(maxvMenuValue < newInput || newInput < minMenuValue);
+        }while(maxMenuValue < newInput || newInput < minMenuValue);
         return newInput;
     }
 

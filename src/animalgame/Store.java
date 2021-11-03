@@ -17,11 +17,12 @@ public class Store {
     private Player customer;
 
     /**
-     *
-     * @param animal
-     * @param gender
-     * @param price
-     * @return
+     * animalsToBuy checks if the player can buy tha animal they chose and then calls on {@link Factory#createAnimal}
+     * if they can, else they will get a message and skip their round.
+     * @param animal gets the Animal they chose
+     * @param gender gets the enum gender to createAnimal.
+     * @param price gets an int value of price
+     * @return boolean depending on if they cna buy the animal or not.
      */
     public boolean animalToBuy(String animal, Gender gender, int price){
        if(this.customer.getMoney() < price){
@@ -35,27 +36,30 @@ public class Store {
     }
 
     /**
-     *
-     * @param animal
+     * sells the animal that the player has chosen from the menu.
+     * @param animal is the animal chosen from menu.
      */
     public void animalToSell(Animal animal){
         int animalPrice = animal.animalSellPrice();
         this.customer.addMoney(animalPrice);
+        System.out.println("\n"+animalPrice + ProgramUtils.YELLOW + " gold" + ProgramUtils.RESET+" added to treasury!");
         this.customer.getPlayerAnimal().remove(animal);
     }
 
     /**
-     *
-     * @param customer
+     * setter for customer, to get currentPlayer.
+     * @param customer gets Player customer/currentPlayer
      */
     public void setCustomer(Player customer){
         this.customer = customer;
     }
 
     /**
-     *
-     * @param food
-     * @param foodPrice
+     * foodToBuy gets food and price from menu and then asks how much they want, but if they don't have enough money
+     * for that amount of food they get a message.
+     * If they can buy the food, it's added to players/customers inventory.
+     * @param food gets string value of food depending on what food in on the menu.
+     * @param foodPrice gets the int value of the food type they chose.
      */
     public void foodToBuy(String food, int foodPrice){
         System.out.println("How many kg do you want to buy?");

@@ -70,20 +70,15 @@ public abstract class Animal implements Serializable {
     public int howManyBabies(String animal){
         switch(animal){
             case "Ferret":
-                int makeFerretBabies = (int) (Math.random() * 6) + 1;
-                return makeFerretBabies;
+                return (int) (Math.random() * 6) + 1;
             case "Giraffe":
-                int makeGiraffeBabies = (int) (Math.random() * 3) + 1;
-                return makeGiraffeBabies;
+                return (int) (Math.random() * 3) + 1;
             case "Dragon":
-                int makeLizardBabies = (int) (Math.random() * 8) + 1;
-                return makeLizardBabies;
+                return (int) (Math.random() * 8) + 1;
             case "PolarBear":
-                int makePolarBearBabies = (int) (Math.random() * 4) + 1;
-                return makePolarBearBabies;
+                return (int) (Math.random() * 4) + 1;
             case "Troll":
-                int makeTrollBabies = (int) (Math.random() * 2) + 1;
-                return makeTrollBabies;
+                return (int) (Math.random() * 2) + 1;
         }return 0;
     }
 
