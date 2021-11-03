@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * ProgramUtils ...
+ * Class that handles static methods which are used all over the program without
+ * the need to create objects to reach them.
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class ProgramUtils {
