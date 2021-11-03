@@ -163,6 +163,9 @@ public class Game {
             for(String winner : resultList)
             System.out.print(winner+" \uD83D\uDC51 ");
         }
+        for(Player players : allPlayers){
+            System.out.println("\n"+players.getName() +" had "+ players.getMoney()+ProgramUtils.YELLOW+"Gold"+ProgramUtils.RESET);
+        }
         System.out.println("\n\n"+ProgramUtils.RED + "Good Game!" + ProgramUtils.RESET);
     }
 
