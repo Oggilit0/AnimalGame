@@ -95,8 +95,12 @@ public abstract class Animal implements Serializable {
      * Calculates the sell price for this animal
      * @return sellprice as an int
      */
-    public int animalSellPrice(){
-        return animalPrice * ((health-currentAge))/100;
+    public int animalSellPrice() {
+        if (currentAge > health) {
+            return animalPrice * ((currentAge - health)) / 100;
+        } else {
+            return animalPrice * ((health - currentAge)) / 100;
+        }
     }
 
     /**
