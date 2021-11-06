@@ -318,7 +318,7 @@ public class Menu {
                 currentGame.getCurrentPlayer().feedAnimal(playerAnimalList.get(animalChoice-1),playerFoodList.get(foodChoice-1), kgChoice);
                 System.out.println("Feed another animal?");
                 System.out.println("1.\tYes");
-                System.out.println("1.\tNo");
+                System.out.println("2.\tNo");
                 switch(ProgramUtils.tryCatch(1,2)){
                     case 1:
                         buyMoreFood = true;

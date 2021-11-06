@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Player class ---  ADD TEXT
+ * This is the Player class where we store info about the player, and we have arraylists for
+ * the players alive animals, deceased animals, and the player food they bought in the store. 
  * @author Sebastian Banfi, Oskar Herdenberg, Mathilda Nilsson, Hanna Petersson
  */
 public class Player implements Serializable {
@@ -19,7 +20,11 @@ public class Player implements Serializable {
 
     /**
      * Constructor for the Player Class
-     * Initialize ---- ADD TEXT
+     * Initialize name decided by parameters.
+     * Initialize money of this player to start the game with 20000 gold.
+     * Initialize this player animals as a new arraylist.
+     * Initialize this player food as a new arraylist.
+     * Initialize this player deceased animals as a new arraylist.
      * @param name Name of this player
      */
     public Player(String name) {
