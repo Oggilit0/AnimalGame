@@ -198,7 +198,7 @@ public class Game {
                 System.out.println(food.getName()+": "+food.getWeight()+" kg ");
             }
             for (Animal animal : currentPlayer.getPlayerAnimal()) {
-                System.out.println(animal.getClass().getSimpleName()+": "+animal.getName()+", Health: "+ProgramUtils.RED+animal.getHealth()+ProgramUtils.RESET+", Age: "+ProgramUtils.PURPLE+animal.getCurrentAge()+ProgramUtils.RESET);
+                System.out.println(animal.getClass().getSimpleName()+": "+animal.getName()+", Health: "+ProgramUtils.RED+animal.getHealth()+"(-"+animal.getRandNr()+")"+ProgramUtils.RESET+", Age: "+ProgramUtils.PURPLE+animal.getCurrentAge()+ProgramUtils.RESET);
             }
             if(currentPlayer.getDeceasedAnimals() != null && currentPlayer.getDeceasedAnimals().size() != 0){
                 System.out.println("\nDeceased animals since last turn: ");

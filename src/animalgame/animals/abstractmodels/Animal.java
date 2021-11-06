@@ -16,6 +16,7 @@ public abstract class Animal implements Serializable {
     private int animalPrice;
     private final Gender gender;
     private boolean aliveStatus;
+    private int randNr;
 
     /**
      * Constructor for the Animal class
@@ -47,11 +48,19 @@ public abstract class Animal implements Serializable {
     }
 
     /**
+     * gets the amount lost hp
+     * @return randNr gets hp lost in int
+     */
+    public int getRandNr() {
+        return randNr;
+    }
+
+    /**
      * Remove 10-30% of maximum value of health each time method is running
      * checks if health is over 0, if not the animal dies
      */
     public void healthOverTime(){
-        int randNr = (int) (Math.random()*21)+10;
+        this.randNr = (int) (Math.random()*21)+10;
         if (randNr < health){
             this.health = this.health-randNr;
         }else{
