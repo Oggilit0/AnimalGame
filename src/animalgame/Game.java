@@ -183,6 +183,8 @@ public class Game {
                 try {
                     System.out.println(ProgramUtils.RED + "GAME OVER " + currentPlayer.getName() + "!" + ProgramUtils.RESET);
                     Thread.sleep(3000);
+                    this.currentPlayer = allPlayers.get(i);
+                    this.playerAmount -= 1;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -191,27 +193,28 @@ public class Game {
                 } else {
                     gameOver();
                 }
-            }
-            System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
-            System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold" + ProgramUtils.RESET);
-            for(Food food : currentPlayer.getFoods()){
-                System.out.println(food.getName()+": "+food.getWeight()+" kg ");
-            }
-            for (Animal animal : currentPlayer.getPlayerAnimal()) {
-                System.out.println(animal.getClass().getSimpleName()+": "+animal.getName()+", Health: "+ProgramUtils.RED+animal.getHealth()+"(-"+animal.getRandNr()+")"+ProgramUtils.RESET+", Age: "+ProgramUtils.PURPLE+animal.getCurrentAge()+ProgramUtils.RESET);
-            }
-            if(currentPlayer.getDeceasedAnimals() != null && currentPlayer.getDeceasedAnimals().size() != 0){
-                System.out.println("\nDeceased animals since last turn: ");
-                for(Animal animal : currentPlayer.getDeceasedAnimals()){
-                    System.out.println(animal.getClass().getSimpleName()+": "+animal.getName());
+            }else {
+                System.out.println("\n" + ProgramUtils.GREEN + currentPlayer.getName() + "'s Turn" + ProgramUtils.RESET + "\n");
+                System.out.println(currentPlayer.getMoney() + ProgramUtils.YELLOW + " Gold" + ProgramUtils.RESET);
+                for (Food food : currentPlayer.getFoods()) {
+                    System.out.println(food.getName() + ": " + food.getWeight() + " kg ");
                 }
-            }
+                for (Animal animal : currentPlayer.getPlayerAnimal()) {
+                    System.out.println(animal.getClass().getSimpleName() + ": " + animal.getName() + ", Health: " + ProgramUtils.RED + animal.getHealth() + "(-" + animal.getRandNr() + ")" + ProgramUtils.RESET + ", Age: " + ProgramUtils.PURPLE + animal.getCurrentAge() + ProgramUtils.RESET);
+                }
+                if (currentPlayer.getDeceasedAnimals() != null && currentPlayer.getDeceasedAnimals().size() != 0) {
+                    System.out.println("\nDeceased animals since last turn: ");
+                    for (Animal animal : currentPlayer.getDeceasedAnimals()) {
+                        System.out.println(animal.getClass().getSimpleName() + ": " + animal.getName());
+                    }
+                }
 
-            gameMenu.roundMenu();
-            if (i != playerAmount - 1) {
-                this.currentPlayer = allPlayers.get(1 + i);
-            }else{
-                this.currentPlayer = this.allPlayers.get(0);
+                gameMenu.roundMenu();
+                if (i != playerAmount - 1) {
+                    this.currentPlayer = allPlayers.get(1 + i);
+                } else {
+                    this.currentPlayer = this.allPlayers.get(0);
+                }
             }
         }
     }
