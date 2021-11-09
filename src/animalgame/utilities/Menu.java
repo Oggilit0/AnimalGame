@@ -54,10 +54,13 @@ public class Menu {
             switch(ProgramUtils.menuBuilder("\nLoad game",files, "Back")){
                 case 1:
                     this.currentGame.loadGame(ProgramUtils.readAllLines().get(0));
+                    break;
                 case 2:
                     this.currentGame.loadGame(ProgramUtils.readAllLines().get(1));
+                    break;
                 case 3:
                     this.currentGame.loadGame(ProgramUtils.readAllLines().get(2));
+                    break;
                 case 4:
                     newGameMenu();
                     break;
